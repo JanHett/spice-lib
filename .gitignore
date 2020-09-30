@@ -1,0 +1,8 @@
+build
+doc/html
+doc/xml
+doc/m.math.cache
+.idea
+cmake-build*
+.vscode
+.DS_Store
