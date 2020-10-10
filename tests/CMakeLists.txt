@@ -11,7 +11,7 @@
 
 # Target name
 set(target ${PROJECT_NAME}-test)
-message(STATUS "Test ${target}")
+message(STATUS "Configuring ${target}")
 
 
 # 
@@ -70,7 +70,7 @@ find_package(GTest REQUIRED)
 target_link_libraries(${target}
     PRIVATE
     # ${DEFAULT_LIBRARIES}
-    ${PROJECT_NAME}::spice
+    ${PROJECT_NAME}::${PROJECT_NAME}
     GTest::GTest
 )
 
@@ -117,5 +117,5 @@ target_link_options(${target}
 target_link_libraries(${target}
     PRIVATE
     # ${DEFAULT_LINKER_OPTIONS}
-    spice
+    ${PROJECT_NAME}
 )

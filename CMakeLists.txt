@@ -29,11 +29,11 @@
 
 ################################################################################
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.16)
 
-project("spice"
+project("spice-lib"
              DESCRIPTION "An image processing library."
-             HOMEPAGE_URL "https://github.com/janhett/spice")
+             HOMEPAGE_URL "https://github.com/janhett/spice-lib")
 
 set(PROJECT_VERSION 1.0.0-alpha)
 
@@ -47,6 +47,8 @@ endif()
 #############################
 # Dependency setup
 #############################
+
+set(EXTERNAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/")
 
 # Include cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -78,6 +80,12 @@ if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/gsl/include/")
 endif()
 add_subdirectory(external/gsl)
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Custom Halide generators
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+add_subdirectory(generators)
+
 #############################
 # Libary target setup
 #############################
@@ -92,10 +100,11 @@ target_include_directories(
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 
-target_link_libraries(spice
+target_link_libraries(${PROJECT_NAME}
     INTERFACE
         GSL
-        OpenImageIO)
+        OpenImageIO
+        adaptive_threshold_generator)
 
 #############################
 # Installation setup

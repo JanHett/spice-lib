@@ -8,9 +8,9 @@
 
 #include <gsl/span>
 
-#include <spice/image.hpp>
-#include <spice/statistics.hpp>
-#include <spice/print.hpp>
+#include <spice-lib/image.hpp>
+#include <spice-lib/statistics.hpp>
+#include <spice-lib/print.hpp>
 
 #include "test_utils.hpp"
 

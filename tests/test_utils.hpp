@@ -1,4 +1,4 @@
-#include <spice/image.hpp>
+#include <spice-lib/image.hpp>
 
 using namespace spice;
 
