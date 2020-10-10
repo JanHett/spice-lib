@@ -302,33 +302,37 @@ TEST(image_support, load_image) {
     auto hist = statistics::histogram(boat, 50);
 
     // print histogram for debugging
-    print::histogram(hist, 100);
+    // print::histogram(hist, 100);
 
     // print image for debugging
-    print::image<float, 3>(boat, 10);
+    // print::image<float, 3>(boat, 10);
 
     EXPECT_EQ(3, boat.channels());
     EXPECT_EQ(boat.width(), 512);
     EXPECT_EQ(boat.height(), 410);
 
+    size_t red_max = *std::max_element(hist[0].begin(), hist[0].end());
+    EXPECT_EQ(28147, red_max);
+    size_t green_max = *std::max_element(hist[1].begin(), hist[1].end());
+    EXPECT_EQ(23211, green_max);
+    size_t blue_max = *std::max_element(hist[2].begin(), hist[2].end());
+    EXPECT_EQ(30903, blue_max);
+
     size_t red_average = std::accumulate(
         hist[0].begin(),
         hist[0].end(),
         0)/hist[0].size();
-    EXPECT_GT(red_average, 0);
-    EXPECT_LT(red_average, 1500);
+    EXPECT_EQ(red_average, 4198);
     size_t green_average = std::accumulate(
         hist[1].begin(),
         hist[1].end(),
         0)/hist[1].size();
-    EXPECT_GT(green_average, 0);
-    EXPECT_LT(green_average, 1500);
+    EXPECT_EQ(green_average, 4198);
     size_t blue_average = std::accumulate(
         hist[2].begin(),
         hist[2].end(),
         0)/hist[2].size();
-    EXPECT_GT(blue_average, 0);
-    EXPECT_LT(blue_average, 1500);
+    EXPECT_EQ(blue_average, 4198);
 }
 
 // TEST(image_support, write_image) {

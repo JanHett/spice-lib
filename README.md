@@ -51,7 +51,7 @@ std::cout << c1 << ", " << c2 << '\n';
 Output
 
 ```
-
+color(0.3, 0.705, 1.5), color(0.1, 0.235, 0.5)
 ```
 
 ## Building

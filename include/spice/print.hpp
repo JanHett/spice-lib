@@ -97,9 +97,9 @@ namespace print {
     void histogram(std::vector<std::vector<size_t>> const & histogram,
         size_t max_amplitude,
         std::vector<color<T, 3>> const & colors = {
-            color<float, 3>{1, 0, 0},
-            color<float, 3>{0, 1, 0},
-            color<float, 3>{0, 0, 1}
+            color<T, 3>{color<T>::max, 0, 0},
+            color<T, 3>{0, color<T>::max, 0},
+            color<T, 3>{0, 0, color<T>::max}
         },
         std::ostream & stream = std::cout)
     {
@@ -131,10 +131,6 @@ namespace print {
                             cell_color += color<T, 3>(0.5);
                     }
                 }
-                // normalise colours
-                cell_color /= std::max({cell_color[0],
-                    cell_color[1],
-                    cell_color[2]});
                 cell_color = color<T, 3>(1) - cell_color;
                 stream << color_escape_string<float, 3>(" ", cell_color, cell_color);
             }
