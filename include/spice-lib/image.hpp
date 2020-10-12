@@ -674,6 +674,12 @@ std::ostream& operator<<(std::ostream& os, color<T, Channels> const & pxl)
     return os;
 }
 
+/**
+ * \brief Represents an image
+ * 
+ * \tparam T 
+ * \tparam Channels 
+ */
 template<typename T = float, size_t Channels = 4>
 class image {
 private:

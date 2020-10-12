@@ -1,3 +1,14 @@
+/**
+ * \file threshold.hpp
+ * \author Jan Hettenkofer (jan@hettenkofer.net)
+ * \brief 
+ * \version 0.1
+ * \date 2020-10-12
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #ifndef SPICE_THRESHOLD
 #define SPICE_THRESHOLD
 
@@ -8,6 +19,11 @@
 #include <HalideBuffer.h>
 
 namespace spice {
+/**
+ * \brief The namespace `threshold` includes functions for determining thresholds
+ * as well as segmenting images according to a pre-determined threshold
+ * 
+ */
 namespace threshold {
 
 // helpers
