@@ -40,27 +40,18 @@ public:
 
         //
         // SCHEDULING
-        // 
+        //
 
-        // setting the memory layout straight
-        input.dim(0).set_stride(3);
-        input.dim(2).set_stride(1);
-        input.dim(2).set_bounds(0, 3);
+        horizontal_blur
+            .store_at(output, c)
+            .compute_at(output, c)
+            .parallel(y, 16)
+            .vectorize(x, natural_vector_size(Float(32)));
 
-        output.dim(0).set_stride(3);
-        output.dim(2).set_stride(1);
-        output.dim(2).set_bounds(0, 3);
+        output.parallel(y, 16)
+            .vectorize(x, natural_vector_size(Float(32)));
 
-        output.reorder(c, x, y).unroll(c);
-
-        // The actual schedule
-
-        horizontal_blur.compute_root();
-        horizontal_blur.parallel(y, 16);
-        horizontal_blur.vectorize(x, natural_vector_size(Float(32)));
-
-        output.parallel(y, 16);
-        output.vectorize(x, natural_vector_size(Float(32)));
+        
     }
 };
 

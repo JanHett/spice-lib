@@ -41,15 +41,15 @@ namespace statistics {
         // uint8_t
         double max_val = static_cast<double>(image<T>::max);
         // do the counting
-        for (
-            size_t offset = 0;
-            offset < data_length;
-            ++offset)
+        for (size_t chan = 0; chan < Channels; ++chan)
         {
-            for (size_t chan = 0; chan < Channels; ++chan)
+            for (
+                size_t offset = 0;
+                offset < data_length;
+                ++offset)
             {
                 T clamped_val = std::clamp(
-                    source.data()[offset][chan],
+                    source.data()[chan * data_length + offset],
                     image<T>::min,
                     image<T>::max);
                 // calculate which class the pixel's channel value belongs to...

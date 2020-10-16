@@ -59,17 +59,15 @@ image<float, Channels> adaptive(image<float, Channels> & input,
     image<float, Channels> output(input.width(), input.height());
 
     Halide::Runtime::Buffer<float> in_buf =
-        Halide::Runtime::Buffer<float>::make_interleaved(
-            // flatten `color` structure into just the channel values
-            reinterpret_cast<float*>(input.data().data()),
+        Halide::Runtime::Buffer<float>(
+            input.data(),
             input.width(),
             input.height(),
             input.channels());
 
     Halide::Runtime::Buffer<float> out_buf =
-        Halide::Runtime::Buffer<float>::make_interleaved(
-            // flatten `color` structure into just the channel values
-            reinterpret_cast<float*>(output.data().data()),
+        Halide::Runtime::Buffer<float>(
+            output.data(),
             output.width(),
             output.height(),
             output.channels());

@@ -26,19 +26,26 @@ namespace print {
      * \param foreground The text colour
      * \param background The background colour
      */
-    template<typename T_data = float, size_t Channels = 4>
+    template<typename T_color, size_t Channels = 4>
     std::string color_escape_string(
         std::string const & str,
-        color<T_data, Channels> const & foreground,
-        color<T_data, Channels> const & background)
+        T_color const & foreground,
+        T_color const & background)
     {
-        const float scaling_factor = 255 / (image<T_data, Channels>::max -
-            image<T_data, Channels>::min);
-        const float offset = 0 - image<T_data, Channels>::min;
+        const float scaling_factor = 255 / (
+            image<std::remove_cv_t<typename T_color::value_type>,
+                Channels>::max -
+            image<std::remove_cv_t<typename T_color::value_type>,
+                Channels>::min);
 
-        color<T_data, Channels> bg_scaled = background;
+        const float offset = 0 -
+            image<std::remove_cv_t<typename T_color::value_type>, Channels>::min;
+
+        color<std::remove_cv_t<typename T_color::value_type>,
+            Channels> bg_scaled = background;
         bg_scaled *= scaling_factor + offset;
-        color<T_data, Channels> fg_scaled = foreground;
+        color<std::remove_cv_t<typename T_color::value_type>,
+            Channels> fg_scaled = foreground;
         fg_scaled *= scaling_factor + offset;
 
         // std::cout << "\nScale: " << scaling_factor << ", offset " << offset << "\n";
@@ -73,7 +80,7 @@ namespace print {
         std::ostream & stream = std::cout) {
         for (size_t y = 0; y < img.height(); y += stride) {
             for (size_t x = 0; x < img.width(); x += stride) {
-                stream << print::color_escape_string<float, Channels>("  ",
+                stream << print::color_escape_string<color_view<const float>, Channels>("  ",
                     img(x, y), img(x, y));
             }
             stream << "\n";
@@ -132,7 +139,8 @@ namespace print {
                     }
                 }
                 cell_color = color<T, 3>(1) - cell_color;
-                stream << color_escape_string<float, 3>(" ", cell_color, cell_color);
+                stream << color_escape_string<color<T, 3>, 3>(" ",
+                    cell_color, cell_color);
             }
             stream << "\n";
         }

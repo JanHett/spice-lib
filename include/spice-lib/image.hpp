@@ -9,6 +9,9 @@
 
 #include <OpenImageIO/imageio.h>
 
+#include "color.hpp"
+#include "color_view.hpp"
+
 /**
  * Contains the entire public interface of the library.
  */
@@ -71,610 +74,6 @@ namespace helpers
 }
 
 /**
- * Represents a color.
- */
-template<typename T = float, size_t Channels = 4>
-class color {
-private:
-    std::array<T, Channels> m_data;
-public:
-    ////////////////////////////////////////////////////////////////////////////
-    // STATIC MEMBERS
-    ////////////////////////////////////////////////////////////////////////////
-    /**
-     * \brief The value representing no emission or occlusion for this image
-     * type (i.e. "black")
-     */
-    static const constexpr T min = ([]() -> T {
-        if (std::is_floating_point<T>::value) return T{};
-        return std::numeric_limits<T>::min();
-    })();
-
-    /**
-     * \brief The value representing the maximum renderable emission or
-     * occlusion for this image type (i.e. "white")
-     */
-    static const constexpr T max = ([]() -> T {
-        if (std::is_floating_point<T>::value) return T(1.f);
-        return std::numeric_limits<T>::max();
-    })();
-
-    ////////////////////////////////////////////////////////////////////////////
-    // CONSTRUCTORS
-    ////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * \brief Construct a new color object representing (transparent) black.
-     */
-    color (): m_data{ color<T, Channels>::min } {}
-
-    /**
-     * \brief Create a copy of the given color object
-     * 
-     * \param other The color to copy
-     */
-    color (color const & other) = default;
-
-    /**
-     * \brief Move the the given color object
-     * 
-     * \param other The color to copy
-     */
-    color (color && other) = default;
-
-    /**
-     * \brief Construct a new color object initialised with the given value
-     * 
-     * \param value 
-     */
-    color (T const & value) {
-        m_data.fill(value);
-    }
-
-    /**
-     * \brief Construct a new color object with given values
-     *
-     * \param values The channel values
-     */
-    color (std::initializer_list<T> values) {
-        std::copy(values.begin(), values.end(), m_data.begin());
-    }
-
-    /**
-     * \brief Construct a new color object with given values
-     * 
-     * The values are assumed to be of length `Channels`
-     *
-     * \param values The channel values
-     */
-    color (T const * const values) {
-        std::copy(values, values + Channels, m_data.begin());
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // ASSIGNMENT OPERATORS
-    ////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * \brief Copy-assigns another color
-     * 
-     * \param other 
-     * \return color& 
-     */
-    color& operator=(color const & other) noexcept = default;
-
-    /**
-     * \brief Move-assigns another color
-     * 
-     * \param other 
-     * \return color& 
-     */
-    color& operator=(color && other) noexcept = default;
-
-    /**
-     * \brief Assign each channel the provided value
-     * 
-     * \param other 
-     * \return color& 
-     */
-    color& operator=(T const & value) noexcept {
-        m_data.fill(value);
-        return *this;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // SIZE GETTERS
-    ////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * \brief Returns the channel count
-     * 
-     * \return size_t 
-     */
-    constexpr size_t size() const {
-        return Channels;
-    }
-
-    /**
-     * \brief Returns the channel count
-     * 
-     * \return size_t 
-     */
-    constexpr size_t channels() const {
-        return Channels;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // COMPARISON OPERATORS
-    ////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * \brief Compares a color component-wise with a scalar
-     * 
-     * \tparam T_other A scalar that is comparable to the color's data type `T`
-     * \param lhs 
-     * \param rhs 
-     * \return true if all elements of the color correspond to the scalar value,
-     * false otherwise
-     * 
-     * \todo refactor this to work for any type that is convertible to `T`
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<std::is_scalar<T_other>::value, bool>
-    operator==(T_other const & lhs,
-        color const & rhs)
-    {
-        for (size_t i = 0; i < rhs.size(); ++i) {
-            if (lhs != rhs[i])
-                return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * \brief Compares a color component-wise with a scalar
-     * 
-     * \tparam T_other A scalar that is comparable to the color's data type `T`
-     * \param lhs 
-     * \param rhs 
-     * \return true if all elements of the color correspond to the scalar value,
-     * false otherwise
-     * 
-     * \todo refactor this to work for any type that is convertible to `T`
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<std::is_scalar<T_other>::value, bool>
-    operator==(color const & lhs,
-        T_other const & rhs)
-    {
-        return rhs == lhs;
-    }
-
-    /**
-     * \brief Compares a color component-wise with a scalar for inequality
-     * 
-     * \tparam T_other A scalar that is comparable to the color's data type `T`
-     * \param lhs 
-     * \param rhs 
-     * \return true if any of the elements of the color do not correspond to the
-     * scalar value, false otherwise
-     * 
-     * \todo refactor this to work for any type that is convertible to `T`
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<std::is_scalar<T_other>::value, bool>
-    operator!=(T_other const & lhs,
-        color const & rhs)
-    {
-        return !(lhs == rhs);
-    }
-
-    /**
-     * \brief Compares a color component-wise with a scalar for inequality
-     * 
-     * \tparam T_other A scalar that is comparable to the color's data type `T`
-     * \param lhs 
-     * \param rhs 
-     * \return true if any of the elements of the color do not correspond to the
-     * scalar value, false otherwise
-     * 
-     * \todo refactor this to work for any type that is convertible to `T`
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<std::is_scalar<T_other>::value, bool>
-    operator!=(color const & lhs,
-        T_other const & rhs)
-    {
-        return !(rhs == lhs);
-    }
-
-    /**
-     * \brief Compares two colors for equality
-     * 
-     * \param lhs 
-     * \param rhs 
-     * \return true if the two have the same number of elements with
-     * corresponding values, false otherwise
-     */
-    [[nodiscard]] friend bool operator==(color const & lhs, color const & rhs)
-    {
-        if (lhs.size() != rhs.size())
-            return false;
-
-        for (size_t i = 0; i < rhs.size(); ++i) {
-            if (lhs[i] != rhs[i])
-                return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * \brief Compares two colors for inequality
-     * 
-     * \param lhs 
-     * \param rhs 
-     * \return true if the two do not have the same number of elements or any of
-     * the values do not correspond, false otherwise
-     */
-    [[nodiscard]] friend bool operator!=(color const & lhs, color const & rhs)
-    {
-        return !(lhs == rhs);
-    }
-
-    /**
-     * \brief Compares two colors
-     * 
-     * \tparam T_other A type implementing the subscript operator as well as a
-     * `size` member function
-     * \param lhs 
-     * \param rhs 
-     * \return true if the two have the same number of elements with
-     * corresponding values, false otherwise
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<
-        !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
-        bool
-    >
-    operator==(T_other const & lhs,
-        color const & rhs) {
-        if (lhs.size() != rhs.size())
-            return false;
-
-        for (size_t i = 0; i < rhs.size(); ++i) {
-            if (lhs[i] != rhs[i])
-                return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * \brief Compares two colors for inequality
-     * 
-     * \param lhs 
-     * \param rhs 
-     * \return true if the two do not have the same number of elements or any of
-     * the values do not correspond, false otherwise
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<
-        !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
-        bool
-    >
-    operator!=(color const & lhs, T_other const & rhs)
-    {
-        return !(lhs == rhs);
-    }
-
-    /**
-     * \brief Compares two colors
-     * 
-     * \tparam T_other A type implementing the subscript operator as well as a
-     * `size` member function
-     * \param lhs 
-     * \param rhs 
-     * \return true if the two have the same number of elements with
-     * corresponding values, false otherwise
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<
-        !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
-        bool
-    >
-    operator==(color const & lhs,
-        T_other const & rhs) {
-        return rhs == lhs;
-    }
-
-    /**
-     * \brief Compares two colors for inequality
-     * 
-     * \param lhs 
-     * \param rhs 
-     * \return true if the two do not have the same number of elements or any of
-     * the values do not correspond, false otherwise
-     */
-    template<typename T_other>
-    [[nodiscard]] friend
-    std::enable_if_t<
-        !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
-        bool
-    >
-    operator!=(T_other const & lhs, color const & rhs)
-    {
-        return !(rhs == lhs);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // CHANNEL ACCESS OPERATORS
-    ////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * \brief Retrieve a reference to an element of the color
-     * 
-     * \param index 
-     * \return T& 
-     */
-    [[nodiscard]] T& operator[] (size_t index) {
-        return m_data[index];
-    }
-
-    /**
-     * \brief Retrieve a constant reference to an element of the color
-     * 
-     * \param index 
-     * \return T& 
-     */
-    [[nodiscard]] T const & operator[] (size_t index) const {
-        return m_data[index];
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // ARITHMETIC OPERATORS
-    ////////////////////////////////////////////////////////////////////////////
-
-    // ~~~ ADDITION ~~~ //
-
-    /**
-     * \brief Add `rhs` to this color channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator+=(color const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] += rhs.m_data[c];
-        }
-        return *this;
-    }
-    
-    /**
-     * \brief Add `rhs` to `lhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator+(color lhs, color const & rhs)
-    {
-        lhs += rhs;
-        return lhs;
-    }
-
-    /**
-     * \brief Add `rhs` to this color channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator+=(T const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] += rhs;
-        }
-        return *this;
-    }
-
-    /**
-     * \brief Add `rhs` to `lhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator+(color lhs, T const & rhs)
-    {
-        lhs += rhs;
-        return lhs;
-    }
-
-    // ~~~ SUBTRACTION ~~~ //
-
-    /**
-     * \brief Subtract `rhs` from this color channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator-=(color const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] -= rhs.m_data[c];
-        }
-        return *this;
-    }
-    
-    /**
-     * \brief Subtract `rhs` from `lhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator-(color lhs, color const & rhs)
-    {
-        lhs -= rhs;
-        return lhs;
-    }
-
-    /**
-     * \brief Subtract `rhs` from this color channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator-=(T const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] -= rhs;
-        }
-        return *this;
-    }
-
-    /**
-     * \brief Subtract `rhs` from `lhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator-(color lhs, T const & rhs)
-    {
-        lhs -= rhs;
-        return lhs;
-    }
-
-    // ~~~ MULTIPLICATION ~~~ //
-
-    /**
-     * \brief Multiply this color with `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator*=(color const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] *= rhs.m_data[c];
-        }
-        return *this;
-    }
-    
-    /**
-     * \brief Multiply `lhs` with `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator*(color lhs, color const & rhs)
-    {
-        lhs *= rhs;
-        return lhs;
-    }
-
-    /**
-     * \brief Multiply this color with `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator*=(T const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] *= rhs;
-        }
-        return *this;
-    }
-
-    /**
-     * \brief Multiply `lhs` with `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator*(color lhs, T const & rhs)
-    {
-        lhs *= rhs;
-        return lhs;
-    }
-
-    // ~~~ DIVISION ~~~ //
-
-    /**
-     * \brief Divide this color by `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator/=(color const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] /= rhs.m_data[c];
-        }
-        return *this;
-    }
-    
-    /**
-     * \brief Divide `lhs` by `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator/(color lhs, color const & rhs)
-    {
-        lhs /= rhs;
-        return lhs;
-    }
-
-    /**
-     * \brief Divide this color by `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-     color & operator/=(T const & rhs)
-    {
-        for (size_t c = 0; c < m_data.size(); ++c) {
-            m_data[c] /= rhs;
-        }
-        return *this;
-    }
-
-    /**
-     * \brief Divide `lhs` by `rhs` channel-wise
-     * 
-     * \param rhs 
-     * \return color& 
-     */
-    [[nodiscard]] friend color operator/(color lhs, T const & rhs)
-    {
-        lhs /= rhs;
-        return lhs;
-    }
-};
-
-/**
- * Specialized formatter for `spice::color`.
- */
-template<typename T, size_t Channels>
-std::ostream& operator<<(std::ostream& os, color<T, Channels> const & pxl)
-{
-    os << "color(";
-    for (size_t idx = 0; idx < pxl.size() - 1; ++idx)
-        os << pxl[idx] << ", ";
-    os << pxl[pxl.size() - 1];
-    os << ")";
-    return os;
-}
-
-/**
  * \brief Represents an image
  * 
  * \tparam T 
@@ -685,8 +84,17 @@ class image {
 private:
     size_t m_width;
     size_t m_height;
-    std::vector<color<T, Channels>> m_data;
+    std::vector<T> m_data;
 public:
+    ////////////////////////////////////////////////////////////////////////////
+    // MEMBER TYPES
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * \brief Alias for the type used to represent individual pixel values
+     */
+    using value_type = T;
+
     /**
      * \brief Default-construct a new image object
      * 
@@ -723,52 +131,52 @@ public:
     image(size_t width, size_t height):
         m_width(width),
         m_height(height),
-        m_data(width * height, color<T, Channels>()) {}
+        m_data(width * height * Channels, T{}) {}
 
     /**
      * \brief Construct a new image object with the given width and height and
      * initialise it with the provided data
      * 
-     * The data array is assumed to be of length `width * height * Channels`.
+     * The data array is assumed to have  the following properties:
+     * - Planar memory layout (i.e. all red samples before all green samples
+     * before all blue samples etc...)
+     * - RGB[A[X...]] channel order
+     * - length `width * height * Channels`
      * 
-     * \param data 
+     * \param data pointer to data array in planar memory layout
      * \param width 
      * \param height 
      */
     image(T const * const data, size_t width, size_t height):
         m_width(width),
         m_height(height),
-        m_data(width * height, T{})
-    {
-        for (size_t i = 0; i < m_data.size(); ++i) {
-            m_data[i] = color<T, Channels>(data + (i * Channels));
-        }
+        m_data(data, data + width * height * Channels)
+    {}
+
+    /**
+     * \brief Get direct access to the underlying data
+     * 
+     * \return T * const
+     */
+    [[nodiscard]] T * const data() noexcept {
+        return m_data.data();
     }
 
     /**
      * \brief Get direct access to the underlying data
      * 
-     * \return std::vector<color<T, Channels>>& 
+     * \return T * const& 
      */
-    std::vector<color<T, Channels>> & data() {
-        return m_data;
+    [[nodiscard]] T const * const data() const noexcept {
+        return m_data.data();
     }
 
     /**
-     * \brief Get direct access to the underlying data
-     * 
-     * \return std::vector<color<T, Channels>>& 
-     */
-    std::vector<color<T, Channels>> const & data() const {
-        return m_data;
-    }
-
-    /**
-     * \brief Get teh width of the image
+     * \brief Get the width of the image
      * 
      * \return size_t 
      */
-    size_t width() const {
+    [[nodiscard]] size_t width() const {
         return m_width;
     }
 
@@ -777,7 +185,7 @@ public:
      * 
      * \return size_t 
      */
-    size_t height() const {
+    [[nodiscard]] size_t height() const {
         return m_height;
     }
 
@@ -786,8 +194,17 @@ public:
      * 
      * \return constexpr size_t 
      */
-    constexpr size_t channels() const {
+    [[nodiscard]] constexpr size_t channels() const {
         return Channels;
+    }
+
+    /**
+     * \brief Get the size of the data array containing the image
+     * 
+     * \return constexpr size_t 
+     */
+    [[nodiscard]] constexpr size_t size() const {
+        return m_data.size();
     }
 
     /**
@@ -803,23 +220,23 @@ public:
     static const constexpr T max = color<T, Channels>::max;
 
     /**
-     * \brief Get a reference to the pixel at the specified coordinates
+     * \brief Get a reference to the sample at the specified offset
      * 
-     * \param index 
-     * \return color<T, Channels>& 
+     * \param offset 
+     * \return T & 
      */
-    color<T, Channels> & operator[] (size_t index) {
-        return m_data[index];
+    [[nodiscard]] T & operator[] (size_t offset) {
+        return m_data[offset];
     }
 
     /**
-     * \brief Get a constant reference to the pixel at the specified coordinates
+     * \brief Get a constant reference to the sample at the specified offset
      * 
-     * \param index 
-     * \return color<T, Channels>& 
+     * \param offset 
+     * \return T & 
      */
-    color<T, Channels> const & operator[] (size_t index) const {
-        return m_data[index];
+    [[nodiscard]] T const & operator[] (size_t offset) const {
+        return m_data[offset];
     }
 
     /**
@@ -830,8 +247,11 @@ public:
      * \return color<T, Channels>& A reference to the image's color at the given
      * coordinates
      */
-    color<T, Channels> & operator() (int x, int y) {
-        return m_data[y * m_width + x];
+    [[nodiscard]] color_view<T> operator() (int x, int y) {
+        // std::cout << "Colorview starting at address " << &m_data[y * m_width + x] << "\n";
+        return color_view<T>(&m_data[y * m_width + x],
+            width() * height(),
+            channels());
     }
 
     /**
@@ -842,8 +262,11 @@ public:
      * \return color<T, Channels>& A constant reference to the image's color at
      * the given coordinates
      */
-    color<T, Channels> const & operator() (int x, int y) const {
-        return m_data[y * m_width + x];
+    [[nodiscard]] color_view<T const> const operator() (int x, int y) const {
+        // std::cout << "Colorview starting at address " << &m_data[y * m_width + x] << "\n";
+        return color_view<T const>(&m_data[y * m_width + x],
+            width() * height(),
+            channels());
     }
 
     /**
@@ -861,7 +284,7 @@ public:
             || lhs.channels() != rhs.channels())
             return false;
 
-        for (size_t i = 0; i < rhs.data().size(); ++i) {
+        for (size_t i = 0; i < rhs.size(); ++i) {
             if (lhs[i] != rhs[i])
                 return false;
         }
@@ -904,7 +327,7 @@ public:
             || lhs.channels() != rhs.channels())
             return false;
 
-        for (size_t i = 0; i < rhs.data().size(); ++i) {
+        for (size_t i = 0; i < rhs.size(); ++i) {
             if (lhs[i] != rhs[i])
                 return false;
         }
@@ -1014,11 +437,57 @@ template<typename T, size_t Channels>
     // if (needs_alpha)
     //     channels.push_back("A");
 
+
+    // TODO find a way to make this work without copying the image {{{
+
+    // std::vector<T> img_data(spec.width * spec.height * spec.nchannels);
+
+    // auto column_stride = sizeof(img_data[0]);
+    // auto row_stride = column_stride * spec.width;
+    // auto slice_stride = row_stride * spec.height;
+
+    // std::cout << column_stride << ", " << row_stride << ", " << slice_stride << '\n';
+
+    // file->read_image(helpers::type_to_typedesc<T>(),
+    //     img_data.data(),
+    //     // &img_data[0],
+    //     column_stride,
+    //     row_stride,
+    //     slice_stride
+    //     );
+
+    // std::cout << "Read data, top left pixel is (" 
+    //     << img_data[0] << ", "
+    //     << img_data[spec.width * spec.height] << ", "
+    //     << img_data[2 * spec.width * spec.height] << ")\n";
+
+    // }}}
+
     std::vector<T> img_data(spec.width * spec.height * spec.nchannels);
-    file->read_image(helpers::type_to_typedesc<T>(), &img_data[0]);
+
+    file->read_image(helpers::type_to_typedesc<T>(), img_data.data());
+
+    std::vector<T> img_data_planar(spec.width * spec.height * spec.nchannels);
+
+    // optimising for write locations seems to be minimally faster
+    for (auto c = 0; c < spec.nchannels; ++c) {
+        for (auto y = 0; y < spec.height; ++y) {
+            for (auto x = 0; x < spec.width; ++x) {
+                img_data_planar[
+                    c * spec.width * spec.height +
+                    y * spec.width +
+                    x
+                ] = img_data[
+                    y * spec.width * spec.nchannels +
+                    x * spec.nchannels +
+                    c
+                ];
+            }
+        }
+    }
 
     image<T, Channels> result(
-        img_data.data(),
+        img_data_planar.data(),
         spec.width,
         spec.height
         );

@@ -16,59 +16,10 @@
 
 using namespace spice;
 
-TEST(color, default_constructor) {
-    const color<float, 5> c;
-
-    EXPECT_EQ(0.f, c[0]);
-    EXPECT_EQ(0.f, c[1]);
-    EXPECT_EQ(0.f, c[2]);
-    EXPECT_EQ(0.f, c[3]);
-    EXPECT_EQ(0.f, c[4]);
-}
-
-TEST(color, copy_constructor) {
-    const color<float> c1{1.f, 1.1f, 0.42f, .47f};
-    const color<float> c2(c1);
-
-    EXPECT_EQ(c1, c2);
-
-    EXPECT_EQ(1.f, c2[0]);
-    EXPECT_EQ(1.1f, c2[1]);
-    EXPECT_EQ(0.42f, c2[2]);
-    EXPECT_EQ(0.47f, c2[3]);
-}
-
-TEST(color, single_value_constructor) {
-    const color<uint8_t, 3> c(static_cast<uint8_t>(42));
-
-    EXPECT_EQ(42, c[0]);
-    EXPECT_EQ(42, c[1]);
-    EXPECT_EQ(42, c[2]);
-}
-
-TEST(color, multiple_values_constructor) {
-    const color<float> c{1, 1.1, 0.42, .47};
-
-    EXPECT_EQ(1.f, c[0]);
-    EXPECT_EQ(1.1f, c[1]);
-    EXPECT_EQ(0.42f, c[2]);
-    EXPECT_EQ(0.47f, c[3]);
-}
-
-TEST(color, multiple_values_pointer_constructor) {
-    float values[] = {1, 1.1, 0.42, .47};
-    const color<float> c(values);
-
-    EXPECT_EQ(1.f, c[0]);
-    EXPECT_EQ(1.1f, c[1]);
-    EXPECT_EQ(0.42f, c[2]);
-    EXPECT_EQ(0.47f, c[3]);
-}
-
 TEST(image, default_constructor) {
     image<float> im;
 
-    EXPECT_EQ(0, im.data().size());
+    EXPECT_EQ(0, im.size());
     EXPECT_EQ(0, im.width());
     EXPECT_EQ(0, im.height());
     EXPECT_EQ(4, im.channels());
@@ -77,9 +28,9 @@ TEST(image, default_constructor) {
 TEST(image, size_constructor) {
     image<float> im1(2, 3);
 
-    EXPECT_EQ(6, im1.data().size());
-    for (auto d : im1.data()) {
-        EXPECT_EQ(0.f, d);
+    EXPECT_EQ(24, im1.size());
+    for (size_t i = 0; i < im1.size(); ++i) {
+        EXPECT_EQ(0.f, im1.data()[i]);
     }
     EXPECT_EQ(2, im1.width());
     EXPECT_EQ(3, im1.height());
@@ -92,9 +43,9 @@ TEST(image, copy_constructor) {
 
     EXPECT_TRUE(im1 == im2);
 
-    EXPECT_EQ(6, im2.data().size());
-    for (auto d : im2.data()) {
-        EXPECT_EQ(0.f, d);
+    EXPECT_EQ(24, im2.size());
+    for (size_t i = 0; i < im2.size(); ++i) {
+        EXPECT_EQ(0.f, im2.data()[i]);
     }
     EXPECT_EQ(2, im2.width());
     EXPECT_EQ(3, im2.height());
@@ -108,9 +59,9 @@ TEST(image, operator_equals) {
     EXPECT_TRUE(im1 == im2);
     EXPECT_FALSE(im1 != im2);
 
-    EXPECT_EQ(6, im2.data().size());
-    for (auto d : im2.data()) {
-        EXPECT_EQ(0.f, d);
+    EXPECT_EQ(24, im2.size());
+    for (size_t i = 0; i < im2.size(); ++i) {
+        EXPECT_EQ(0.f, im2.data()[i]);
     }
     EXPECT_EQ(2, im2.width());
     EXPECT_EQ(3, im2.height());
