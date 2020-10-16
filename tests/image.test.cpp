@@ -286,16 +286,16 @@ TEST(image_support, load_image) {
     EXPECT_EQ(blue_average, 4198);
 }
 
-// TEST(image_support, write_image) {
-//     auto boat = load_image<float>("../data/testing/boat.jpg");
+TEST(image_support, write_image) {
+    auto boat = load_image<float, 3>("../data/testing/boat.jpg");
 
-//     std::string out_path("../data/testing/boat_2.jpg");
-//     bool written = write_image(out_path.c_str(),
-//         boat, OIIO::TypeDesc::UINT8);
+    std::string out_path("../data/testing/boat_2.jpg");
+    bool written = write_image(out_path.c_str(),
+        boat, OIIO::TypeDesc::UINT8);
 
-//     EXPECT_TRUE(written);
-//     std::ifstream f(out_path.c_str());
-//     EXPECT_TRUE(f.good());
+    EXPECT_TRUE(written);
+    std::ifstream f(out_path.c_str());
+    EXPECT_TRUE(f.good());
 
-//     std::remove(out_path.c_str());
-// }
+    std::remove(out_path.c_str());
+}

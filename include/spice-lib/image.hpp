@@ -469,6 +469,7 @@ template<typename T, size_t Channels>
 
     std::vector<T> img_data_planar(spec.width * spec.height * spec.nchannels);
 
+    // remix the data from interleaved to planar memory layout
     // optimising for write locations seems to be minimally faster
     for (auto c = 0; c < spec.nchannels; ++c) {
         for (auto y = 0; y < spec.height; ++y) {
@@ -507,29 +508,48 @@ template<typename T, size_t Channels>
 //  * \returns `true` if the image was successfully written, `false` if an
 //  * error occurred.
 //  */
-// template<typename T>
-// bool write_image(
-//     char const * filename,
-//     image<T> const & data,
-//     OIIO::TypeDesc const & format = helpers::type_to_typedesc<T>())
-// {
-//     std::unique_ptr<OIIO::ImageOutput> out =
-//         OIIO::ImageOutput::create(filename);
-//     if (!out)
-//         return false;
+template<typename T, size_t Channels>
+bool write_image(
+    char const * filename,
+    image<T, Channels> const & data,
+    OIIO::TypeDesc const & format = helpers::type_to_typedesc<T>())
+{
+    std::unique_ptr<OIIO::ImageOutput> out =
+        OIIO::ImageOutput::create(filename);
+    if (!out)
+        return false;
 
-//     OIIO::ImageSpec spec(
-//         data.width(),
-//         data.height(),
-//         data.channels(),
-//         format);
-//     out->open(filename, spec);
-//     out->write_image(helpers::type_to_typedesc<T>(),
-//         transpose(data).data().data()); // transposing image before writing
-//     out->close();
+    // interleave image before writing
+    std::vector<T> interleaved(data.width() * data.height() * data.channels());
+    for (size_t c = 0; c < data.channels(); ++c) {
+        for (size_t y = 0; y < data.height(); ++y) {
+            for (size_t x = 0; x < data.width(); ++x) {
+                interleaved[
+                    y * data.width() * data.channels() +
+                    x * data.channels() +
+                    c
+                ] = data[
+                    c * data.width() * data.height() +
+                    y * data.width() +
+                    x
+                ];
+            }
+        }
+    }
 
-//     return true;
-// }
+
+    OIIO::ImageSpec spec(
+        data.width(),
+        data.height(),
+        data.channels(),
+        format);
+    out->open(filename, spec);
+    out->write_image(helpers::type_to_typedesc<T>(),
+        interleaved.data());
+    out->close();
+
+    return true;
+}
 
 }
 

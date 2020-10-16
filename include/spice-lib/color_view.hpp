@@ -122,14 +122,6 @@ public:
      * 
      * \param other 
      */
-    void reset(color_view && other) {}
-
-    /**
-     * \brief Replaces the reference with the reference held by `other` and
-     * adjusts the size accordingly
-     * 
-     * \param other 
-     */
     void reset(color_view const & other) {
         m_data = other.data;
         m_stride = other.stride;
