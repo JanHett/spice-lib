@@ -100,6 +100,8 @@ target_include_directories(
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 
+target_include_directories(${PROJECT_NAME} INTERFACE ${OIIO_INCLUDE_DIRS})
+
 target_link_libraries(${PROJECT_NAME}
     INTERFACE
         GSL
@@ -147,6 +149,16 @@ option(ENABLE_TESTS "Build unit tests" ON)
 
 if(ENABLE_TESTS)
   add_subdirectory(tests)
+endif()
+
+#############################
+# Benchmarking setup
+#############################
+
+option(ENABLE_BENCHMARKS "Build benchmarks" ON)
+
+if(ENABLE_BENCHMARKS)
+  add_subdirectory(benchmark)
 endif()
 
 #############################

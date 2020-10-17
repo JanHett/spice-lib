@@ -10,7 +10,7 @@ TEST(color_view, default_constructor) {
 }
 
 TEST(color_view, copy_constructor) {
-    const color<float> c1{1.f, 1.1f, 0.42f, .47f};
+    /* const */ color<float> c1{1.f, 1.1f, 0.42f, .47f};
     const color_view<float> cv1(c1.data(), 1, c1.channels());
     const color<float> cv2(cv1);
 

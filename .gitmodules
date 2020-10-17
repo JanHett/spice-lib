@@ -4,3 +4,6 @@
 [submodule "external/m.css"]
 	path = external/m.css
 	url = https://github.com/mosra/m.css.git
+[submodule "external/benchmark"]
+	path = external/benchmark
+	url = https://github.com/google/benchmark.git

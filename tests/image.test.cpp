@@ -250,13 +250,18 @@ TEST(image_helpers, type_to_typedesc) {
 TEST(image_support, load_image) {
     auto boat = load_image<float, 3>("../data/testing/boat.jpg");
 
+    // print image for debugging
+    // print::image<float, 3>(boat, 10);
+
+    // auto eibsee = load_image<float, 3>("../data/testing/eibsee_ps.tif");
+
+    // // print image for debugging
+    // print::image<float, 3>(eibsee, 100);
+
     auto hist = statistics::histogram(boat, 50);
 
     // print histogram for debugging
     // print::histogram(hist, 100);
-
-    // print image for debugging
-    // print::image<float, 3>(boat, 10);
 
     EXPECT_EQ(3, boat.channels());
     EXPECT_EQ(boat.width(), 512);

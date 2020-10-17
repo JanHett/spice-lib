@@ -407,19 +407,6 @@ public:
 //     return new_i;
 // }
 
-/**
- * Loads an image from disk and returns a representation of the indicated
- * data type. All conversions are handled internally by OIIO.
- * If the image could not be read, an empty image is returned (size 0x0).
- * 
- * \todo Transform from file format color model to internal color model
- *
- * \param filename The path on disk relative to the current working
- * directory
- * \param config file format specific parameters in the form of an ImageSpec
- * configuration that will be handed through to OIIO
- * \returns An image object representing the file contents
- */
 template<typename T, size_t Channels>
 [[nodiscard]] image<T, Channels> load_image(char const * filename,
     const OIIO::ImageSpec * config = nullptr)
@@ -430,61 +417,15 @@ template<typename T, size_t Channels>
         return image<T, Channels>();
 
     const OIIO::ImageSpec & spec = file->spec();
-    auto channels = spec.channelnames;
-
-    // bool needs_alpha = spec.alpha_channel == -1 && ensure_alpha;
-
-    // if (needs_alpha)
-    //     channels.push_back("A");
-
-
-    // TODO find a way to make this work without copying the image {{{
-
-    // std::vector<T> img_data(spec.width * spec.height * spec.nchannels);
-
-    // auto column_stride = sizeof(img_data[0]);
-    // auto row_stride = column_stride * spec.width;
-    // auto slice_stride = row_stride * spec.height;
-
-    // std::cout << column_stride << ", " << row_stride << ", " << slice_stride << '\n';
-
-    // file->read_image(helpers::type_to_typedesc<T>(),
-    //     img_data.data(),
-    //     // &img_data[0],
-    //     column_stride,
-    //     row_stride,
-    //     slice_stride
-    //     );
-
-    // std::cout << "Read data, top left pixel is (" 
-    //     << img_data[0] << ", "
-    //     << img_data[spec.width * spec.height] << ", "
-    //     << img_data[2 * spec.width * spec.height] << ")\n";
-
-    // }}}
-
-    std::vector<T> img_data(spec.width * spec.height * spec.nchannels);
-
-    file->read_image(helpers::type_to_typedesc<T>(), img_data.data());
 
     std::vector<T> img_data_planar(spec.width * spec.height * spec.nchannels);
 
-    // remix the data from interleaved to planar memory layout
-    // optimising for write locations seems to be minimally faster
-    for (auto c = 0; c < spec.nchannels; ++c) {
-        for (auto y = 0; y < spec.height; ++y) {
-            for (auto x = 0; x < spec.width; ++x) {
-                img_data_planar[
-                    c * spec.width * spec.height +
-                    y * spec.width +
-                    x
-                ] = img_data[
-                    y * spec.width * spec.nchannels +
-                    x * spec.nchannels +
-                    c
-                ];
-            }
-        }
+    for (auto channel = 0; channel < spec.nchannels; ++channel) {
+        file->read_image(
+            channel, channel + 1,
+            helpers::type_to_typedesc<T>(),
+            &img_data_planar.data()[spec.width * spec.height * channel]);
+
     }
 
     image<T, Channels> result(

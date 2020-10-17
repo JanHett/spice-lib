@@ -201,7 +201,8 @@ public:
      * 
      * \todo refactor this to work for any type that is convertible to `T`
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<std::is_scalar<T_other>::value, bool>
     operator==(T_other const & lhs,
@@ -226,7 +227,8 @@ public:
      * 
      * \todo refactor this to work for any type that is convertible to `T`
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<std::is_scalar<T_other>::value, bool>
     operator==(color const & lhs,
@@ -246,7 +248,8 @@ public:
      * 
      * \todo refactor this to work for any type that is convertible to `T`
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<std::is_scalar<T_other>::value, bool>
     operator!=(T_other const & lhs,
@@ -266,7 +269,8 @@ public:
      * 
      * \todo refactor this to work for any type that is convertible to `T`
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<std::is_scalar<T_other>::value, bool>
     operator!=(color const & lhs,
@@ -319,7 +323,8 @@ public:
      * \return true if the two have the same number of elements with
      * corresponding values, false otherwise
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<
         !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
@@ -346,7 +351,8 @@ public:
      * \return true if the two do not have the same number of elements or any of
      * the values do not correspond, false otherwise
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<
         !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
@@ -367,7 +373,8 @@ public:
      * \return true if the two have the same number of elements with
      * corresponding values, false otherwise
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<
         !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
@@ -386,7 +393,8 @@ public:
      * \return true if the two do not have the same number of elements or any of
      * the values do not correspond, false otherwise
      */
-    template<typename T_other>
+    template<typename T_other,
+        std::enable_if_t<!std::is_same<T_other, color_view<T>>::value, int> = 0>
     [[nodiscard]] friend
     std::enable_if_t<
         !std::is_same<color, T_other>::value && !std::is_scalar<T_other>::value,
