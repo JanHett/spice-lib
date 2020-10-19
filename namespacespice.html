@@ -97,12 +97,6 @@
               <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const&amp; pxl) -&gt; std::ostream&amp;</span>
             </dt>
             <dd></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T, size_t Channels&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6c0d04a6e1ca7478cb00b403ad13f77f" class="m-doc">load_image</a>(</span><span class="m-doc-wrap">char const* filename,
-              const OIIO::ImageSpec* config = nullptr) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&lt;T, Channels&gt;</span>
-            </dt>
-            <dd></dd>
           </dl>
         </section>
         <section>
@@ -116,37 +110,6 @@
               <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const&amp; pxl)</span></span>
             </h3>
 <p>Specialized formatter for <code><a href="classspice_1_1color.html" class="m-doc">spice::<wbr />color</a></code>.</p>
-          </div></section>
-          <section class="m-doc-details" id="a6c0d04a6e1ca7478cb00b403ad13f77f"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T, size_t Channels&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&lt;T, Channels&gt; spice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c0d04a6e1ca7478cb00b403ad13f77f" class="m-doc-self">load_image</a>(</span><span class="m-doc-wrap">char const* filename,
-              const OIIO::ImageSpec* config = nullptr)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">filename</td>
-                  <td>The path on disk relative to the current working directory</td>
-                </tr>
-                <tr>
-                  <td>config</td>
-                  <td>file format specific parameters in the form of an ImageSpec configuration that will be handed through to OIIO</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>An image object representing the file contents</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Loads an image from disk and returns a representation of the indicated data type. All conversions are handled internally by OIIO. If the image could not be read, an empty image is returned (size 0x0).</p><aside class="m-note m-dim"><h4><a href="todo.html#_todo000001" class="m-doc">Todo</a></h4><p>Transform from file format color model to internal color model</p></aside>
           </div></section>
         </section>
       </div>

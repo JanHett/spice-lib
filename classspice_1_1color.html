@@ -53,6 +53,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-static-attribs">Public static variables</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
@@ -62,6 +63,15 @@
           </ul>
         </div>
 <p>Represents a color.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a56cba331ac6632c6356bfe9025f88fe3">
+              using <a href="#a56cba331ac6632c6356bfe9025f88fe3" class="m-doc-self">value_type</a> = T
+            </dt>
+            <dd>Alias for the type used to represent individual pixel values.</dd>
+          </dl>
+        </section>
         <section id="pub-static-attribs">
           <h2><a href="#pub-static-attribs">Public static variables</a></h2>
           <dl class="m-doc">
@@ -102,6 +112,11 @@
               <span class="m-doc-wrap-bumper"><a href="#ae094414c46a613598f950785aa0de7b8" class="m-doc">color</a>(</span><span class="m-doc-wrap">T const*const values)</span>
             </dt>
             <dd>Construct a new color object with given values.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#a8a1bd5b00688ea2b7e1f87d3333f94cc" class="m-doc">color</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T_other&gt; const&amp; other)</span>
+            </dt>
+            <dd>Create a copy of the given <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -127,6 +142,14 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a50e12296fa710de8c795bbc2457746b5" class="m-doc">channels</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Returns the channel count.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae661d016c924ea96c61e191e06d0c3dc" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; T*const <span class="m-label m-flat m-primary">constexpr</span></span>
+            </dt>
+            <dd>Returns the raw data pointer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a69acacadd1f760585183c4d1c9b81d53" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; T const *const <span class="m-label m-flat m-primary">constexpr</span></span>
+            </dt>
+            <dd>Returns the raw data pointer.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac4cb2055424946094698b183fd71397b" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) -&gt; T&amp;</span>
             </dt>
@@ -173,26 +196,26 @@
           <h2><a href="#friends">Friends</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad78eba241a701d55e135aaa8ed1fc20d" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9ae56e28b8158e63f8d09b555654b530" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares a color component-wise with a scalar.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7e98069fb2f19c35ca0c3da119ba2840" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8daf1748887c2a5a20ff05be54d3f76" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares a color component-wise with a scalar.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5aa7c3d8722530661e623c6530335e58" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab43dfe83971437f0dfbea545b48c788c" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares a color component-wise with a scalar for inequality.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a95fa889ea19e169c5e66f6cfd2092b8c" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a19bec5eeebf2f20d8389933ca0a201ad" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares a color component-wise with a scalar for inequality.</dd>
@@ -207,26 +230,26 @@
             </dt>
             <dd>Compares two colors for inequality.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a12442d7563d2c46c66e1e3ab063c094d" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7647393c33a0abaf8ce8659aa6bcbbaa" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two colors.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a20df613fa123cf590d15e85fce9db05f" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aae8c1a13b3ce3238c317cc267efe02a5" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two colors for inequality.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac8a7d116834607f784f53ce30e7d4de7" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#afe552a41d1c3b11ede53fcc1a67bef05" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two colors.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#add552e63a9867d46ae12bf063e9d28fc" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <div class="m-doc-template">template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a99f8c06f61bcf4b29b6a476bc629df2e" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two colors for inequality.</dd>
@@ -375,6 +398,27 @@
             </table>
 <p>The values are assumed to be of length <code>Channels</code></p>
           </div></section>
+          <section class="m-doc-details" id="a8a1bd5b00688ea2b7e1f87d3333f94cc"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+                template&lt;typename T_other&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> spice::<wbr />color&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8a1bd5b00688ea2b7e1f87d3333f94cc" class="m-doc-self">color</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T_other&gt; const&amp; other)</span></span>
+            </h3>
+            <p>Create a copy of the given <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>The <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> to copy values from</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ae7a9b1266046120cb8efb05d39daf66c"><div>
             <h3>
               <div class="m-doc-template">
@@ -469,6 +513,40 @@
               <span class="m-doc-wrap-bumper">size_t spice::<wbr />color&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a50e12296fa710de8c795bbc2457746b5" class="m-doc-self">channels</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Returns the channel count.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>size_t</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae661d016c924ea96c61e191e06d0c3dc"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T*const spice::<wbr />color&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae661d016c924ea96c61e191e06d0c3dc" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span></span></span>
+            </h3>
+            <p>Returns the raw data pointer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>size_t</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a69acacadd1f760585183c4d1c9b81d53"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T const *const spice::<wbr />color&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a69acacadd1f760585183c4d1c9b81d53" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
+            </h3>
+            <p>Returns the raw data pointer.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -738,14 +816,56 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad78eba241a701d55e135aaa8ed1fc20d"><div>
+          <section class="m-doc-details" id="a9ae56e28b8158e63f8d09b555654b530"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad78eba241a701d55e135aaa8ed1fc20d" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ae56e28b8158e63f8d09b555654b530" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs)</span></span>
+            </h3>
+            <p>Compares a color component-wise with a scalar.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T_other</td>
+                  <td>A scalar that is comparable to the color&#x27;s data type <code>T</code></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all elements of the color correspond to the scalar value, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-dim"><h4><a href="todo.html#_todo000001" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae8daf1748887c2a5a20ff05be54d3f76"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8daf1748887c2a5a20ff05be54d3f76" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              T_other const&amp; rhs)</span></span>
             </h3>
             <p>Compares a color component-wise with a scalar.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -780,55 +900,13 @@
             </table>
 <aside class="m-note m-dim"><h4><a href="todo.html#_todo000002" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
           </div></section>
-          <section class="m-doc-details" id="a7e98069fb2f19c35ca0c3da119ba2840"><div>
+          <section class="m-doc-details" id="ab43dfe83971437f0dfbea545b48c788c"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e98069fb2f19c35ca0c3da119ba2840" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
-              T_other const&amp; rhs)</span></span>
-            </h3>
-            <p>Compares a color component-wise with a scalar.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T_other</td>
-                  <td>A scalar that is comparable to the color&#x27;s data type <code>T</code></td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>lhs</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>rhs</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if all elements of the color correspond to the scalar value, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-dim"><h4><a href="todo.html#_todo000003" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a5aa7c3d8722530661e623c6530335e58"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5aa7c3d8722530661e623c6530335e58" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab43dfe83971437f0dfbea545b48c788c" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares a color component-wise with a scalar for inequality.</p>
@@ -862,15 +940,15 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-dim"><h4><a href="todo.html#_todo000004" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
+<aside class="m-note m-dim"><h4><a href="todo.html#_todo000003" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
           </div></section>
-          <section class="m-doc-details" id="a95fa889ea19e169c5e66f6cfd2092b8c"><div>
+          <section class="m-doc-details" id="a19bec5eeebf2f20d8389933ca0a201ad"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95fa889ea19e169c5e66f6cfd2092b8c" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19bec5eeebf2f20d8389933ca0a201ad" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
             <p>Compares a color component-wise with a scalar for inequality.</p>
@@ -904,7 +982,7 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-dim"><h4><a href="todo.html#_todo000005" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
+<aside class="m-note m-dim"><h4><a href="todo.html#_todo000004" class="m-doc">Todo</a></h4><p>refactor this to work for any type that is convertible to <code>T</code></p></aside>
           </div></section>
           <section class="m-doc-details" id="a9641e33fcd25fda0015cf715eaa944e7"><div>
             <h3>
@@ -968,13 +1046,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a12442d7563d2c46c66e1e3ab063c094d"><div>
+          <section class="m-doc-details" id="a7647393c33a0abaf8ce8659aa6bcbbaa"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a12442d7563d2c46c66e1e3ab063c094d" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7647393c33a0abaf8ce8659aa6bcbbaa" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares two colors.</p>
@@ -1009,13 +1087,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a20df613fa123cf590d15e85fce9db05f"><div>
+          <section class="m-doc-details" id="aae8c1a13b3ce3238c317cc267efe02a5"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20df613fa123cf590d15e85fce9db05f" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae8c1a13b3ce3238c317cc267efe02a5" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
             <p>Compares two colors for inequality.</p>
@@ -1041,13 +1119,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac8a7d116834607f784f53ce30e7d4de7"><div>
+          <section class="m-doc-details" id="afe552a41d1c3b11ede53fcc1a67bef05"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8a7d116834607f784f53ce30e7d4de7" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe552a41d1c3b11ede53fcc1a67bef05" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
             <p>Compares two colors.</p>
@@ -1082,13 +1160,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="add552e63a9867d46ae12bf063e9d28fc"><div>
+          <section class="m-doc-details" id="a99f8c06f61bcf4b29b6a476bc629df2e"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
-                template&lt;typename T_other&gt;
+                template&lt;typename T_other, std::enable_if_t&lt;!std::is_same&lt;T_other, <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;&gt;::value, int&gt; = 0&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#add552e63a9867d46ae12bf063e9d28fc" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99f8c06f61bcf4b29b6a476bc629df2e" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
               <a href="classspice_1_1color.html" class="m-doc">color</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares two colors for inequality.</p>

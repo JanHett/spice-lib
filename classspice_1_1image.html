@@ -69,6 +69,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-static-attribs">Public static variables</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
@@ -77,6 +78,15 @@
             </li>
           </ul>
         </div>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a00920586d1cfd023cc092077407be475">
+              using <a href="#a00920586d1cfd023cc092077407be475" class="m-doc-self">value_type</a> = T
+            </dt>
+            <dd>Alias for the type used to represent individual pixel values.</dd>
+          </dl>
+        </section>
         <section id="pub-static-attribs">
           <h2><a href="#pub-static-attribs">Public static variables</a></h2>
           <dl class="m-doc">
@@ -122,17 +132,17 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab4c42557fc4044092069760066d3b9b5" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af49d98d5322df12e5a67efa5fff819be" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; T*const <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Get direct access to the underlying data.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae8713d8467affeb9a970bc5e52816c82" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&gt; const &amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac9fd9e7c4f2346d2dec5319db39b5382" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; T const *const <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Get direct access to the underlying data.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6de3a1a3447e3eee44258ef7fa509b43" class="m-doc">width</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
             </dt>
-            <dd>Get teh width of the image.</dd>
+            <dd>Get the width of the image.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aee184f6eaf215d9084bb791184c3b84a" class="m-doc">height</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
             </dt>
@@ -142,23 +152,31 @@
             </dt>
             <dd>Get the number of channels in the image.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7b6fd5d97ec475e87dd744e58bf8e573" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) -&gt; <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#acc0f13d08a1bafe8fa1673ed1931b22b" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd>Get a reference to the pixel at the specified coordinates.</dd>
+            <dd>Get the size of the data array containing the image.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1bc2b7034a6fa65e75f2c79a91a8be05" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const -&gt; <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const &amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a39cdfec7445c7b10d58522566de237a6" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t offset) -&gt; T&amp;</span>
             </dt>
-            <dd>Get a constant reference to the pixel at the specified coordinates.</dd>
+            <dd>Get a reference to the sample at the specified offset.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afda8f8b650ba66efe25acd6ebdde203f" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
-              int y) -&gt; <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a89a5ad63d67667768d487f452a1ad387" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t offset) const -&gt; T const &amp;</span>
+            </dt>
+            <dd>Get a constant reference to the sample at the specified offset.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a3436402d745d23787a065c16ac3adb" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
+              int y) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;</span>
             </dt>
             <dd>Get pixel value at specified coordinates.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac5da3c07e55a18ac6db1bc865466d9b8" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
-              int y) const -&gt; <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const &amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a57e4b06ec20e73328ec52ab82437607c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
+              int y) const -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const</span>
             </dt>
             <dd>Get pixel value at specified coordinates.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1252686f6cdbafc0a23a710b8f51c557" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
+            </dt>
+            <dd>Add <code>rhs</code> element-wise to this image.</dd>
           </dl>
         </section>
         <section id="friends">
@@ -198,6 +216,11 @@
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1image.html" class="m-doc">image</a>, T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two images for inequality.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af5207ea266652948cf92e60482846b67" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              <a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Add <code>rhs</code> element-wise to this image.</dd>
           </dl>
         </section>
         <section>
@@ -284,7 +307,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td></td>
+                  <td>pointer to data array in planar memory layout</td>
                 </tr>
                 <tr>
                   <td>width</td>
@@ -296,38 +319,38 @@
                 </tr>
               </tbody>
             </table>
-<p>The data array is assumed to be of length <code>width * height * Channels</code>.</p>
+<p>The data array is assumed to have the following properties:</p><ul><li>Planar memory layout (i.e. all red samples before all green samples before all blue samples etc...)</li><li>RGB[A[X...]] channel order</li><li>length <code>width * height * Channels</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="ab4c42557fc4044092069760066d3b9b5"><div>
+          <section class="m-doc-details" id="af49d98d5322df12e5a67efa5fff819be"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&gt;&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab4c42557fc4044092069760066d3b9b5" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">T*const spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af49d98d5322df12e5a67efa5fff819be" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Get direct access to the underlying data.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>std::vector&lt;color&lt;T, Channels&gt;&gt;&amp;</td>
+                  <td>T * const</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae8713d8467affeb9a970bc5e52816c82"><div>
+          <section class="m-doc-details" id="ac9fd9e7c4f2346d2dec5319db39b5382"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&gt; const &amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8713d8467affeb9a970bc5e52816c82" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">T const *const spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac9fd9e7c4f2346d2dec5319db39b5382" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Get direct access to the underlying data.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>std::vector&lt;color&lt;T, Channels&gt;&gt;&amp;</td>
+                  <td>T * const&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -339,7 +362,7 @@
               </div>
               <span class="m-doc-wrap-bumper">size_t spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6de3a1a3447e3eee44258ef7fa509b43" class="m-doc-self">width</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Get teh width of the image.</p>
+            <p>Get the width of the image.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -383,64 +406,81 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7b6fd5d97ec475e87dd744e58bf8e573"><div>
+          <section class="m-doc-details" id="acc0f13d08a1bafe8fa1673ed1931b22b"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7b6fd5d97ec475e87dd744e58bf8e573" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index)</span></span>
+              <span class="m-doc-wrap-bumper">size_t spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc0f13d08a1bafe8fa1673ed1931b22b" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
-            <p>Get a reference to the pixel at the specified coordinates.</p>
+            <p>Get the size of the data array containing the image.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>constexpr size_t</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a39cdfec7445c7b10d58522566de237a6"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a39cdfec7445c7b10d58522566de237a6" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t offset)</span></span>
+            </h3>
+            <p>Get a reference to the sample at the specified offset.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">index</td>
+                  <td style="width: 1%">offset</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>color&lt;T, Channels&gt;&amp;</td>
+                  <td>T &amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1bc2b7034a6fa65e75f2c79a91a8be05"><div>
+          <section class="m-doc-details" id="a89a5ad63d67667768d487f452a1ad387"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const &amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bc2b7034a6fa65e75f2c79a91a8be05" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const</span></span>
+              <span class="m-doc-wrap-bumper">T const &amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89a5ad63d67667768d487f452a1ad387" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t offset) const</span></span>
             </h3>
-            <p>Get a constant reference to the pixel at the specified coordinates.</p>
+            <p>Get a constant reference to the sample at the specified offset.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">index</td>
+                  <td style="width: 1%">offset</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>color&lt;T, Channels&gt;&amp;</td>
+                  <td>T &amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afda8f8b650ba66efe25acd6ebdde203f"><div>
+          <section class="m-doc-details" id="a6a3436402d745d23787a065c16ac3adb"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt;&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afda8f8b650ba66efe25acd6ebdde203f" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
+              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a3436402d745d23787a065c16ac3adb" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
               int y)</span></span>
             </h3>
             <p>Get pixel value at specified coordinates.</p>
@@ -466,12 +506,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac5da3c07e55a18ac6db1bc865466d9b8"><div>
+          <section class="m-doc-details" id="a57e4b06ec20e73328ec52ab82437607c"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const &amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac5da3c07e55a18ac6db1bc865466d9b8" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
+              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57e4b06ec20e73328ec52ab82437607c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
               int y) const</span></span>
             </h3>
             <p>Get pixel value at specified coordinates.</p>
@@ -493,6 +533,32 @@
                 <tr>
                   <th>Returns</th>
                   <td>color&lt;T, Channels&gt;&amp; A constant reference to the image&#x27;s color at the given coordinates</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1252686f6cdbafc0a23a710b8f51c557"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1252686f6cdbafc0a23a710b8f51c557" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
+            </h3>
+            <p>Add <code>rhs</code> element-wise to this image.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -719,6 +785,37 @@
                 <tr>
                   <th>Returns</th>
                   <td>true if the two have an unequal number of elements or non-corresponding values, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af5207ea266652948cf92e60482846b67"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5207ea266652948cf92e60482846b67" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              <a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
+            </h3>
+            <p>Add <code>rhs</code> element-wise to this image.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
                 </tr>
               </tfoot>
             </table>
