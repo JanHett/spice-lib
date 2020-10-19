@@ -68,4 +68,5 @@ target_link_libraries(spice_lib_generators PRIVATE Halide::Generator)
 # Halide libraries
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-add_halide_library(adaptive_threshold_generator FROM spice_lib_generators)
+add_halide_library(adaptive_threshold_halide FROM spice_lib_generators)
+add_halide_library(add_buffers_halide FROM spice_lib_generators)

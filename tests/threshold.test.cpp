@@ -13,7 +13,7 @@
 #include <spice-lib/print.hpp>
 #include <spice-lib/threshold.hpp>
 
-#include "test_utils.hpp"
+#include "../tools/test_utils.hpp"
 
 using namespace spice;
 

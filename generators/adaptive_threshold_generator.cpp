@@ -57,4 +57,4 @@ public:
 
 }  // namespace
 
-HALIDE_REGISTER_GENERATOR(AdaptiveThreshold, adaptive_threshold_generator)
+HALIDE_REGISTER_GENERATOR(AdaptiveThreshold, adaptive_threshold_halide)

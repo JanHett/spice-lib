@@ -56,6 +56,7 @@ target_include_directories(${target}
     # ${DEFAULT_INCLUDE_DIRECTORIES}
     ${PROJECT_BINARY_DIR}/external
     ${PROJECT_BINARY_DIR}/include
+    ${PROJECT_BINARY_DIR}/tools
 )
 
 

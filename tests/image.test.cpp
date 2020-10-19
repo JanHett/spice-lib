@@ -12,7 +12,7 @@
 #include <spice-lib/statistics.hpp>
 #include <spice-lib/print.hpp>
 
-#include "test_utils.hpp"
+#include "../tools/test_utils.hpp"
 
 using namespace spice;
 
@@ -154,6 +154,29 @@ TEST(image, operator_call_two_arg_const) {
 //     EXPECT_EQ(im_const(1, 1, 1), 0);
 //     EXPECT_EQ(im_const(1, 1, 2), 0);
 // }
+
+TEST(image, operator_plus_equals) {
+    size_t width = 16;
+    size_t height = 16;
+    auto im1 = make_gradient<float, 3>(width, height, 0, 0.5);
+    auto im2 = make_gradient<float, 3>(width, height, 0, 1);
+
+    // print::image<float, 3>(im1);
+    // print::image<float, 3>(im2);
+
+    im1 += im2;
+
+    // print::image<float, 3>(im1);
+
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
+            // pixels should be have values of a gradient from 0 to 1.5
+            EXPECT_EQ(
+                (calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
+                (im1(x, y)) );
+        }
+    }
+}
 
 TEST(image, intensity_range) {
     // check that the intensity range is indeed constexpr

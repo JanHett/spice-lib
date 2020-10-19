@@ -14,7 +14,7 @@
 
 #include "image.hpp"
 
-#include <adaptive_threshold_generator.h>
+#include <adaptive_threshold_halide.h>
 
 #include <HalideBuffer.h>
 
@@ -25,14 +25,6 @@ namespace spice {
  * 
  */
 namespace threshold {
-
-// helpers
-namespace {
-    template<typename T, size_t Channels>
-    T * flat_cast (color<T, Channels> * c) {
-        return reinterpret_cast<T *>(c);
-    }
-}
 
 /**
  * \brief Segment the image channel-wise using an adaptive thresholding
@@ -72,7 +64,7 @@ image<float, Channels> adaptive(image<float, Channels> & input,
             output.height(),
             output.channels());
 
-    auto success = adaptive_threshold_generator(in_buf, threshold, radius, out_buf);
+    auto success = adaptive_threshold_halide(in_buf, threshold, radius, out_buf);
 
     if (success != 0)
         std::cout << "Failed to apply adaptive threshold\n";

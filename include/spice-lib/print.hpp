@@ -19,6 +19,26 @@ namespace spice {
  * colour output.
  */
 namespace print {
+    namespace {
+        /**
+         * \brief Convert sample of type T to clamped uint8_t sample
+         * 
+         * \tparam T 
+         * \param val 
+         * \return uint8_t 
+         */
+        template<typename T>
+        uint8_t to_8bit(T const & val) {
+            const float scaling_factor = 255 / (image<T>::max - image<T>::min);
+
+            const float offset = 0 - image<T>::min;
+
+            return std::clamp<T>(
+                std::floor(val * (scaling_factor + offset)),
+                0, 255);
+        }
+    }
+
     /**
      * Insert escape codes for terminals supporting 8 bpc colours into a string.
      *
@@ -32,37 +52,18 @@ namespace print {
         T_color const & foreground,
         T_color const & background)
     {
-        const float scaling_factor = 255 / (
-            image<std::remove_cv_t<typename T_color::value_type>,
-                Channels>::max -
-            image<std::remove_cv_t<typename T_color::value_type>,
-                Channels>::min);
-
-        const float offset = 0 -
-            image<std::remove_cv_t<typename T_color::value_type>, Channels>::min;
-
-        color<std::remove_cv_t<typename T_color::value_type>,
-            Channels> bg_scaled = background;
-        bg_scaled *= scaling_factor + offset;
-        color<std::remove_cv_t<typename T_color::value_type>,
-            Channels> fg_scaled = foreground;
-        fg_scaled *= scaling_factor + offset;
-
-        // std::cout << "\nScale: " << scaling_factor << ", offset " << offset << "\n";
-        // std::cout << "Vector size: " << bg_scaled.size() << "\n";
-        // std::cout << "Original |" << background[0] << "|" << background[1] << "|" << background[2] << "\n";
-        // std::cout << "Scaled   |" << bg_scaled[0] << "|" << bg_scaled[1] << "|" << bg_scaled[2] << "\n";
+        using pixel_value_t = std::remove_cv_t<typename T_color::value_type>;
 
         return std::string("\033[48;2;") +
         // set BG-colours
-        std::to_string(static_cast<int>(std::floor(bg_scaled[0]))) + ";" +
-        std::to_string(static_cast<int>(std::floor(bg_scaled[1]))) + ";" +
-        std::to_string(static_cast<int>(std::floor(bg_scaled[2]))) +
+        std::to_string(to_8bit<pixel_value_t>(background[0])) + ";" +
+        std::to_string(to_8bit<pixel_value_t>(background[1])) + ";" +
+        std::to_string(to_8bit<pixel_value_t>(background[2])) +
         // set FG-colours
         ";38;2;" +
-        std::to_string(static_cast<int>(std::floor(fg_scaled[0]))) + ";" +
-        std::to_string(static_cast<int>(std::floor(fg_scaled[1]))) + ";" +
-        std::to_string(static_cast<int>(std::floor(fg_scaled[2]))) + "m" +
+        std::to_string(to_8bit<pixel_value_t>(foreground[0])) + ";" +
+        std::to_string(to_8bit<pixel_value_t>(foreground[1])) + ";" +
+        std::to_string(to_8bit<pixel_value_t>(foreground[2])) + "m" +
         // add the actual string and the ending escape code
         str + "\033[0m";
     }

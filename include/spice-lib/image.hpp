@@ -9,6 +9,13 @@
 
 #include <OpenImageIO/imageio.h>
 
+#include <add_buffers_halide.h>
+// #include <subtract_buffers_halide.h>
+// #include <multiply_buffers_halide.h>
+// #include <divide_buffers_halide.h>
+
+#include <HalideBuffer.h>
+
 #include "color.hpp"
 #include "color_view.hpp"
 
@@ -387,6 +394,54 @@ public:
     {
         return !(rhs == lhs);
     }
+
+    /**
+     * \brief Add `rhs` element-wise to this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator +=(image const & rhs) {
+        if (width() != rhs.width() ||
+            height() != rhs.height() ||
+            channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot add images of unequal sizes");
+        }
+
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        auto rhs_buf =
+            Halide::Runtime::Buffer<const T>(
+                rhs.data(),
+                rhs.size());
+
+        add_buffers_halide(lhs_buf, rhs_buf, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Add `rhs` element-wise to this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator +(image lhs, image const & rhs) {
+        if (lhs.width() != rhs.width() ||
+            lhs.height() != rhs.height() ||
+            lhs.channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot add images of unequal sizes");
+        }
+
+        lhs += rhs;
+
+        return lhs;
+    }
 };
 
 // /**
@@ -425,7 +480,6 @@ template<typename T, size_t Channels>
             channel, channel + 1,
             helpers::type_to_typedesc<T>(),
             &img_data_planar.data()[spec.width * spec.height * channel]);
-
     }
 
     image<T, Channels> result(
