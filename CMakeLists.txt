@@ -108,7 +108,11 @@ target_link_libraries(${PROJECT_NAME}
         OpenImageIO
         # Halide-generated code
         adaptive_threshold_halide
-        add_buffers_halide)
+        add_buffers_halide
+        subtract_buffers_halide
+        multiply_buffers_halide
+        divide_buffers_halide
+        )
 
 #############################
 # Installation setup

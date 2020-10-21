@@ -10,9 +10,9 @@
 #include <OpenImageIO/imageio.h>
 
 #include <add_buffers_halide.h>
-// #include <subtract_buffers_halide.h>
-// #include <multiply_buffers_halide.h>
-// #include <divide_buffers_halide.h>
+#include <subtract_buffers_halide.h>
+#include <multiply_buffers_halide.h>
+#include <divide_buffers_halide.h>
 
 #include <HalideBuffer.h>
 
@@ -20,7 +20,7 @@
 #include "color_view.hpp"
 
 /**
- * Contains the entire public interface of the library.
+ * \brief Contains the entire public interface of the library.
  */
 namespace spice
 {
@@ -425,8 +425,9 @@ public:
     }
 
     /**
-     * \brief Add `rhs` element-wise to this image
+     * \brief Add `rhs` element-wise to lhs
      * 
+     * \param lhs 
      * \param rhs 
      * \return image& 
      */
@@ -439,6 +440,153 @@ public:
         }
 
         lhs += rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Subtract `rhs` element-wise from this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator -=(image const & rhs) {
+        if (width() != rhs.width() ||
+            height() != rhs.height() ||
+            channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot subtract images of unequal sizes");
+        }
+
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        auto rhs_buf =
+            Halide::Runtime::Buffer<const T>(
+                rhs.data(),
+                rhs.size());
+
+        subtract_buffers_halide(lhs_buf, rhs_buf, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Subtract `rhs` element-wise from `lhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator -(image lhs, image const & rhs) {
+        if (lhs.width() != rhs.width() ||
+            lhs.height() != rhs.height() ||
+            lhs.channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot subtract images of unequal sizes");
+        }
+
+        lhs -= rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Multiply this image element-wise with `rhs`
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator *=(image const & rhs) {
+        if (width() != rhs.width() ||
+            height() != rhs.height() ||
+            channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot multiply images of unequal sizes");
+        }
+
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        auto rhs_buf =
+            Halide::Runtime::Buffer<const T>(
+                rhs.data(),
+                rhs.size());
+
+        multiply_buffers_halide(lhs_buf, rhs_buf, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Multiply `lhs` element-wise with `rhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator *(image lhs, image const & rhs) {
+        if (lhs.width() != rhs.width() ||
+            lhs.height() != rhs.height() ||
+            lhs.channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot multiply images of unequal sizes");
+        }
+
+        lhs *= rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Divide this image element-wise by `rhs`
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator /=(image const & rhs) {
+        if (width() != rhs.width() ||
+            height() != rhs.height() ||
+            channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot divide images of unequal sizes");
+        }
+
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        auto rhs_buf =
+            Halide::Runtime::Buffer<const T>(
+                rhs.data(),
+                rhs.size());
+
+        divide_buffers_halide(lhs_buf, rhs_buf, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Divide `lhs` element-wise by `rhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator /(image lhs, image const & rhs) {
+        if (lhs.width() != rhs.width() ||
+            lhs.height() != rhs.height() ||
+            lhs.channels() != rhs.channels())
+        {
+            throw std::out_of_range("Cannot divide images of unequal sizes");
+        }
+
+        lhs /= rhs;
 
         return lhs;
     }

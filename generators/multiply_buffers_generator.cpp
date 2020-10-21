@@ -2,7 +2,7 @@
 
 namespace {
 
-class AddBuffers : public Halide::Generator<AddBuffers> {
+class MultiplyBuffers : public Halide::Generator<MultiplyBuffers> {
 public:
     Input<Buffer<float>> lhs{"lhs", 1};
     Input<Buffer<float>> rhs{"rhs", 1};
@@ -11,10 +11,10 @@ public:
     void generate() {
         Var i("i");
 
-        output(i) = lhs(i) + rhs(i);
+        output(i) = lhs(i) * rhs(i);
     }
 };
 
 }  // namespace
 
-HALIDE_REGISTER_GENERATOR(AddBuffers, add_buffers_halide)
+HALIDE_REGISTER_GENERATOR(MultiplyBuffers, multiply_buffers_halide)
