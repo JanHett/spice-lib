@@ -93,14 +93,24 @@ Not glamorous, but for retro-cool and debugging it does the job.
 
 #### For the library
 
+##### Need to be manually installed
+
 - [C++17](https://en.cppreference.com/w/cpp/compiler_support)
 - [CMake 3.10](https://cmake.org/)
 - [OpenImageIO](https://github.com/OpenImageIO/oiio)
-- [Guideline Support Library](https://github.com/microsoft/GSL) (included as a git submodule, will be pulled by CMake during configuration)
+- [LLVM](http://llvm.org/)
+
+##### Included as git submodules
+
+You do not need to install these by hand, they will be pulled by CMake during configuration.
+
+- [Halide](https://halide-lang.org/)
+- [Guideline Support Library](https://github.com/microsoft/GSL)
 
 #### For the tests
 
-- [Google Test](https://github.com/google/googletest)
+- [Google Test](https://github.com/google/googletest) (manual install)
+- [Google Benchmark](https://github.com/google/benchmark) (included as git submodule, will be pulled by CMake during configuration if building benchmarks is enabled)
 
 #### For the documentation
 

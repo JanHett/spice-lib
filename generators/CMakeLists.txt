@@ -13,35 +13,46 @@ set(EXTERNAL_DIR "${PROJECT_SOURCE_DIR}/external/")
 # Halide
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-set(Halide_ROOT_DIR "${EXTERNAL_DIR}/Halide/")
-set(Halide_DIR "${Halide_ROOT_DIR}/lib/cmake/Halide/")
+# set(Halide_ROOT_DIR "${EXTERNAL_DIR}/Halide/")
+# set(Halide_DIR "${Halide_ROOT_DIR}/lib/cmake/Halide/")
 
-message(STATUS "Installing Halide in ${Halide_ROOT_DIR}")
+# message(STATUS "Installing Halide in ${Halide_ROOT_DIR}")
 
-if(NOT EXISTS "${Halide_ROOT_DIR}")
-    # we couldn't find the header files for GSL or they don't exist
-    message("Unable to find Halide. Attempting to pull pre-built binaries.")
+# if(NOT EXISTS "${Halide_ROOT_DIR}")
+#     # we couldn't find the header files for GSL or they don't exist
+#     message("Unable to find Halide. Attempting to pull pre-built binaries.")
 
-    if(APPLE)
-      # curl Halide build
-      set(HALIDE_MACOS_BUILD_URL https://github.com/halide/Halide/releases/download/v10.0.0/Halide-10.0.0-x86-64-osx-db901f7f7084025abc3cbb9d17b0f2d3f1745900.tar.gz)
-      file(DOWNLOAD ${HALIDE_MACOS_BUILD_URL} "${EXTERNAL_DIR}__halide_temp.tar.gz"
-           TIMEOUT 60)
-      # Ensure the target directory exists
-      execute_process(COMMAND mkdir -p ${Halide_ROOT_DIR}
-                      WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
-      # Unpack the Halide build
-      execute_process(COMMAND tar -xzf __halide_temp.tar.gz -C Halide --strip-components 1
-                      WORKING_DIRECTORY "${EXTERNAL_DIR}")
-      # Remove the archive
-      execute_process(COMMAND rm -f __halide_temp.tar.gz
-                      WORKING_DIRECTORY "${EXTERNAL_DIR}")
-    endif()
+#     if(APPLE)
+#       # curl Halide build
+#       set(HALIDE_MACOS_BUILD_URL https://github.com/halide/Halide/releases/download/v10.0.0/Halide-10.0.0-x86-64-osx-db901f7f7084025abc3cbb9d17b0f2d3f1745900.tar.gz)
+#       file(DOWNLOAD ${HALIDE_MACOS_BUILD_URL} "${EXTERNAL_DIR}__halide_temp.tar.gz"
+#            TIMEOUT 60)
+#       # Ensure the target directory exists
+#       execute_process(COMMAND mkdir -p ${Halide_ROOT_DIR}
+#                       WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
+#       # Unpack the Halide build
+#       execute_process(COMMAND tar -xzf __halide_temp.tar.gz -C Halide --strip-components 1
+#                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
+#       # Remove the archive
+#       execute_process(COMMAND rm -f __halide_temp.tar.gz
+#                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
+#     endif()
 
-    # TODO: replicate this for other OSes
+#     # TODO: replicate this for other OSes
+# endif()
+
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/Halide/")
+    # we couldn't find the header files for Halide or they don't exist
+    message("Unable to find Halide. Attempting to pull.")
+
+    # we have a submodule setup for halide, so we clone it
+    execute_process(COMMAND git submodule update --init -- external/Halide
+                    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endif()
 
-find_package(Halide REQUIRED)
+add_subdirectory(../external/Halide Halide)
+
+# find_package(Halide REQUIRED)
 
 #############################
 # Target setup

@@ -64,6 +64,17 @@ target_include_directories(${target}
 # Libraries
 #
 
+# Pull benchmark library if it isn't there
+
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/benchmark/")
+    # we couldn't find the header files for Google benchmark or they don't exist
+    message("Unable to find benchmark. Attempting to pull.")
+
+    # we have a submodule setup for halide, so we clone it
+    execute_process(COMMAND git submodule update --init -- external/benchmark
+                    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+endif()
+
 set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
 
 add_subdirectory(../external/benchmark benchmark)

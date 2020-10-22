@@ -38,5 +38,6 @@ addons:
     update: true
     packages:
       # - gcc
+      - llvm
       - openimageio
       - doxygen
