@@ -63,7 +63,7 @@ public:
      * \param stride The distance between the channels
      * \param channels The number of channels this color_view refers to
      */
-    constexpr color_view (T * data, size_t stride, size_t channels):
+    constexpr color_view (T * const data, size_t stride, size_t channels):
         m_data(data),
         m_stride(stride),
         m_channels(channels)
@@ -141,7 +141,7 @@ public:
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // SIZE GETTERS
+    // GETTERS
     ////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -160,6 +160,33 @@ public:
      */
     constexpr size_t channels() const {
         return m_channels;
+    }
+
+    /**
+     * \brief Returns the stride
+     * 
+     * \return size_t 
+     */
+    constexpr size_t stride() const {
+        return m_stride;
+    }
+
+    /**
+     * \brief Returns the data pointer
+     * 
+     * \return size_t 
+     */
+    constexpr T * const data() {
+        return m_data;
+    }
+
+    /**
+     * \brief Returns the data pointer
+     * 
+     * \return size_t 
+     */
+    constexpr T const * const data() const {
+        return m_data;
     }
 
     ////////////////////////////////////////////////////////////////////////////

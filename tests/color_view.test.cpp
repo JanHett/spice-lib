@@ -7,6 +7,11 @@ using namespace spice;
 
 TEST(color_view, default_constructor) {
     const color_view<float> cv;
+
+    EXPECT_EQ(nullptr, cv.data());
+    EXPECT_EQ(0, cv.stride());
+    EXPECT_EQ(0, cv.channels());
+    EXPECT_EQ(0, cv.size());
 }
 
 TEST(color_view, copy_constructor) {
