@@ -81,6 +81,38 @@ endif()
 add_subdirectory(external/gsl)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# FFTW
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+set(FFTW_ROOT_DIR "${EXTERNAL_DIR}fftw/")
+# set(FFTW_DIR "${FFTW_ROOT_DIR}/lib/cmake/Halide/")
+
+if(NOT EXISTS "${FFTW_ROOT_DIR}")
+    # we couldn't find the directory for FFTW
+    message("Unable to find FFTW. Attempting to pull pre-built binaries.")
+
+    if(UNIX)
+      # curl FFTW build
+      set(FFTW_MACOS_BUILD_URL http://fftw.org/fftw-3.3.8.tar.gz)
+      file(DOWNLOAD ${FFTW_MACOS_BUILD_URL} "${EXTERNAL_DIR}__fftw_temp.tar.gz"
+           TIMEOUT 60)
+      # Ensure the target directory exists
+      execute_process(COMMAND mkdir -p ${FFTW_ROOT_DIR}
+                      WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
+      # Unpack the FFTW build
+      execute_process(COMMAND tar -xzf __fftw_temp.tar.gz -C fftw --strip-components 1
+                      WORKING_DIRECTORY "${EXTERNAL_DIR}")
+      # Remove the archive
+      execute_process(COMMAND rm -f __fftw_temp.tar.gz
+                      WORKING_DIRECTORY "${EXTERNAL_DIR}")
+    endif()
+
+    # TODO: replicate this for other OSes (read: Windows)
+endif()
+
+add_subdirectory(${FFTW_ROOT_DIR})
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # Custom Halide generators
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -107,11 +139,15 @@ target_link_libraries(${PROJECT_NAME}
         GSL
         OpenImageIO
         # Halide-generated code
+        ## Custom Halide functions
         adaptive_threshold_halide
         add_buffers_halide
         subtract_buffers_halide
         multiply_buffers_halide
         divide_buffers_halide
+        ## Halide apps
+        # fft_2d_forward_halide
+        # fft_2d_reverse_halide
         )
 
 #############################
