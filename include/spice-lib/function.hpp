@@ -19,6 +19,10 @@
 
 namespace spice {
 
+/**
+ * \brief Contains implementations of commonly used mathematical functions
+ * 
+ */
 namespace function {
 
 /**
@@ -31,9 +35,18 @@ const auto sqrt_2_pi = std::sqrt(2 * M_PI);
 /**
  * \brief Calculates the gaussian function at the given point
  * 
+ * The implemented function is a simplified gaussian function suitable for use
+ * as an impulse response for convolution:
+ * 
+ * \f[
+ * g(x, y) = \frac{1}{2\pi\sigma^2} \cdot e^{\frac{x^2 + y^2}{2\sigma^2}}
+ * \f]
+ * 
+ * where \f$\sigma\f$ is the standard deviation and \f$e\f$ is Euler's constant.
+ * 
  * \param std_deviation 
  * \param x 
- * \param y 
+ * \param y defaults to 0, thus giving the result for a one-dimensional gaussian
  * \return float 
  */
 float gaussian(float std_deviation, float x, float y = 0) {
@@ -44,7 +57,7 @@ float gaussian(float std_deviation, float x, float y = 0) {
 
 /**
  * \brief Calculate the values of the unary function `fn` over the interval
- * `[begin, end)`
+ * \f$[begin, end)\f$
  * 
  * If the steps do not divide this interval evenly, an additional sample is
  * added at the end.
@@ -56,23 +69,47 @@ float gaussian(float std_deviation, float x, float y = 0) {
  * \param begin 
  * \param end 
  * \param step 
- * \return std::vector<T> a vector of length `(end - begin) / step`
+ * \param fn_vals a buffer of length `std::ceil((end - begin) / step)` to
+ * write the result to
+ */
+template<typename T_arg, typename T_vals, typename Fn>
+void evaluate_unary(Fn fn, T_arg begin, T_arg end, T_arg step,
+    T_vals * const fn_vals)
+{
+    size_t length = std::ceil((end - begin) / step);
+
+    for (size_t i = 0; i < length; ++i) {
+        fn_vals[i] = fn(begin + i * step);
+    }
+}
+
+/**
+ * \brief Calculate the values of the unary function `fn` over the interval
+ * \f$[begin, end)\f$
+ * 
+ * If the steps do not divide this interval evenly, an additional sample is
+ * added at the end.
+ * 
+ * \tparam T_arg type of arguments to `fn`
+ * \tparam T_vals type of values of `fn`
+ * \tparam Fn unary function type
+ * \param fn 
+ * \param begin 
+ * \param end 
+ * \param step 
+ * \return std::vector<T> a vector of length `std::ceil((end - begin) / step)`
  */
 template<typename T_arg, typename T_vals, typename Fn>
 std::vector<T_vals> evaluate_unary(Fn fn, T_arg begin, T_arg end, T_arg step) {
     size_t length = std::ceil((end - begin) / step);
-
     std::vector<T_vals> fn_vals(length);
-    for (size_t i = 0; i < length; ++i) {
-        fn_vals[i] = fn(begin + i * step);
-    }
-
+    evaluate_unary(fn, begin, end, step, fn_vals.data());
     return fn_vals;
 }
 
 /**
  * \brief Calculate the values of the binary function `fn` over the area
- * `[(begin_x, begin_y), (end_x, end_y))`
+ * \f$[(begin\_x, begin\_y), (end\_x, end\_y))\f$
  * 
  * If the steps do not divide this area evenly, an additional column and/or row
  * is added at the end.
@@ -87,7 +124,45 @@ std::vector<T_vals> evaluate_unary(Fn fn, T_arg begin, T_arg end, T_arg step) {
  * \param begin_y 
  * \param end_y 
  * \param step_y 
- * \return std::vector<T> a vector of length `(end - begin) / step`
+ * \param fn_vals a buffer of length `std::ceil((end_x - begin_x) / step_x) *
+ * std::ceil((end_y - begin_y) / step_y)` to write the result to
+ */
+template<typename T_arg, typename T_vals, typename Fn>
+void evaluate_binary(Fn fn,
+    T_arg begin_x, T_arg end_x, T_arg step_x,
+    T_arg begin_y, T_arg end_y, T_arg step_y,
+    T_vals * const fn_vals)
+{
+    size_t width = std::ceil((end_x - begin_x) / step_x);
+    size_t height = std::ceil((end_y - begin_y) / step_y);
+
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
+            fn_vals[y * width + x] = fn(begin_x + x * step_x,
+                begin_y + y * step_y);
+        }
+    }
+}
+
+/**
+ * \brief Calculate the values of the binary function `fn` over the area
+ * \f$[(begin\_x, begin\_y), (end\_x, end\_y))\f$
+ * 
+ * If the steps do not divide this area evenly, an additional column and/or row
+ * is added at the end.
+ * 
+ * \tparam T_arg type of arguments to `fn`
+ * \tparam T_vals type of values of `fn`
+ * \tparam Fn binary function type
+ * \param fn 
+ * \param begin_x 
+ * \param end_x 
+ * \param step_x 
+ * \param begin_y 
+ * \param end_y 
+ * \param step_y 
+ * \return std::vector<T> a vector of length `std::ceil((end_x - begin_x) /
+ * step_x) * std::ceil((end_y - begin_y) / step_y)`
  */
 template<typename T_arg, typename T_vals, typename Fn>
 std::vector<T_vals> evaluate_binary(Fn fn,
@@ -98,12 +173,10 @@ std::vector<T_vals> evaluate_binary(Fn fn,
     size_t height = std::ceil((end_y - begin_y) / step_y);
 
     std::vector<T_vals> fn_vals(width * height);
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            fn_vals[y * width + x] = fn(begin_x + x * step_x,
-                begin_y + y * step_y);
-        }
-    }
+    evaluate_binary(fn,
+        begin_x, end_x, step_x,
+        begin_y, end_y, step_y,
+        fn_vals.data());
 
     return fn_vals;
 }

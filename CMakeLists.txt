@@ -35,7 +35,7 @@ project("spice-lib"
              DESCRIPTION "An image processing library."
              HOMEPAGE_URL "https://github.com/janhett/spice-lib")
 
-set(PROJECT_VERSION 1.0.0-alpha)
+set(PROJECT_VERSION 0.1.0)
 
 include(GNUInstallDirs)
 

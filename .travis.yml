@@ -41,3 +41,5 @@ addons:
       - llvm
       - openimageio
       - doxygen
+    casks:
+      - mactex-no-gui

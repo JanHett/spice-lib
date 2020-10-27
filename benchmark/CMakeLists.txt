@@ -66,7 +66,7 @@ target_include_directories(${target}
 
 # Pull benchmark library if it isn't there
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/benchmark/")
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/benchmark/CMakeLists.txt")
     # we couldn't find the header files for Google benchmark or they don't exist
     message("Unable to find benchmark. Attempting to pull.")
 
