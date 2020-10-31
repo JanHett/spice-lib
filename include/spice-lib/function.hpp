@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef SPICE_FUNCTIONS
-#define SPICE_FUNCTIONS
+#ifndef SPICE_FUNCTION
+#define SPICE_FUNCTION
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -49,7 +49,7 @@ const auto sqrt_2_pi = std::sqrt(2 * M_PI);
  * \param y defaults to 0, thus giving the result for a one-dimensional gaussian
  * \return float 
  */
-float gaussian(float std_deviation, float x, float y = 0) {
+inline float gaussian(float std_deviation, float x, float y = 0) {
     return (1 / (sqrt_2_pi * std_deviation)) * std::pow(
         M_E,
         -((x * x + y * y) / (2 * std_deviation * std_deviation)));
@@ -185,4 +185,4 @@ std::vector<T_vals> evaluate_binary(Fn fn,
 
 }
 
-#endif // SPICE_FUNCTIONS
+#endif // SPICE_FUNCTION

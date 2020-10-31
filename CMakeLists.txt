@@ -140,11 +140,18 @@ target_link_libraries(${PROJECT_NAME}
         OpenImageIO
         # Halide-generated code
         ## Custom Halide functions
+        ### Thresholds
         adaptive_threshold_halide
+
+        ### Buffer arithmetic
         add_buffers_halide
         subtract_buffers_halide
         multiply_buffers_halide
         divide_buffers_halide
+
+        ### Convolution
+        spatial_convolution_halide
+
         ## Halide apps
         # fft_2d_forward_halide
         # fft_2d_reverse_halide
