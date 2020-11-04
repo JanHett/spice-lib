@@ -39,6 +39,29 @@ const auto sqrt_2_pi = std::sqrt(2 * M_PI);
  * as an impulse response for convolution:
  * 
  * \f[
+ * g(x, y) = \frac{1}{2\pi\sigma^2} \cdot e^{\frac{x^2}{2\sigma^2}}
+ * \f]
+ * 
+ * where \f$\sigma\f$ is the standard deviation and \f$e\f$ is Euler's constant.
+ * 
+ * \param std_deviation 
+ * \param x 
+ * \param y defaults to 0, thus giving the result for a one-dimensional gaussian
+ * \return float 
+ */
+inline float gaussian(float std_deviation, float x) {
+    return (1 / (sqrt_2_pi * std_deviation)) * std::pow(
+        M_E,
+        -((x * x) / (2 * std_deviation * std_deviation)));
+};
+
+/**
+ * \brief Calculates the gaussian function at the given point
+ * 
+ * The implemented function is a simplified gaussian function suitable for use
+ * as an impulse response for convolution:
+ * 
+ * \f[
  * g(x, y) = \frac{1}{2\pi\sigma^2} \cdot e^{\frac{x^2 + y^2}{2\sigma^2}}
  * \f]
  * 
@@ -49,8 +72,8 @@ const auto sqrt_2_pi = std::sqrt(2 * M_PI);
  * \param y defaults to 0, thus giving the result for a one-dimensional gaussian
  * \return float 
  */
-inline float gaussian(float std_deviation, float x, float y = 0) {
-    return (1 / (sqrt_2_pi * std_deviation)) * std::pow(
+inline float gaussian(float std_deviation, float x, float y) {
+    return (1 / (2 * M_PI * std_deviation * std_deviation)) * std::pow(
         M_E,
         -((x * x + y * y) / (2 * std_deviation * std_deviation)));
 };

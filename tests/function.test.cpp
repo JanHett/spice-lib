@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <numeric>
+
 #include <spice-lib/function.hpp>
 
 // for debugging
@@ -32,7 +34,36 @@ TEST(function, gaussian_1d) {
     EXPECT_FLOAT_EQ(gaussian_vals[12], 0.054670025);
 }
 
-TEST(function, gaussian_2d) {
+TEST(function, gaussian_2d_symmetric) {
+    float std_deviation = 10;
+    float g_width  = 3 * std_deviation;
+    float g_height = 3 * std_deviation;
+    float begin    = -(g_width / 2);
+    float end      =   g_width / 2;
+    float step     = 1;
+
+    auto gaussian_vals = function::evaluate_binary<float, float>(
+        [](float x, float y){ return function::gaussian(2, x, y); },
+        begin, end, step,
+        begin, end, step);
+
+    size_t width = std::ceil((end - begin) / step);
+    size_t height = std::ceil((end - begin) / step);
+    
+    // print the resulting image for debugging
+    // std::cout << "width: " << width << ", height: " << height << "\n";
+    // image<float, 1> img(gaussian_vals.data(), width, height);
+    // print::image(img);
+
+    EXPECT_EQ(gaussian_vals.size(), width * height);
+
+    // sanity check: sum of all values should approach 1
+    auto gaussian_sum = std::reduce(gaussian_vals.begin(), gaussian_vals.end());
+    // std::cout << "gaussian sum: " << gaussian_sum << "\n";
+    EXPECT_FLOAT_EQ(gaussian_sum, 1.f);
+}
+
+TEST(function, gaussian_2d_asymmetric) {
     float begin_x = -4.2f;
     float end_x = 2.1f;
     float step_x = 0.25f;
@@ -55,9 +86,9 @@ TEST(function, gaussian_2d) {
     EXPECT_EQ(gaussian_vals.size(), width * height);
 
     // checking all values would be too verbose, so we'll just check a few
-    EXPECT_FLOAT_EQ(gaussian_vals[  0], 0.013338704 ); // first
-    EXPECT_FLOAT_EQ(gaussian_vals[ 25], 0.071547166 ); // end of first row
-    EXPECT_FLOAT_EQ(gaussian_vals[194], 0.12576558  ); // somewhere in the middle
-    EXPECT_FLOAT_EQ(gaussian_vals[342], 0.0044124047); // in the bottom row
-    EXPECT_FLOAT_EQ(gaussian_vals[363], 0.009384946 ); // last
+    EXPECT_FLOAT_EQ(gaussian_vals[  0], 0.0026606864 ); // first
+    EXPECT_FLOAT_EQ(gaussian_vals[ 25], 0.014271595  ); // end of first row
+    EXPECT_FLOAT_EQ(gaussian_vals[194], 0.025086602  ); // somewhere in the middle
+    EXPECT_FLOAT_EQ(gaussian_vals[342], 0.00088014739); // in the bottom row
+    EXPECT_FLOAT_EQ(gaussian_vals[363], 0.0018720259 ); // last
 }
