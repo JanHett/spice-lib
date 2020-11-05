@@ -25,49 +25,6 @@ namespace spice {
 namespace convolve {
 
 /**
- * \brief Convolves `img` horizontally with `filter_h` and vertically with
- * `filter_v`
- * 
- * \tparam T 
- * \tparam Channels 
- * \tparam Filter_Channels 
- * \param img 
- * \param filter 
- * \return image<T, Channels> 
- */
-// template<typename T, size_t Channels, size_t Filter_Channels = Channels>
-// image<T, Channels> separable(image<T, Channels> img,
-//     std::vector<T> filter_h[Filter_Channels],
-//     std::vector<T> filter_v[Filter_Channels])
-// {
-//     static_assert(Filter_Channels == Channels || Filter_Channels == 1,
-//         "The filter must either have a single channel or the same number as " +
-//         "the filtered image");
-
-    
-// }
-
-/**
- * \brief Convolves `img` with `filter` by separating `filter` into two vectors
- * `Fv` and `Fh` such that `filter == mul(Fv, Fh)`
- * 
- * \tparam T 
- * \tparam Channels 
- * \tparam Filter_Channels 
- * \param img 
- * \param filter 
- * \return image<T, Channels> 
- */
-// template<typename T, size_t Channels, size_t Filter_Channels = Channels>
-// image<T, Channels> separable(image<T, Channels> img,
-//     image<T, Filter_Channels> filter)
-// {
-//     static_assert(Filter_Channels == Channels || Filter_Channels == 1,
-//         "The filter must either have a single channel or the same number as " +
-//         "the filtered image");
-// }
-
-/**
  * \brief Convolves `img` with `filter`
  * 
  * \tparam T 
@@ -114,6 +71,51 @@ image<T, Channels> spatial(image<T, Channels> img,
 
     return output;
 }
+
+/**
+ * \brief Convolves `img` horizontally with `filter_h` and vertically with
+ * `filter_v`
+ * 
+ * `filter_h` is assumed to be of height 1 and `filter_v` is assumed to be of
+ * width 1.
+ * 
+ * \tparam T 
+ * \tparam Channels 
+ * \tparam Filter_Channels 
+ * \param img 
+ * \param filter 
+ * \return image<T, Channels> 
+ */
+template<typename T, size_t Channels, size_t Filter_Channels = Channels>
+image<T, Channels> separable(image<T, Channels> img,
+    image<T, Filter_Channels> filter_h,
+    image<T, Filter_Channels> filter_v)
+{
+    static_assert(Filter_Channels == Channels || Filter_Channels == 1,
+        "The filter must either have a single channel or the same number as the filtered image");
+
+    return spatial(spatial(img, filter_h), filter_v);
+}
+
+/**
+ * \brief Convolves `img` with `filter` by separating `filter` into two vectors
+ * `Fv` and `Fh` such that `filter == mul(Fv, Fh)`
+ * 
+ * \tparam T 
+ * \tparam Channels 
+ * \tparam Filter_Channels 
+ * \param img 
+ * \param filter 
+ * \return image<T, Channels> 
+ */
+// template<typename T, size_t Channels, size_t Filter_Channels = Channels>
+// image<T, Channels> separable(image<T, Channels> img,
+//     image<T, Filter_Channels> filter)
+// {
+//     static_assert(Filter_Channels == Channels || Filter_Channels == 1,
+//         "The filter must either have a single channel or the same number as " +
+//         "the filtered image");
+// }
 
 /**
  * \brief Convolves `img` with `filter` by multiplying the two in frequency

@@ -39,13 +39,42 @@ TEST(convolution, spatial) {
 
     std::cout << "Width: " << g_width << " height: " << g_height << '\n';
 
-    print::image(gaussian_filter);
+    // print::image(gaussian_filter);
 
-    std::cout << "gaussian sum: " << std::reduce(
-        gaussian_data.begin(), gaussian_data.end()) << "\n";
+    // std::cout << "gaussian sum: " << std::reduce(
+    //     gaussian_data.begin(), gaussian_data.end()) << "\n";
 
     auto img = load_image<float, 3>("../data/testing/boat.jpg");
     auto blurred = convolve::spatial(img, gaussian_filter);
 
-    write_image("../data/testing/boat_spatially_convolved.jpg", blurred);
+    write_image("../data/testing/boat_convolved_spatial.jpg", blurred);
+}
+
+TEST(convolution, separable_pre_seperated) {
+    float std_deviation = 10;
+    float g_width  = 6 * std_deviation + 1;
+    float g_height = 6 * std_deviation + 1;
+    float begin    = -(g_width / 2);
+    float end      =   g_width / 2;
+    float step     = 1;
+
+    auto gaussian_data = function::evaluate_unary<float, float>(
+        [&](float x){ return function::gaussian(std_deviation, x); },
+        begin, end, step);
+    image<float, 1> gaussian_filter_h(gaussian_data.data(), g_width, 1);
+    image<float, 1> gaussian_filter_v(gaussian_data.data(), 1, g_height);
+
+    std::cout << "Width: " << g_width << " height: " << g_height << '\n';
+
+    // print::image(gaussian_filter_h);
+    // print::image(gaussian_filter_v);
+
+    // std::cout << "gaussian sum: " << std::reduce(
+    //     gaussian_data.begin(), gaussian_data.end()) << "\n";
+
+    auto img = load_image<float, 3>("../data/testing/boat.jpg");
+    auto blurred = convolve::separable(img,
+        gaussian_filter_h, gaussian_filter_v);
+
+    write_image("../data/testing/boat_convolved_spatial_pre_separated.jpg", blurred);
 }
