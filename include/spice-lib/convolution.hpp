@@ -101,6 +101,8 @@ image<T, Channels> separable(image<T, Channels> img,
  * \brief Convolves `img` with `filter` by separating `filter` into two vectors
  * `Fv` and `Fh` such that `filter == mul(Fv, Fh)`
  * 
+ * This function assumes that the passed kernel is separable, i.e. has rank 1
+ * 
  * \tparam T 
  * \tparam Channels 
  * \tparam Filter_Channels 
@@ -108,14 +110,45 @@ image<T, Channels> separable(image<T, Channels> img,
  * \param filter 
  * \return image<T, Channels> 
  */
-// template<typename T, size_t Channels, size_t Filter_Channels = Channels>
-// image<T, Channels> separable(image<T, Channels> img,
-//     image<T, Filter_Channels> filter)
-// {
-//     static_assert(Filter_Channels == Channels || Filter_Channels == 1,
-//         "The filter must either have a single channel or the same number as " +
-//         "the filtered image");
-// }
+template<typename T, size_t Channels, size_t Filter_Channels = Channels>
+image<T, Channels> separable(image<T, Channels> img,
+    image<T, Filter_Channels> filter)
+{
+    static_assert(Filter_Channels == Channels || Filter_Channels == 1,
+        "The filter must either have a single channel or the same number as the filtered image");
+
+    // possible improvement:
+    // check if filter Matrix has rank 1 and throw error if not the case?
+    // That's relatively expensive and should be optional if implemented
+
+    image<T, Filter_Channels> filter_h (filter.width(), 1);
+    image<T, Filter_Channels> filter_v (1, filter.height());
+
+    for (size_t c = 0; c < Filter_Channels; ++c) {
+        // find any non-zero element `E` in the kernel
+        size_t x, y;
+        float e;
+        for (y = 0; y < filter.height(); ++y) {
+            for (x = 0; x < filter.width(); ++x) {
+                if (filter(x, y, c) != 0) {
+                    e = filter(x, y, c);
+                    goto found_e;
+                }
+            }
+        }
+        found_e:
+        // let the vertical kernel be the column of e and the horizontal one the
+        // row divided by `e`
+        for (size_t k_x = 0; k_x < filter.width(); ++k_x) {
+            filter_h(k_x, y, c) = filter(k_x, y, c) / e;
+        }
+        for (size_t k_y = 0; k_y < filter.height(); ++k_y) {
+            filter_v(x, k_y, c) = filter(x, k_y, c);
+        }
+
+        return separable(img, filter_h, filter_v);
+    }
+}
 
 /**
  * \brief Convolves `img` with `filter` by multiplying the two in frequency

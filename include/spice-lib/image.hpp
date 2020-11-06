@@ -277,6 +277,35 @@ public:
     }
 
     /**
+     * \brief Get reference to scalar value at specified coordinates
+     * 
+     * \param x The x-coordinate
+     * \param y The y-coordinate
+     * \param c The channel
+     * \return T& A reference to the image's color at the given coordinates
+     */
+    [[nodiscard]] T & operator() (int x, int y, int c) {
+        return m_data[c * m_width * m_height
+            + y * m_width
+            + x];
+    }
+
+    /**
+     * \brief Get reference to scalar value at specified coordinates
+     * 
+     * \param x The x-coordinate
+     * \param y The y-coordinate
+     * \param c The channel
+     * \return T const & A constant reference to the image's color at the given
+     * coordinates
+     */
+    [[nodiscard]] T const & operator() (int x, int y, int c) const {
+        return m_data[c * m_width * m_height
+            + y * m_width
+            + x];
+    }
+
+    /**
      * \brief Compares two images
      *
      * \param lhs 
