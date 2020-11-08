@@ -111,3 +111,32 @@ TEST(convolution, separable_combined) {
     
     write_image("../data/testing/boat_convolved_spatial_auto_separated.jpg", blurred);
 }
+
+TEST(convolution, dft_based) {
+    float std_deviation = 10;
+    float g_width  = 6 * std_deviation + 1;
+    float g_height = 6 * std_deviation + 1;
+    float begin    = -(g_width / 2);
+    float end      =   g_width / 2;
+    float step     = 1;
+
+    auto gaussian_data = function::evaluate_binary<float, float>(
+        [&](float x, float y){ return function::gaussian(std_deviation, x, y); },
+        begin, end, step,
+        begin, end, step);
+    image<float, 1> gaussian_filter(gaussian_data.data(), g_width, g_height);
+
+    std::cout << "Width: " << g_width << " height: " << g_height << '\n';
+
+    // print::image(gaussian_filter);
+
+    // std::cout << "gaussian sum: " << std::reduce(
+    //     gaussian_data.begin(), gaussian_data.end()) << "\n";
+
+    auto img = load_image<float, 3>("../data/testing/boat.jpg");
+    auto blurred = convolve::dft_based(img, gaussian_filter);
+
+    // TODO: test if result is reasonable
+    
+    write_image("../data/testing/boat_convolved_dft.jpg", blurred);
+}

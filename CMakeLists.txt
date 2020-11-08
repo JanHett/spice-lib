@@ -138,6 +138,7 @@ target_link_libraries(${PROJECT_NAME}
     INTERFACE
         GSL
         OpenImageIO
+        fftw3f
         # Halide-generated code
         ## Custom Halide functions
         ### Thresholds
