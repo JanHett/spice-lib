@@ -112,6 +112,9 @@ endif()
 
 add_subdirectory(${FFTW_ROOT_DIR})
 
+# find threads so we can link to them and enable fftw's parallel routines
+# find_package(Threads) # TODO: make this work
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # Custom Halide generators
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -138,7 +141,10 @@ target_link_libraries(${PROJECT_NAME}
     INTERFACE
         GSL
         OpenImageIO
+        # fftw3_threads # TODO: make this work
         fftw3f
+        # Threads::Threads
+
         # Halide-generated code
         ## Custom Halide functions
         ### Thresholds
