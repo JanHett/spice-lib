@@ -19,8 +19,10 @@
 #include <fftw3.h>
 
 #include <spatial_convolution_halide.h>
+#include <multiply_complex_buffers_halide.h>
 
 #include "image.hpp"
+#include "algorithm.hpp"
 #include "print.hpp"
 
 namespace spice {
@@ -289,8 +291,8 @@ image<T, Channels> dft_based(image<T, Channels> img,
             for (int x = 0; x < padded_w; ++x) {
                 // TODO: comparisons in clamp are slowing this down - avoid them
                 img_spatial[y * padded_w + x] =
-                    img(std::clamp<int>(x - offset_left, 0, img.width() - 1),
-                        std::clamp<int>(y - offset_top, 0, img.height() - 1),
+                    img(spice::clamp<int>(x - offset_left, 0, img.width() - 1),
+                        spice::clamp<int>(y - offset_top, 0, img.height() - 1),
                         c);
             }
         }
@@ -337,9 +339,23 @@ image<T, Channels> dft_based(image<T, Channels> img,
         //     image_spatial_buffer_re_inverted);
 
         // multiply img_frequency with filter_frequency
-        for (size_t i = 0; i < frq_buffer_size; ++i) {
-            img_frequency[i] *= filter_frequency[i];
-        }
+        // for (size_t i = 0; i < frq_buffer_size; ++i) {
+        //     img_frequency[i] *= filter_frequency[i];
+        // }
+        auto img_frq_buf = Halide::Runtime::Buffer<T>(
+            reinterpret_cast<float*>(img_frequency),
+            // innermost dimension is fixed size 2: the real and imaginary
+            // parts
+            2, frq_buffer_size);
+
+        auto filter_frq_buf = Halide::Runtime::Buffer<const T>(
+            reinterpret_cast<float*>(filter_frequency),
+            // innermost dimension is fixed size 2: the real and imaginary
+            // parts
+            2, frq_buffer_size);
+        multiply_complex_buffers_halide(img_frq_buf, filter_frq_buf,
+            img_frq_buf);
+
 
         // FOR DEBUGGING
         // std::vector<T> img_frq_mult(frq_buffer_size);

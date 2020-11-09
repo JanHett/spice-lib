@@ -106,6 +106,17 @@ add_halide_library(multiply_buffers_halide FROM spice_lib_generators
 add_halide_library(divide_buffers_halide FROM spice_lib_generators
     USE_RUNTIME adaptive_threshold_halide.runtime)
 
+# Buffer arithmetic
+# add_halide_library(add_buffers_halide FROM spice_lib_generators
+#     USE_RUNTIME adaptive_threshold_halide.runtime)
+# add_halide_library(subtract_buffers_halide FROM spice_lib_generators
+#     USE_RUNTIME adaptive_threshold_halide.runtime)
+add_halide_library(multiply_complex_buffers_halide FROM spice_lib_generators
+    FEATURES metal opencl cuda # d3d12compute
+    USE_RUNTIME adaptive_threshold_halide.runtime)
+# add_halide_library(divide_buffers_halide FROM spice_lib_generators
+#     USE_RUNTIME adaptive_threshold_halide.runtime)
+
 # Convolution
 add_halide_library(spatial_convolution_halide FROM spice_lib_generators
     USE_RUNTIME adaptive_threshold_halide.runtime)

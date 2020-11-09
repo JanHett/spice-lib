@@ -156,6 +156,12 @@ target_link_libraries(${PROJECT_NAME}
         multiply_buffers_halide
         divide_buffers_halide
 
+        ### Complex buffer arithmetic
+        # add_complex_buffers_halide
+        # subtract_complex_buffers_halide
+        multiply_complex_buffers_halide
+        # divide_complex_buffers_halide
+
         ### Convolution
         spatial_convolution_halide
 
