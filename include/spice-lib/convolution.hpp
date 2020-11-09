@@ -174,14 +174,15 @@ image<T, Channels> separable(image<T, Channels> img,
  * \tparam Filter_Channels 
  * \param img 
  * \param filter 
+ * \param nthreads Maximum number of threads to use
  * \return image<T, Channels> 
  *
- * \todo: add extra padding to remove circular bleeding
  * \todo: use fftw_plan_many_dft?
  */
 template<typename T, size_t Channels, size_t Filter_Channels = Channels>
 image<T, Channels> dft_based(image<T, Channels> img,
-    image<T, Filter_Channels> filter)
+    image<T, Filter_Channels> filter,
+    size_t n_threads = 1)
 {
     static_assert(Filter_Channels == Channels || Filter_Channels == 1,
         "The filter must either have a single channel or the same number as the filtered image");
@@ -192,11 +193,11 @@ image<T, Channels> dft_based(image<T, Channels> img,
     // if (!fftw_threads_status) {
     //     fftw_threads_status = fftw_init_threads();
     // }
-    // fftw_plan_with_nthreads(8);
+    // fftw_plan_with_nthreads(n_threads);
 
     // set up buffers and plan for `img`
-    auto padded_w = img.width() * 2;
-    auto padded_h = img.height() * 2;
+    auto padded_w = (img.width() + filter.width() - 1) * 2;
+    auto padded_h = (img.height() + filter.height() - 1) * 2;
 
     auto frq_buffer_width = (padded_w / 2 + 1);
     auto frq_buffer_height = padded_h;
@@ -282,11 +283,14 @@ image<T, Channels> dft_based(image<T, Channels> img,
         }
 
         // copy channel from `img` to img_spatial buffer
-        for (size_t y = 0; y < padded_h; ++y) {
-            for (size_t x = 0; x < padded_w; ++x) {
+        size_t offset_left = (filter.width() - 1) / 2;
+        size_t offset_top = (filter.height() - 1) / 2;
+        for (int y = 0; y < padded_h; ++y) {
+            for (int x = 0; x < padded_w; ++x) {
+                // TODO: comparisons in clamp are slowing this down - avoid them
                 img_spatial[y * padded_w + x] =
-                    img(std::min(x, img.width() - 1),
-                        std::min(y, img.height() - 1),
+                    img(std::clamp<int>(x - offset_left, 0, img.width() - 1),
+                        std::clamp<int>(y - offset_top, 0, img.height() - 1),
                         c);
             }
         }
@@ -294,6 +298,10 @@ image<T, Channels> dft_based(image<T, Channels> img,
         // FOR DEBUGGING
         // image<T, 1> image_spatial_buffer(img_spatial, padded_w,
         //     padded_h);
+        // write_image(
+        //     (std::string("../data/testing/img_padded_") +
+        //         std::to_string(c) + ".jpg").c_str(),
+        //     image_spatial_buffer);
         // print::image(image_spatial_buffer, 20);
 
         // apply dft to img_spatial
@@ -307,7 +315,7 @@ image<T, Channels> dft_based(image<T, Channels> img,
         //     [](auto v){ return std::abs(v) / 100; });
         // image<T, 1> img_frq_buffer(img_frq.data(), frq_buffer_width,
         //     frq_buffer_height);
-        // print::image(img_frq_buffer, 20);
+        // // print::image(img_frq_buffer, 20);
         // write_image(
         //     (std::string("../data/testing/img_frq_") +
         //         std::to_string(c) + ".jpg").c_str(),
@@ -322,7 +330,7 @@ image<T, Channels> dft_based(image<T, Channels> img,
         //     [&](auto v){ return v / (spatial_buffer_size); });
         // image<T, 1> image_spatial_buffer_re_inverted(
         //     img_spatial_buffer_re_inverted.data(), padded_w, padded_h);
-        // print::image(image_spatial_buffer_re_inverted, 20);
+        // // print::image(image_spatial_buffer_re_inverted, 20);
         // write_image(
         //     (std::string("../data/testing/img_re_inverted_") +
         //         std::to_string(c) + ".jpg").c_str(),
@@ -358,21 +366,21 @@ image<T, Channels> dft_based(image<T, Channels> img,
         //     [&](auto v){ return v / (spatial_buffer_size); });
         // image<T, 1> image_spatial_buffer_final_inverted(
         //     img_spatial_buffer_final_inverted.data(), padded_w, padded_h);
-        // print::image(image_spatial_buffer_final_inverted, 20);
+        // // print::image(image_spatial_buffer_final_inverted, 20);
         // write_image(
         //     (std::string("../data/testing/img_final_inverted_") +
         //         std::to_string(c) + ".jpg").c_str(),
         //     image_spatial_buffer_final_inverted);
 
         // copy channel from img_spatial to result
-        auto offset_x = padded_w / 2;
-        auto offset_y = padded_h / 2;
+        auto offset_x = padded_w / 2 + offset_left;
+        auto offset_y = padded_h / 2 + offset_top;
         for (size_t y = 0; y < img.height(); ++y) {
             for (size_t x = 0; x < img.width(); ++x) {
-                result(x, y, c) = std::real(img_spatial[
+                result(x, y, c) = img_spatial[
                         // offset to get the result from lower-right quadrant
                         (offset_y + y) * padded_w + x + offset_x
-                    ]) / (spatial_buffer_size);
+                    ] / spatial_buffer_size;
             }
         }
     }
