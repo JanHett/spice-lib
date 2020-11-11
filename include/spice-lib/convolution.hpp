@@ -197,15 +197,16 @@ image<T, Channels> dft_based(image<T, Channels> img,
     // }
     // fftw_plan_with_nthreads(n_threads);
 
-    // set up buffers and plan for `img`
-    auto padded_w = (img.width() + filter.width() - 1) * 2;
-    auto padded_h = (img.height() + filter.height() - 1) * 2;
+    // some size calculations
+    auto padded_w = img.width() + filter.width() - 1;
+    auto padded_h = img.height() + filter.height() - 1;
 
     auto frq_buffer_width = (padded_w / 2 + 1);
     auto frq_buffer_height = padded_h;
     auto frq_buffer_size = frq_buffer_width * frq_buffer_height;
     auto spatial_buffer_size = padded_h * padded_w;
 
+    // set up buffers and plan for `img`
     scalar_t * img_spatial = reinterpret_cast<scalar_t*>(fftwf_malloc(sizeof(scalar_t) *
         spatial_buffer_size));
     std::complex<scalar_t> * img_frequency = reinterpret_cast<std::complex<scalar_t>*>(
@@ -394,8 +395,11 @@ image<T, Channels> dft_based(image<T, Channels> img,
         for (size_t y = 0; y < img.height(); ++y) {
             for (size_t x = 0; x < img.width(); ++x) {
                 result(x, y, c) = img_spatial[
-                        // offset to get the result from lower-right quadrant
-                        (offset_y + y) * padded_w + x + offset_x
+                        // offset to get the result starting from lower-right
+                        // quadrant and mod because the result is circularly
+                        // shifted
+                        ((offset_y + y) % padded_h) * padded_w +
+                        (x + offset_x) % padded_w
                     ] / spatial_buffer_size;
             }
         }

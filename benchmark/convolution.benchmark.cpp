@@ -40,7 +40,7 @@ BENCHMARK(BM_convolution_dft_based)
     ->Unit(benchmark::kMillisecond)
     // ->Ranges({{32, 8192}, {32, 8192}})
     // ->Ranges({{32, 2048}, {512, 4096}, {512, 4096}})
-    ->Ranges({{8, 128}, {1024, 4098}, {1024, 4098}})
+    ->Ranges({{8, 128}, {1024, 4096}, {1024, 4096}})
     ;
 
 static void BM_convolution_auto_separated (benchmark::State& state) {
@@ -74,7 +74,8 @@ BENCHMARK(BM_convolution_auto_separated)
     ->Unit(benchmark::kMillisecond)
     // ->Ranges({{32, 8192}, {32, 8192}})
     // ->Ranges({{32, 2048}, {512, 4096}, {512, 4096}})
-    ->Ranges({{8, 128}, {32, 1024}, {32, 1024}})
+    // ->Ranges({{8, 128}, {32, 1024}, {32, 1024}})
+    ->Ranges({{8, 128}, {1024, 4096}, {1024, 4096}})
     ;
 
 static void BM_convolution_pre_separated (benchmark::State& state) {
