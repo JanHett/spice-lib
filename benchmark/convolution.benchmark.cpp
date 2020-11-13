@@ -8,7 +8,7 @@
 
 using T = float;
 
-static void BM_convolution_dft_based (benchmark::State& state) {
+static void BM_convolution_frequency_space (benchmark::State& state) {
     float std_deviation = state.range(0);
     size_t width = state.range(1);
     size_t height = state.range(2);
@@ -29,12 +29,12 @@ static void BM_convolution_dft_based (benchmark::State& state) {
     image<float, 1> filter(gaussian_data.data(), g_width, g_height);
 
     for (auto _ : state) {
-        auto res = spice::convolve::dft_based(img, filter);
+        auto res = spice::convolve::frequency_space(img, filter);
     }
 }
 
 
-BENCHMARK(BM_convolution_dft_based)
+BENCHMARK(BM_convolution_frequency_space)
     // ->Complexity(benchmark::oN)
     ->UseRealTime()
     ->Unit(benchmark::kMillisecond)

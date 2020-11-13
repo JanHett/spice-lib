@@ -9,20 +9,6 @@
 
 using namespace spice;
 
-// TEST(convolution, separable_pre_seperated) {
-//     auto img = load_image<float, 3>("../data/testing/boat.jpg");
-//     auto filtered = convolve::separable(img,
-//         {filter::sobel_avg<float>()}, {filter::sobel_diff<float>()});
-//     // auto filtered_per_channel = convolve::separable(img, gaussian_per_channel);
-// }
-
-// TEST(convolution, separable_combined) {
-//     auto gaussian
-//     auto img = load_image<float, 3>("../data/testing/boat.jpg");
-//     auto blurred = convolve::separable(img, gaussian);
-//     auto blurred_per_channel = convolve::separable(img, gaussian_per_channel);
-// }
-
 TEST(convolution, spatial) {
     float std_deviation = 10;
     float g_width  = 6 * std_deviation + 1;
@@ -37,8 +23,6 @@ TEST(convolution, spatial) {
         begin, end, step);
     image<float, 1> gaussian_filter(gaussian_data.data(), g_width, g_height);
 
-    std::cout << "Width: " << g_width << " height: " << g_height << '\n';
-
     // print::image(gaussian_filter);
 
     // std::cout << "gaussian sum: " << std::reduce(
@@ -47,9 +31,32 @@ TEST(convolution, spatial) {
     auto img = load_image<float, 3>("../data/testing/boat.jpg");
     auto blurred = convolve::spatial(img, gaussian_filter);
 
-    // TODO: test if result is reasonable
+    // test if result is reasonable
+
+    auto blurred_expectation = load_image<float, 3>(
+        "../data/testing/boat_gaussian_deviation_10.jpg");
+
+    ASSERT_EQ(blurred_expectation.width(), blurred.width());
+    ASSERT_EQ(img.width(), blurred.width());
+    ASSERT_EQ(blurred_expectation.height(), blurred.height());
+    ASSERT_EQ(img.height(), blurred.height());
+    ASSERT_EQ(img.channels(), blurred.channels());
+
+    for (size_t y = 0; y < blurred.height(); ++y) {
+        for (size_t x = 0; x < blurred.width(); ++x) {
+            for (size_t c = 0; c < blurred.channels(); ++c) {
+                // Assert that difference between expectation and reality lies
+                // somewhere in the to-be-expected room for error with JPG
+                ASSERT_NEAR(blurred_expectation(x, y, c), blurred(x, y, c),
+                    0.016f);
+            }
+        }
+    }
+    // for (size_t i = 0; i < blurred.size(); ++i) {
+    //     ASSERT_FLOAT_EQ(blurred_expectation.data()[i], blurred.data()[i]);
+    // }
     
-    write_image("../data/testing/boat_convolved_spatial.jpg", blurred);
+    // write_image("../data/testing/boat_convolved_spatial.jpg", blurred);
 }
 
 TEST(convolution, separable_pre_seperated) {
@@ -66,8 +73,6 @@ TEST(convolution, separable_pre_seperated) {
     image<float, 1> gaussian_filter_h(gaussian_data.data(), g_width, 1);
     image<float, 1> gaussian_filter_v(gaussian_data.data(), 1, g_height);
 
-    std::cout << "Width: " << g_width << " height: " << g_height << '\n';
-
     // print::image(gaussian_filter_h);
     // print::image(gaussian_filter_v);
 
@@ -78,9 +83,33 @@ TEST(convolution, separable_pre_seperated) {
     auto blurred = convolve::separable(img,
         gaussian_filter_h, gaussian_filter_v);
 
-    // TODO: test if result is reasonable
+    // test if result is reasonable
+
+    auto blurred_expectation = load_image<float, 3>(
+        "../data/testing/boat_gaussian_deviation_10.jpg");
+
+    ASSERT_EQ(blurred_expectation.width(), blurred.width());
+    ASSERT_EQ(img.width(), blurred.width());
+    ASSERT_EQ(blurred_expectation.height(), blurred.height());
+    ASSERT_EQ(img.height(), blurred.height());
+    ASSERT_EQ(img.channels(), blurred.channels());
+
+    for (size_t y = 0; y < blurred.height(); ++y) {
+        for (size_t x = 0; x < blurred.width(); ++x) {
+            for (size_t c = 0; c < blurred.channels(); ++c) {
+                // Assert that difference between expectation and reality lies
+                // somewhere in the to-be-expected room for error with JPG
+                ASSERT_NEAR(blurred_expectation(x, y, c), blurred(x, y, c),
+                    0.016f);
+            }
+        }
+    }
+    // for (size_t i = 0; i < blurred.size(); ++i) {
+    //     ASSERT_FLOAT_EQ(blurred_expectation.data()[i], blurred.data()[i]);
+    // }
     
-    write_image("../data/testing/boat_convolved_spatial_pre_separated.jpg", blurred);
+    // write_image("../data/testing/boat_convolved_spatial_pre_separated.jpg",
+    //     blurred);
 }
 
 TEST(convolution, separable_combined) {
@@ -97,8 +126,6 @@ TEST(convolution, separable_combined) {
         begin, end, step);
     image<float, 1> gaussian_filter(gaussian_data.data(), g_width, g_height);
 
-    std::cout << "Width: " << g_width << " height: " << g_height << '\n';
-
     // print::image(gaussian_filter);
 
     // std::cout << "gaussian sum: " << std::reduce(
@@ -107,12 +134,36 @@ TEST(convolution, separable_combined) {
     auto img = load_image<float, 3>("../data/testing/boat.jpg");
     auto blurred = convolve::separable(img, gaussian_filter);
 
-    // TODO: test if result is reasonable
+    // test if result is reasonable
+
+    auto blurred_expectation = load_image<float, 3>(
+        "../data/testing/boat_gaussian_deviation_10.jpg");
+
+    ASSERT_EQ(blurred_expectation.width(), blurred.width());
+    ASSERT_EQ(img.width(), blurred.width());
+    ASSERT_EQ(blurred_expectation.height(), blurred.height());
+    ASSERT_EQ(img.height(), blurred.height());
+    ASSERT_EQ(img.channels(), blurred.channels());
+
+    for (size_t y = 0; y < blurred.height(); ++y) {
+        for (size_t x = 0; x < blurred.width(); ++x) {
+            for (size_t c = 0; c < blurred.channels(); ++c) {
+                // Assert that difference between expectation and reality lies
+                // somewhere in the to-be-expected room for error with JPG
+                ASSERT_NEAR(blurred_expectation(x, y, c), blurred(x, y, c),
+                    0.016f);
+            }
+        }
+    }
+    // for (size_t i = 0; i < blurred.size(); ++i) {
+    //     ASSERT_FLOAT_EQ(blurred_expectation.data()[i], blurred.data()[i]);
+    // }
     
-    write_image("../data/testing/boat_convolved_spatial_auto_separated.jpg", blurred);
+    // write_image("../data/testing/boat_convolved_spatial_auto_separated.jpg",
+    //     blurred);
 }
 
-TEST(convolution, dft_based) {
+TEST(convolution, frequency_space) {
     float std_deviation = 10;
     float g_width  = 6 * std_deviation + 1;
     float g_height = 6 * std_deviation + 1;
@@ -126,17 +177,38 @@ TEST(convolution, dft_based) {
         begin, end, step);
     image<float, 1> gaussian_filter(gaussian_data.data(), g_width, g_height);
 
-    std::cout << "Width: " << g_width << " height: " << g_height << '\n';
-
     // print::image(gaussian_filter);
 
     // std::cout << "gaussian sum: " << std::reduce(
     //     gaussian_data.begin(), gaussian_data.end()) << "\n";
 
     auto img = load_image<float, 3>("../data/testing/boat.jpg");
-    auto blurred = convolve::dft_based(img, gaussian_filter);
+    auto blurred = convolve::frequency_space(img, gaussian_filter);
 
-    // TODO: test if result is reasonable
+    // test if result is reasonable
+
+    auto blurred_expectation = load_image<float, 3>(
+        "../data/testing/boat_dft_gaussian_deviation_10.jpg");
+
+    ASSERT_EQ(blurred_expectation.width(), blurred.width());
+    ASSERT_EQ(img.width(), blurred.width());
+    ASSERT_EQ(blurred_expectation.height(), blurred.height());
+    ASSERT_EQ(img.height(), blurred.height());
+    ASSERT_EQ(img.channels(), blurred.channels());
+
+    for (size_t y = 0; y < blurred.height(); ++y) {
+        for (size_t x = 0; x < blurred.width(); ++x) {
+            for (size_t c = 0; c < blurred.channels(); ++c) {
+                // Assert that difference between expectation and reality lies
+                // somewhere in the to-be-expected room for error with JPG
+                ASSERT_NEAR(blurred_expectation(x, y, c), blurred(x, y, c),
+                    0.018f);
+            }
+        }
+    }
+    // for (size_t i = 0; i < blurred.size(); ++i) {
+    //     ASSERT_FLOAT_EQ(blurred_expectation.data()[i], blurred.data()[i]);
+    // }
     
-    write_image("../data/testing/boat_convolved_dft.jpg", blurred);
+    // write_image("../data/testing/boat_convolved_dft.jpg", blurred);
 }
