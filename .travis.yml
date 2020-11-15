@@ -37,7 +37,3 @@ addons:
   homebrew:
     update: true
     brewfile: true
-
-after_install:
-  # set up mactex
-  - if [ $TRAVIS_OS_NAME = osx ]; then eval "$(/usr/libexec/path_helper)"; fi
