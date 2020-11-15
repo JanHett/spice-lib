@@ -84,35 +84,38 @@ add_subdirectory(external/gsl)
 # FFTW
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-set(FFTW_ROOT_DIR "${EXTERNAL_DIR}fftw/")
-# set(FFTW_DIR "${FFTW_ROOT_DIR}/lib/cmake/Halide/")
+# TODO: remove this if it turns out that FFTW can be nicely installed as an
+# external dependency
 
-if(NOT EXISTS "${FFTW_ROOT_DIR}")
-    # we couldn't find the directory for FFTW
-    message("Unable to find FFTW. Attempting to pull pre-built binaries.")
+# set(FFTW_ROOT_DIR "${EXTERNAL_DIR}fftw/")
+# # set(FFTW_DIR "${FFTW_ROOT_DIR}/lib/cmake/Halide/")
 
-    if(UNIX)
-      # curl FFTW build
-      set(FFTW_MACOS_BUILD_URL http://fftw.org/fftw-3.3.8.tar.gz)
-      file(DOWNLOAD ${FFTW_MACOS_BUILD_URL} "${EXTERNAL_DIR}__fftw_temp.tar.gz"
-           TIMEOUT 60)
-      # Ensure the target directory exists
-      execute_process(COMMAND mkdir -p ${FFTW_ROOT_DIR}
-                      WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
-      # Unpack the FFTW build
-      execute_process(COMMAND tar -xzf __fftw_temp.tar.gz -C fftw --strip-components 1
-                      WORKING_DIRECTORY "${EXTERNAL_DIR}")
-      # Remove the archive
-      execute_process(COMMAND rm -f __fftw_temp.tar.gz
-                      WORKING_DIRECTORY "${EXTERNAL_DIR}")
-    else()
-      message("No instructions to pull FFTW for the current OS")
-    endif()
+# if(NOT EXISTS "${FFTW_ROOT_DIR}")
+#     # we couldn't find the directory for FFTW
+#     message("Unable to find FFTW. Attempting to pull pre-built binaries.")
 
-    # TODO: replicate this for other OSes (read: Windows)
-endif()
+#     if(UNIX)
+#       # curl FFTW build
+#       set(FFTW_MACOS_BUILD_URL http://fftw.org/fftw-3.3.8.tar.gz)
+#       file(DOWNLOAD ${FFTW_MACOS_BUILD_URL} "${EXTERNAL_DIR}__fftw_temp.tar.gz"
+#            TIMEOUT 60)
+#       # Ensure the target directory exists
+#       execute_process(COMMAND mkdir -p ${FFTW_ROOT_DIR}
+#                       WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
+#       # Unpack the FFTW build
+#       execute_process(COMMAND tar -xzf __fftw_temp.tar.gz -C fftw --strip-components 1
+#                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
+#       # Remove the archive
+#       execute_process(COMMAND rm -f __fftw_temp.tar.gz
+#                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
+#     else()
+#       message("No instructions to pull FFTW for the current OS")
+#     endif()
 
-add_subdirectory(${FFTW_ROOT_DIR})
+#     # TODO: replicate this for other OSes (read: Windows)
+# endif()
+
+# add_subdirectory(${FFTW_ROOT_DIR})
 
 # find threads so we can link to them and enable fftw's parallel routines
 # find_package(Threads) # TODO: make this work

@@ -8,3 +8,4 @@ cmake-build*
 .DS_Store
 external/fftw
 __pycache__
+Brewfile.lock.json

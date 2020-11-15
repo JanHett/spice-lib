@@ -8,8 +8,11 @@
 
 - [C++17](https://en.cppreference.com/w/cpp/compiler_support)
 - [CMake 3.16](https://cmake.org/)
-- [OpenImageIO](https://github.com/OpenImageIO/oiio)
-- [LLVM](http://llvm.org/) - this is a dependency of Halide
+- [OpenImageIO](https://github.com/OpenImageIO/oiio)*
+- [FFTW](http://fftw.org/)*
+- [LLVM](http://llvm.org/)* - this is a dependency of Halide
+
+> \* On macOS you can install these dependencies by running `brew bundle install`.
 
 #### Included as git submodules
 
@@ -25,8 +28,10 @@ You do not need to install these by hand, they will be pulled by CMake during co
 
 ### For the documentation
 
-- [Doxygen](http://www.doxygen.nl/)
+- [Doxygen](http://www.doxygen.nl/)*
 - [m.css](https://github.com/mosra/m.css) (included as a git submodule, will be pulled by CMake during configuration if building documentation is enabled)
+
+> \* On macOS you can install these dependencies by running `brew bundle install`.
 
 ## Building spice as a CMake subdirectory
 
