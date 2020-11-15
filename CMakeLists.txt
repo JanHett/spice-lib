@@ -105,6 +105,8 @@ if(NOT EXISTS "${FFTW_ROOT_DIR}")
       # Remove the archive
       execute_process(COMMAND rm -f __fftw_temp.tar.gz
                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
+    else()
+      message("No instructions to pull FFTW for the current OS")
     endif()
 
     # TODO: replicate this for other OSes (read: Windows)
