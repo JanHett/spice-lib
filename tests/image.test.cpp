@@ -119,41 +119,41 @@ TEST(image, operator_call_two_arg_const) {
     EXPECT_EQ(im_const(1, 1)[2], 1);
 }
 
-// TEST(image, operator_call_three_arg) {
-//     auto im = make_checkerboard<float>(2, 2);
+TEST(image, operator_call_three_arg) {
+    auto im = make_checkerboard<float, 3>(2, 2);
 
-//     EXPECT_EQ(im(0, 0, 0), 1);
-//     EXPECT_EQ(im(0, 0, 1), 1);
-//     EXPECT_EQ(im(0, 0, 2), 1);
-//     EXPECT_EQ(im(1, 0, 0), 1);
-//     EXPECT_EQ(im(1, 0, 1), 1);
-//     EXPECT_EQ(im(1, 0, 2), 1);
-//     EXPECT_EQ(im(0, 1, 0), 0);
-//     EXPECT_EQ(im(0, 1, 1), 0);
-//     EXPECT_EQ(im(0, 1, 2), 0);
-//     EXPECT_EQ(im(1, 1, 0), 0);
-//     EXPECT_EQ(im(1, 1, 1), 0);
-//     EXPECT_EQ(im(1, 1, 2), 0);
-// }
+    EXPECT_EQ(im(0, 0, 0), 1);
+    EXPECT_EQ(im(0, 0, 1), 1);
+    EXPECT_EQ(im(0, 0, 2), 1);
+    EXPECT_EQ(im(1, 0, 0), 0);
+    EXPECT_EQ(im(1, 0, 1), 0);
+    EXPECT_EQ(im(1, 0, 2), 0);
+    EXPECT_EQ(im(0, 1, 0), 0);
+    EXPECT_EQ(im(0, 1, 1), 0);
+    EXPECT_EQ(im(0, 1, 2), 0);
+    EXPECT_EQ(im(1, 1, 0), 1);
+    EXPECT_EQ(im(1, 1, 1), 1);
+    EXPECT_EQ(im(1, 1, 2), 1);
+}
 
-// TEST(image, operator_call_three_arg_const) {
-//     auto im = make_checkerboard<float>(2, 2);
+TEST(image, operator_call_three_arg_const) {
+    auto im = make_checkerboard<float, 3>(2, 2);
 
-//     auto const im_const(im);
+    auto const im_const(im);
 
-//     EXPECT_EQ(im_const(0, 0, 0), 1);
-//     EXPECT_EQ(im_const(0, 0, 1), 1);
-//     EXPECT_EQ(im_const(0, 0, 2), 1);
-//     EXPECT_EQ(im_const(1, 0, 0), 1);
-//     EXPECT_EQ(im_const(1, 0, 1), 1);
-//     EXPECT_EQ(im_const(1, 0, 2), 1);
-//     EXPECT_EQ(im_const(0, 1, 0), 0);
-//     EXPECT_EQ(im_const(0, 1, 1), 0);
-//     EXPECT_EQ(im_const(0, 1, 2), 0);
-//     EXPECT_EQ(im_const(1, 1, 0), 0);
-//     EXPECT_EQ(im_const(1, 1, 1), 0);
-//     EXPECT_EQ(im_const(1, 1, 2), 0);
-// }
+    EXPECT_EQ(im_const(0, 0, 0), 1);
+    EXPECT_EQ(im_const(0, 0, 1), 1);
+    EXPECT_EQ(im_const(0, 0, 2), 1);
+    EXPECT_EQ(im_const(1, 0, 0), 0);
+    EXPECT_EQ(im_const(1, 0, 1), 0);
+    EXPECT_EQ(im_const(1, 0, 2), 0);
+    EXPECT_EQ(im_const(0, 1, 0), 0);
+    EXPECT_EQ(im_const(0, 1, 1), 0);
+    EXPECT_EQ(im_const(0, 1, 2), 0);
+    EXPECT_EQ(im_const(1, 1, 0), 1);
+    EXPECT_EQ(im_const(1, 1, 1), 1);
+    EXPECT_EQ(im_const(1, 1, 2), 1);
+}
 
 TEST(image, operator_add_assign) {
     size_t width = 16;

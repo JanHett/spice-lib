@@ -46,7 +46,7 @@ namespace print {
      * \param foreground The text colour
      * \param background The background colour
      */
-    template<typename T_color, size_t Channels = 4>
+    template<typename T_color>
     std::string color_escape_string(
         std::string const & str,
         T_color const & foreground,
@@ -57,13 +57,17 @@ namespace print {
         return std::string("\033[48;2;") +
         // set BG-colours
         std::to_string(to_8bit<pixel_value_t>(background[0])) + ";" +
-        std::to_string(to_8bit<pixel_value_t>(background[1])) + ";" +
-        std::to_string(to_8bit<pixel_value_t>(background[2])) +
+        std::to_string(to_8bit<pixel_value_t>(
+            background[std::min(1UL, background.channels() - 1)])) + ";" +
+        std::to_string(to_8bit<pixel_value_t>(
+            background[std::min(2UL, background.channels() - 1)])) +
         // set FG-colours
         ";38;2;" +
         std::to_string(to_8bit<pixel_value_t>(foreground[0])) + ";" +
-        std::to_string(to_8bit<pixel_value_t>(foreground[1])) + ";" +
-        std::to_string(to_8bit<pixel_value_t>(foreground[2])) + "m" +
+        std::to_string(to_8bit<pixel_value_t>(
+            foreground[std::min(1UL, foreground.channels() - 1)])) + ";" +
+        std::to_string(to_8bit<pixel_value_t>(
+            foreground[std::min(2UL, foreground.channels() - 1)])) + "m" +
         // add the actual string and the ending escape code
         str + "\033[0m";
     }
@@ -81,7 +85,7 @@ namespace print {
         std::ostream & stream = std::cout) {
         for (size_t y = 0; y < img.height(); y += stride) {
             for (size_t x = 0; x < img.width(); x += stride) {
-                stream << print::color_escape_string<color_view<const float>, Channels>("  ",
+                stream << print::color_escape_string<color_view<const float>>("  ",
                     img(x, y), img(x, y));
             }
             stream << "\n";
@@ -140,7 +144,7 @@ namespace print {
                     }
                 }
                 cell_color = color<T, 3>(1) - cell_color;
-                stream << color_escape_string<color<T, 3>, 3>(" ",
+                stream << color_escape_string<color<T, 3>>(" ",
                     cell_color, cell_color);
             }
             stream << "\n";

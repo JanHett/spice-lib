@@ -1,4 +1,4 @@
-if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/../external/m.css/")
+if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/../external/m.css/README.rst")
     # we couldn't find m.css
     message("Unable to find m.css. Attempting to pull.")
 
@@ -7,5 +7,5 @@ if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/../external/m.css/")
                     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
 
-add_custom_target(doc COMMAND "../external/m.css/documentation/doxygen.py" "Doxyfile-mcss"
+add_custom_target(doc COMMAND "../external/m.css/documentation/doxygen.py" "conf.py"
     WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}")

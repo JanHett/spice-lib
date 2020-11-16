@@ -87,67 +87,9 @@ This will result in the following output:
 
 Not glamorous, but for retro-cool and debugging it does the job.
 
-## Building
+## Building, installing and using spice-lib in your CMake build
 
-### Prerequisites
-
-#### For the library
-
-##### Need to be manually installed
-
-- [C++17](https://en.cppreference.com/w/cpp/compiler_support)
-- [CMake 3.10](https://cmake.org/)
-- [OpenImageIO](https://github.com/OpenImageIO/oiio)
-- [LLVM](http://llvm.org/)
-
-##### Included as git submodules
-
-You do not need to install these by hand, they will be pulled by CMake during configuration.
-
-- [Halide](https://halide-lang.org/)
-- [Guideline Support Library](https://github.com/microsoft/GSL)
-
-#### For the tests
-
-- [Google Test](https://github.com/google/googletest) (manual install)
-- [Google Benchmark](https://github.com/google/benchmark) (included as git submodule, will be pulled by CMake during configuration if building benchmarks is enabled)
-
-#### For the documentation
-
-- [Doxygen](http://www.doxygen.nl/)
-- [m.css](https://github.com/mosra/m.css) (included as a git submodule, will be pulled by CMake during configuration if building documentation is enabled)
-
-### Build It!
-
-```bash
-cd <spice repo directory>
-mkdir build
-cd build
-# tests are enabled by default, use option ENABLE_TESTS to override
-cmake .. -DCMAKE_INSTALL_PREFIX=<where spice should be installed> [-DENABLE_TESTS=OFF|ON] [-DENABLE_DOCS=OFF|ON]
-cmake --build . --config Debug|Release [--target [install] [doc]]
-# if you chose to build the tests, you can test if everything worked
-tests/spice-test
-```
-
-### Notes
-
-spice has been tested to build with clang on macOS and may or may not build in other configurations. I plan to extend support to other operating systems and platforms, but for now, features are the primary focus.
-
-## Contributing
-
-If you found this project useful enough to add your two cents (or lines of code), please do!
-
-Here's a few ways you can have a part in driving this library forward:
-
-- use it, note what's working and what isn't and tell me about it
-- review the code
-- propose a specific fix or - even better...
-- submit a pull request
-
-If you submit a pull request, make sure all added functionality is thoroughly (unit) tested.
-
-If you spot a bug or a vulnerability, please [create an issue](https://github.com/JanHett/spice/issues/new) describing the malfunction. I will do my best to look into it within a few days.
+See [INSTALL.md](./INSTALL.md).
 
 ## History
 
