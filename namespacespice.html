@@ -24,10 +24,11 @@
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="md_doc__i_n_s_t_a_l_l.html">Installing spice</a></li>
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -63,6 +64,8 @@
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
+            <dt>namespace <a href="namespacespice_1_1function.html" class="m-doc">function</a></dt>
+            <dd>Contains implementations of commonly used mathematical functions.</dd>
             <dt>namespace <a href="namespacespice_1_1helpers.html" class="m-doc">helpers</a></dt>
             <dd></dd>
             <dt>namespace <a href="namespacespice_1_1print.html" class="m-doc">print</a></dt>
@@ -92,6 +95,25 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <div class="m-doc-template">template&lt;typename T, std::enable_if_t&lt;std::is_signed_v&lt;T&gt;, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a52f12e17eead1d6d159f809f84aa5054" class="m-doc">min</a>(</span><span class="m-doc-wrap">T const&amp; a,
+              T const&amp; b) -&gt; T</span>
+            </dt>
+            <dd>Returns the lesser of the given values.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, std::enable_if_t&lt;std::is_signed_v&lt;T&gt;, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0ea60d240b3ac55a24a6887e2a191dfe" class="m-doc">max</a>(</span><span class="m-doc-wrap">T const&amp; a,
+              T const&amp; b) -&gt; T</span>
+            </dt>
+            <dd>Returns the greater of the given values.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, std::enable_if_t&lt;std::is_signed_v&lt;T&gt;, int&gt; = 0&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#acbebd953062e51c126f453b671ed247d" class="m-doc">clamp</a>(</span><span class="m-doc-wrap">T const&amp; val,
+              T const&amp; lo,
+              T const&amp; hi) -&gt; T</span>
+            </dt>
+            <dd>If v compares less than lo, returns lo; otherwise if hi compares less than v, returns hi; otherwise returns v.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T, size_t Channels&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a9ce92e8b66421f7400e86120d3aec9a9" class="m-doc">operator&lt;&lt;</a>(</span><span class="m-doc-wrap">std::ostream&amp; os,
               <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const&amp; pxl) -&gt; std::ostream&amp;</span>
@@ -101,6 +123,120 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a52f12e17eead1d6d159f809f84aa5054"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="algorithm_8hpp.html">&lt;include/spice-lib/algorithm.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T, std::enable_if_t&lt;std::is_signed_v&lt;T&gt;, int&gt; = 0&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T spice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a52f12e17eead1d6d159f809f84aa5054" class="m-doc-self">min</a>(</span><span class="m-doc-wrap">T const&amp; a,
+              T const&amp; b)</span></span>
+            </h3>
+            <p>Returns the lesser of the given values.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>a</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>T</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This implementation is branchless, but returns a new value instead of a reference and only works on floating point and signed integer types.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a0ea60d240b3ac55a24a6887e2a191dfe"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="algorithm_8hpp.html">&lt;include/spice-lib/algorithm.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T, std::enable_if_t&lt;std::is_signed_v&lt;T&gt;, int&gt; = 0&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T spice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ea60d240b3ac55a24a6887e2a191dfe" class="m-doc-self">max</a>(</span><span class="m-doc-wrap">T const&amp; a,
+              T const&amp; b)</span></span>
+            </h3>
+            <p>Returns the greater of the given values.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>a</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>T</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This implementation is branchless, but returns a new value instead of a reference and only works on floating point and signed integer types.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="acbebd953062e51c126f453b671ed247d"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="algorithm_8hpp.html">&lt;include/spice-lib/algorithm.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T, std::enable_if_t&lt;std::is_signed_v&lt;T&gt;, int&gt; = 0&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T spice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acbebd953062e51c126f453b671ed247d" class="m-doc-self">clamp</a>(</span><span class="m-doc-wrap">T const&amp; val,
+              T const&amp; lo,
+              T const&amp; hi)</span></span>
+            </h3>
+            <p>If v compares less than lo, returns lo; otherwise if hi compares less than v, returns hi; otherwise returns v.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>T</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This implementation is branchless, but returns a new value instead of a reference and only works on floating point and signed integer types.</p></aside>
+          </div></section>
           <section class="m-doc-details" id="a9ce92e8b66421f7400e86120d3aec9a9"><div>
             <h3>
               <div class="m-doc-template">

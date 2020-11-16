@@ -24,10 +24,11 @@
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="md_doc__i_n_s_t_a_l_l.html">Installing spice</a></li>
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -173,6 +174,18 @@
               int y) const -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const</span>
             </dt>
             <dd>Get pixel value at specified coordinates.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a61fce65bb769b6b69c0789b8f8ebcbb0" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
+              int y,
+              int c) -&gt; T&amp;</span>
+            </dt>
+            <dd>Get reference to scalar value at specified coordinates.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afe374742a86ecc820b3e9d30ef8f854c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
+              int y,
+              int c) const -&gt; T const &amp;</span>
+            </dt>
+            <dd>Get reference to scalar value at specified coordinates.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1252686f6cdbafc0a23a710b8f51c557" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
             </dt>
@@ -560,6 +573,78 @@
                 <tr>
                   <th>Returns</th>
                   <td>color&lt;T, Channels&gt;&amp; A constant reference to the image&#x27;s color at the given coordinates</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a61fce65bb769b6b69c0789b8f8ebcbb0"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61fce65bb769b6b69c0789b8f8ebcbb0" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
+              int y,
+              int c)</span></span>
+            </h3>
+            <p>Get reference to scalar value at specified coordinates.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">x</td>
+                  <td>The x-coordinate</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>The y-coordinate</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>The channel</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>T&amp; A reference to the image&#x27;s color at the given coordinates</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afe374742a86ecc820b3e9d30ef8f854c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T const &amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe374742a86ecc820b3e9d30ef8f854c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
+              int y,
+              int c) const</span></span>
+            </h3>
+            <p>Get reference to scalar value at specified coordinates.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">x</td>
+                  <td>The x-coordinate</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>The y-coordinate</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>The channel</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>T const &amp; A constant reference to the image&#x27;s color at the given coordinates</td>
                 </tr>
               </tfoot>
             </table>
