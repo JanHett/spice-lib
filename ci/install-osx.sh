@@ -12,6 +12,3 @@ cd build
 cmake -Dgtest_build_samples=OFF -Dgtest_build_tests=OFF ../
 make
 make install
-
-# set up mactex
-eval "$(/usr/libexec/path_helper)"
