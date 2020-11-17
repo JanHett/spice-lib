@@ -27,6 +27,10 @@
 
 namespace spice {
 
+/**
+ * \brief Groups various convolution methods together
+ * 
+ */
 namespace convolve {
 
 // Have we successfully initialised fftw threads yet?

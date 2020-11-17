@@ -12,9 +12,11 @@
 
 namespace spice {
 /**
- * This namespace exports utilities to print some of spice's types to the
+ * \brief This namespace exports utilities to print some of spice's types to the
  * console.
+ * 
  * These are mainly meant for debugging purposes.
+ * 
  * \note Functions that print in colour assume that the terminal supports 24 bit
  * colour output.
  */

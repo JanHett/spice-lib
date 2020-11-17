@@ -13,7 +13,8 @@
 
 namespace spice {
 /**
- * This namespace exports a number of functions providing statistics on images.
+ * \brief This namespace exports a number of functions for calculating
+ * statistics on images
  */
 namespace statistics {
     /**

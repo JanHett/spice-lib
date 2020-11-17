@@ -106,6 +106,15 @@ add_halide_library(multiply_buffers_halide FROM spice_lib_generators
 add_halide_library(divide_buffers_halide FROM spice_lib_generators
     USE_RUNTIME adaptive_threshold_halide.runtime)
 
+add_halide_library(add_buffer_scalar_halide FROM spice_lib_generators
+    USE_RUNTIME adaptive_threshold_halide.runtime)
+add_halide_library(subtract_buffer_scalar_halide FROM spice_lib_generators
+    USE_RUNTIME adaptive_threshold_halide.runtime)
+add_halide_library(multiply_buffer_scalar_halide FROM spice_lib_generators
+    USE_RUNTIME adaptive_threshold_halide.runtime)
+add_halide_library(divide_buffer_scalar_halide FROM spice_lib_generators
+    USE_RUNTIME adaptive_threshold_halide.runtime)
+
 # Buffer arithmetic
 # add_halide_library(add_buffers_halide FROM spice_lib_generators
 #     USE_RUNTIME adaptive_threshold_halide.runtime)
