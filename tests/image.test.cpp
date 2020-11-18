@@ -155,7 +155,7 @@ TEST(image, operator_call_three_arg_const) {
     EXPECT_EQ(im_const(1, 1, 2), 1);
 }
 
-TEST(image, operator_add_assign) {
+TEST(image, operator_add_assign_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     auto im1 = make_gradient<float, 3>(width, height, 0, 0.5);
@@ -168,17 +168,19 @@ TEST(image, operator_add_assign) {
 
     // print::image<float, 3>(im1);
 
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            // pixels should be have values of a gradient from 0 to 1.5
-            ASSERT_EQ(
-                (calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
-                (im1(x, y)) );
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 1.5
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
+                    (im1(x, y, c)) );
+            }
         }
     }
 }
 
-TEST(image, operator_add) {
+TEST(image, operator_add_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     const auto im1 = make_gradient<float, 3>(width, height, 0, 0.5);
@@ -191,17 +193,88 @@ TEST(image, operator_add) {
 
     // print::image<float, 3>(im1);
 
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            // pixels should be have values of a gradient from 0 to 1.5
-            ASSERT_EQ(
-                (calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
-                (im3(x, y)) );
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 1.5
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
+                    (im3(x, y, c)) );
+            }
         }
     }
 }
 
-TEST(image, operator_subtract_assign) {
+TEST(image, operator_add_assign_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    im1 += 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0.2 to 1.7
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0.2, 1.7, x, y)),
+                    (im1(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_add_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    const auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    auto im3 = im1 + 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0.2 to 1.7
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0.2, 1.7, x, y)),
+                    (im3(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_add_scalar_x_image) {
+    size_t width = 16;
+    size_t height = 16;
+    const auto im2 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im2);
+
+    auto im3 = 0.2 + im2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im3.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0.2 to 1.7
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0.2, 1.7, x, y)),
+                    (im3(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_subtract_assign_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     auto im1 = make_gradient<float, 3>(width, height, 0, 0.25);
@@ -214,18 +287,20 @@ TEST(image, operator_subtract_assign) {
 
     // print::image<float, 3>(im1);
 
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            // pixels should be have values of two subtracted gradients
-            ASSERT_EQ(
-                ( calculate_gradient<float, 3>(width, height, 0, 0.25, x, y)
-                - calculate_gradient<float, 3>(width, height, 0, 0.1, x, y)),
-                (im1(x, y)) );
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of two subtracted gradients
+                ASSERT_FLOAT_EQ(
+                    ( calculate_gradient<float, 3>(width, height, 0, 0.25, x, y)
+                    - calculate_gradient<float, 3>(width, height, 0, 0.1, x, y)),
+                    (im1(x, y, c)) );
+            }
         }
     }
 }
 
-TEST(image, operator_subtract) {
+TEST(image, operator_subtract_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     const auto im1 = make_gradient<float, 3>(width, height, 0, 0.5);
@@ -238,18 +313,89 @@ TEST(image, operator_subtract) {
 
     // print::image<float, 3>(im1);
 
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            // pixels should be have values of two subtracted gradients
-            ASSERT_EQ(
-                ( calculate_gradient<float, 3>(width, height, 0, 0.5, x, y)
-                - calculate_gradient<float, 3>(width, height, 0, 0.1, x, y)),
-                (im3(x, y)) );
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of two subtracted gradients
+                ASSERT_FLOAT_EQ(
+                    ( calculate_gradient<float, 3>(width, height, 0, 0.5, x, y)
+                    - calculate_gradient<float, 3>(width, height, 0, 0.1, x, y)),
+                    (im3(x, y, c)) );
+            }
         }
     }
 }
 
-TEST(image, operator_multiply_assign) {
+TEST(image, operator_subtract_assign_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    im1 -= 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from -0.2 to 1.3
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, -0.2, 1.3, x, y)),
+                    (im1(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_subtract_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    const auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    auto im3 = im1 - 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from -0.2 to 1.3
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, -0.2, 1.3, x, y)),
+                    (im3(x, y, c)) );
+            }
+        }
+    }
+}
+
+// TEST(image, operator_subtract_scalar_x_image) {
+//     size_t width = 16;
+//     size_t height = 16;
+//     const auto im2 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+//     // print::image<float, 3>(im2);
+
+//     auto im3 = 0.2 - im2;
+
+//     // print::image<float, 3>(im1);
+
+    // for(size_t c = 0; c < im1.channels(); ++c) {
+    //     for (size_t y = 0; y < height; ++y) {
+    //         for (size_t x = 0; x < width; ++x) {
+    //             // pixels should be have values of a gradient from 0.2 to 1.7
+    //             ASSERT_FLOAT_EQ(
+    //                 (calculate_gradient<float, 3>(width, height, 0.2, 1.7, x, y)),
+    //                 (im3(x, y, c)) );
+    //         }
+    //     }
+    // }
+// }
+
+TEST(image, operator_multiply_assign_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     auto im1 = make_gradient<float, 3>(width, height, 0, 0.5);
@@ -262,18 +408,20 @@ TEST(image, operator_multiply_assign) {
 
     // print::image<float, 3>(im1);
 
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            // pixels should be have values of two multiplied gradients
-            ASSERT_EQ(
-                ( calculate_gradient<float, 3>(width, height, 0, 0.5, x, y)
-                * calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
-                (im1(x, y)) );
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of two multiplied gradients
+                ASSERT_FLOAT_EQ(
+                    ( calculate_gradient<float, 3>(width, height, 0, 0.5, x, y)
+                    * calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
+                    (im1(x, y, c)) );
+            }
         }
     }
 }
 
-TEST(image, operator_multiply) {
+TEST(image, operator_multiply_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     const auto im1 = make_gradient<float, 3>(width, height, 0, 0.5);
@@ -286,18 +434,89 @@ TEST(image, operator_multiply) {
 
     // print::image<float, 3>(im1);
 
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            // pixels should be have values of two multiplied gradients
-            ASSERT_EQ(
-                ( calculate_gradient<float, 3>(width, height, 0, 0.5, x, y)
-                * calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
-                (im3(x, y)) );
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of two multiplied gradients
+                ASSERT_FLOAT_EQ(
+                    ( calculate_gradient<float, 3>(width, height, 0, 0.5, x, y)
+                    * calculate_gradient<float, 3>(width, height, 0, 1.5, x, y)),
+                    (im3(x, y, c)) );
+            }
         }
     }
 }
 
-TEST(image, operator_divide_assign) {
+TEST(image, operator_multiply_assign_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    im1 *= 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 0.3
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 0.3, x, y)),
+                    (im1(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_multiply_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    const auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    auto im3 = im1 * 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 0.3
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 0.3, x, y)),
+                    (im3(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_multiply_scalar_x_image) {
+    size_t width = 16;
+    size_t height = 16;
+    const auto im2 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im2);
+
+    auto im3 = 0.2 * im2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im3.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 0.3
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 0.3, x, y)),
+                    (im3(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_divide_assign_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     auto im1 = make_gradient<float, 3>(width, height, 0.1, 0.5);
@@ -329,7 +548,7 @@ TEST(image, operator_divide_assign) {
     }
 }
 
-TEST(image, operator_divide) {
+TEST(image, operator_divide_image_x_image) {
     size_t width = 16;
     size_t height = 16;
     const auto im1 = make_gradient<float, 3>(width, height, 0.1, 0.5);
@@ -360,6 +579,75 @@ TEST(image, operator_divide) {
         }
     }
 }
+
+TEST(image, operator_divide_assign_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    im1 /= 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 7.5
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 7.5, x, y)),
+                    (im1(x, y, c)) );
+            }
+        }
+    }
+}
+
+TEST(image, operator_divide_image_x_scalar) {
+    size_t width = 16;
+    size_t height = 16;
+    const auto im1 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+    // print::image<float, 3>(im1);
+
+    auto im3 = im1 / 0.2;
+
+    // print::image<float, 3>(im1);
+
+    for(size_t c = 0; c < im1.channels(); ++c) {
+        for (size_t y = 0; y < height; ++y) {
+            for (size_t x = 0; x < width; ++x) {
+                // pixels should be have values of a gradient from 0 to 7.5
+                ASSERT_FLOAT_EQ(
+                    (calculate_gradient<float, 3>(width, height, 0, 7.5, x, y)),
+                    (im3(x, y, c)) );
+            }
+        }
+    }
+}
+
+// TEST(image, operator_divide_scalar_x_image) {
+//     size_t width = 16;
+//     size_t height = 16;
+//     const auto im2 = make_gradient<float, 3>(width, height, 0, 1.5);
+
+//     // print::image<float, 3>(im2);
+
+//     auto im3 = 0.2 / im2;
+
+//     // print::image<float, 3>(im1);
+
+    // for(size_t c = 0; c < im1.channels(); ++c) {
+    //     for (size_t y = 0; y < height; ++y) {
+    //         for (size_t x = 0; x < width; ++x) {
+    //             // pixels should be have values of a gradient from 0.2 to 1.7
+    //             ASSERT_FLOAT_EQ(
+    //                 (calculate_gradient<float, 3>(width, height, 0.2, 1.7, x, y)),
+    //                 (im3(x, y, c)) );
+    //         }
+    //     }
+    // }
+// }
 
 TEST(image, intensity_range) {
     // check that the intensity range is indeed constexpr

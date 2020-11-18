@@ -20,8 +20,8 @@
 
 namespace spice {
 /**
- * \brief The namespace `threshold` includes functions for determining thresholds
- * as well as segmenting images according to a pre-determined threshold
+ * \brief Includes functions for determining thresholds as well as segmenting
+ * images according to a pre-determined threshold
  * 
  */
 namespace threshold {

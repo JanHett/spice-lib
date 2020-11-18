@@ -155,11 +155,17 @@ target_link_libraries(${PROJECT_NAME}
         ### Thresholds
         adaptive_threshold_halide
 
-        ### Buffer arithmetic
+        ### Buffer x Buffer arithmetic
         add_buffers_halide
         subtract_buffers_halide
         multiply_buffers_halide
         divide_buffers_halide
+
+        ### Buffer x Scalar arithmetic
+        add_buffer_scalar_halide
+        subtract_buffer_scalar_halide
+        multiply_buffer_scalar_halide
+        divide_buffer_scalar_halide
 
         ### Complex buffer arithmetic
         # add_complex_buffers_halide

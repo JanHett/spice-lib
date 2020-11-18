@@ -14,6 +14,11 @@
 #include <multiply_buffers_halide.h>
 #include <divide_buffers_halide.h>
 
+#include <add_buffer_scalar_halide.h>
+#include <subtract_buffer_scalar_halide.h>
+#include <multiply_buffer_scalar_halide.h>
+#include <divide_buffer_scalar_halide.h>
+
 #include <HalideBuffer.h>
 
 #include "color.hpp"
@@ -26,7 +31,7 @@ namespace spice
 {
 
 /**
- * This namespace contains utility functionality like adapters between
+ * \brief This namespace contains utility functionality like adapters between
  * interfaces.
  */
 namespace helpers
@@ -430,7 +435,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    image& operator +=(image const & rhs) {
+    image& operator+=(image const & rhs) {
         if (width() != rhs.width() ||
             height() != rhs.height() ||
             channels() != rhs.channels())
@@ -460,7 +465,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator +(image lhs, image const & rhs) {
+    friend image operator+(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -474,12 +479,55 @@ public:
     }
 
     /**
+     * \brief Add `rhs` element-wise to this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator+=(T const & rhs) {
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        add_buffer_scalar_halide(lhs_buf, rhs, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Add `rhs` element-wise to lhs
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator+(image lhs, T const & rhs) {
+        lhs += rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Add `lhs` element-wise to `rhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator+(T const & lhs, image rhs) {
+        rhs += lhs;
+
+        return rhs;
+    }
+
+    /**
      * \brief Subtract `rhs` element-wise from this image
      * 
      * \param rhs 
      * \return image& 
      */
-    image& operator -=(image const & rhs) {
+    image& operator-=(image const & rhs) {
         if (width() != rhs.width() ||
             height() != rhs.height() ||
             channels() != rhs.channels())
@@ -509,7 +557,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator -(image lhs, image const & rhs) {
+    friend image operator-(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -523,12 +571,56 @@ public:
     }
 
     /**
+     * \brief Subtract `rhs` element-wise from this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator-=(T const & rhs) {
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        subtract_buffer_scalar_halide(lhs_buf, rhs, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Subtract `rhs` element-wise from `lhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator-(image lhs, T const & rhs) {
+        lhs -= rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Subtract `lhs` element-wise from `rhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    // TODO...
+    // friend image operator-(T const & lhs, image rhs) {
+    //     rhs -= lhs;
+
+    //     return rhs;
+    // }
+
+    /**
      * \brief Multiply this image element-wise with `rhs`
      * 
      * \param rhs 
      * \return image& 
      */
-    image& operator *=(image const & rhs) {
+    image& operator*=(image const & rhs) {
         if (width() != rhs.width() ||
             height() != rhs.height() ||
             channels() != rhs.channels())
@@ -558,7 +650,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator *(image lhs, image const & rhs) {
+    friend image operator*(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -572,12 +664,55 @@ public:
     }
 
     /**
+     * \brief Multiply `rhs` element-wise with this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator*=(T const & rhs) {
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        multiply_buffer_scalar_halide(lhs_buf, rhs, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Multiply `rhs` element-wise with `lhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator*(image lhs, T const & rhs) {
+        lhs *= rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Multiply `rhs` element-wise with `lhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator*(T const & lhs, image rhs) {
+        rhs *= lhs;
+
+        return rhs;
+    }
+
+    /**
      * \brief Divide this image element-wise by `rhs`
      * 
      * \param rhs 
      * \return image& 
      */
-    image& operator /=(image const & rhs) {
+    image& operator/=(image const & rhs) {
         if (width() != rhs.width() ||
             height() != rhs.height() ||
             channels() != rhs.channels())
@@ -607,7 +742,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator /(image lhs, image const & rhs) {
+    friend image operator/(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -619,6 +754,50 @@ public:
 
         return lhs;
     }
+
+    /**
+     * \brief Divide `rhs` element-wise by this image
+     * 
+     * \param rhs 
+     * \return image& 
+     */
+    image& operator/=(T const & rhs) {
+        auto lhs_buf =
+            Halide::Runtime::Buffer<T>(
+                data(),
+                size());
+
+        divide_buffer_scalar_halide(lhs_buf, rhs, lhs_buf);
+
+        return *this;
+    }
+
+    /**
+     * \brief Divide `rhs` element-wise by `lhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    friend image operator/(image lhs, T const & rhs) {
+        lhs /= rhs;
+
+        return lhs;
+    }
+
+    /**
+     * \brief Divide `lhs` element-wise by `rhs`
+     * 
+     * \param lhs 
+     * \param rhs 
+     * \return image& 
+     */
+    // TODO...
+    // friend image operator/(T const & lhs, image rhs) {
+    //     rhs /= lhs;
+
+    //     return rhs;
+    // }
 };
 
 // /**
