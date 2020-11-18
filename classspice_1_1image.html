@@ -191,17 +191,33 @@
             </dt>
             <dd>Add <code>rhs</code> element-wise to this image.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ada6ba5534d645902b9d5d139c0333658" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
+            </dt>
+            <dd>Add <code>rhs</code> element-wise to this image.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab042992b66ed3df6e471ca0284aeef1f" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
+            </dt>
+            <dd>Subtract <code>rhs</code> element-wise from this image.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a612eb6b4b648eab333fffa2655f66417" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
             </dt>
             <dd>Subtract <code>rhs</code> element-wise from this image.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aaea3bf297d4b7e5c13ed06e775739adb" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
             </dt>
-            <dd>Multiply this image element-wise with <code>rhs</code></dd>
+            <dd>Subtract <code>lhs</code> element-wise from <code>rhs</code></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaac9bedd21d659cd8434ee74704b248a" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
+            </dt>
+            <dd>Multiply <code>rhs</code> element-wise with this image.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a42909d2275fe9eb351ea146c0415afef" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
             </dt>
             <dd>Divide this image element-wise by <code>rhs</code></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a922415d73e31f2a3fc9fefa1d871ff0a" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&amp;</span>
+            </dt>
+            <dd>Divide <code>rhs</code> element-wise by this image.</dd>
           </dl>
         </section>
         <section id="friends">
@@ -247,8 +263,23 @@
             </dt>
             <dd>Add <code>rhs</code> element-wise to lhs.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad258c876401587d653535ee94b0c7f64" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Add <code>rhs</code> element-wise to lhs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8679ededaeb71aaee9b9817717477ab4" class="m-doc">operator+</a>(</span><span class="m-doc-wrap">T const&amp; lhs,
+              <a href="classspice_1_1image.html" class="m-doc">image</a> rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Add <code>lhs</code> element-wise to <code>rhs</code></dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a917a644beada3fe10b1260ee83bde2f5" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
               <a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Subtract <code>rhs</code> element-wise from <code>lhs</code></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a579c3bc2a7f6d471340f68ef6f7489fb" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
             </dt>
             <dd>Subtract <code>rhs</code> element-wise from <code>lhs</code></dd>
             <dt>
@@ -257,10 +288,25 @@
             </dt>
             <dd>Multiply <code>lhs</code> element-wise with <code>rhs</code></dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a825a8fe87faf8a8cabde357fb1ea72ee" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Multiply <code>rhs</code> element-wise with <code>lhs</code></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a239d84a4b055f077e1d9d1648d697d08" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">T const&amp; lhs,
+              <a href="classspice_1_1image.html" class="m-doc">image</a> rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Multiply <code>rhs</code> element-wise with <code>lhs</code></dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac3cc2cff83f70afcfcf71b1e7170eb66" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
               <a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
             </dt>
             <dd>Divide <code>lhs</code> element-wise by <code>rhs</code></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a628f0ae554352984f10c29bbe99d062e" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a></span>
+            </dt>
+            <dd>Divide <code>rhs</code> element-wise by <code>lhs</code></dd>
           </dl>
         </section>
         <section>
@@ -675,12 +721,64 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="ada6ba5534d645902b9d5d139c0333658"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada6ba5534d645902b9d5d139c0333658" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+            </h3>
+            <p>Add <code>rhs</code> element-wise to this image.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ab042992b66ed3df6e471ca0284aeef1f"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
               <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab042992b66ed3df6e471ca0284aeef1f" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
+            </h3>
+            <p>Subtract <code>rhs</code> element-wise from this image.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a612eb6b4b648eab333fffa2655f66417"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a612eb6b4b648eab333fffa2655f66417" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
             </h3>
             <p>Subtract <code>rhs</code> element-wise from this image.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -708,7 +806,34 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaea3bf297d4b7e5c13ed06e775739adb" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Multiply this image element-wise with <code>rhs</code></p>
+            <p>Subtract <code>lhs</code> element-wise from <code>rhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Multiply this image element-wise with <code>rhs</code></p>
+          </div></section>
+          <section class="m-doc-details" id="aaac9bedd21d659cd8434ee74704b248a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaac9bedd21d659cd8434ee74704b248a" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+            </h3>
+            <p>Multiply <code>rhs</code> element-wise with this image.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -735,6 +860,32 @@
               <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a42909d2275fe9eb351ea146c0415afef" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
             </h3>
             <p>Divide this image element-wise by <code>rhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a922415d73e31f2a3fc9fefa1d871ff0a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&amp; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a922415d73e31f2a3fc9fefa1d871ff0a" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+            </h3>
+            <p>Divide <code>rhs</code> element-wise by this image.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -1010,6 +1161,68 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="ad258c876401587d653535ee94b0c7f64"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad258c876401587d653535ee94b0c7f64" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs)</span></span>
+            </h3>
+            <p>Add <code>rhs</code> element-wise to lhs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8679ededaeb71aaee9b9817717477ab4"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8679ededaeb71aaee9b9817717477ab4" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap">T const&amp; lhs,
+              <a href="classspice_1_1image.html" class="m-doc">image</a> rhs)</span></span>
+            </h3>
+            <p>Add <code>lhs</code> element-wise to <code>rhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a917a644beada3fe10b1260ee83bde2f5"><div>
             <h3>
               <div class="m-doc-template">
@@ -1017,6 +1230,37 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a917a644beada3fe10b1260ee83bde2f5" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
               <a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
+            </h3>
+            <p>Subtract <code>rhs</code> element-wise from <code>lhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a579c3bc2a7f6d471340f68ef6f7489fb"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a579c3bc2a7f6d471340f68ef6f7489fb" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs)</span></span>
             </h3>
             <p>Subtract <code>rhs</code> element-wise from <code>lhs</code></p>
             <table class="m-table m-fullwidth m-flat">
@@ -1072,6 +1316,68 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a825a8fe87faf8a8cabde357fb1ea72ee"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a825a8fe87faf8a8cabde357fb1ea72ee" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs)</span></span>
+            </h3>
+            <p>Multiply <code>rhs</code> element-wise with <code>lhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a239d84a4b055f077e1d9d1648d697d08"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a239d84a4b055f077e1d9d1648d697d08" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">T const&amp; lhs,
+              <a href="classspice_1_1image.html" class="m-doc">image</a> rhs)</span></span>
+            </h3>
+            <p>Multiply <code>rhs</code> element-wise with <code>lhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ac3cc2cff83f70afcfcf71b1e7170eb66"><div>
             <h3>
               <div class="m-doc-template">
@@ -1081,6 +1387,37 @@
               <a href="classspice_1_1image.html" class="m-doc">image</a> const&amp; rhs)</span></span>
             </h3>
             <p>Divide <code>lhs</code> element-wise by <code>rhs</code></p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>rhs</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>image&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a628f0ae554352984f10c29bbe99d062e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a628f0ae554352984f10c29bbe99d062e" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1image.html" class="m-doc">image</a> lhs,
+              T const&amp; rhs)</span></span>
+            </h3>
+            <p>Divide <code>rhs</code> element-wise by <code>lhs</code></p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
