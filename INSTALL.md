@@ -23,7 +23,7 @@ You do not need to install these by hand, they will be pulled by CMake during co
 
 ### For the tests
 
-- [Google Test](https://github.com/google/googletest) (manual install)
+- [Google Test](https://github.com/google/googletest) (will be automatically pulled during configuration)
 - [Google Benchmark](https://github.com/google/benchmark) (included as git submodule, will be pulled by CMake during configuration if building benchmarks is enabled)
 
 ### For the documentation

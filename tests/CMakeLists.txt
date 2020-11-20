@@ -64,15 +64,18 @@ target_include_directories(${target}
 # Libraries
 #
 
-include(GoogleTest)
-set(GTEST_ROOT "/usr/local/include/gtest" CACHE PATH "Path to googletest")
-find_package(GTest REQUIRED)
+# Get GTest
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        master
+)
+FetchContent_MakeAvailable(googletest)
 
 target_link_libraries(${target}
     PRIVATE
-    # ${DEFAULT_LIBRARIES}
     ${PROJECT_NAME}::${PROJECT_NAME}
-    GTest::GTest
+    gtest
 )
 
 
