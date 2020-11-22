@@ -53,6 +53,11 @@ set(EXTERNAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/")
 # Include cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+# Include conan-installed dependencies if there are any
+if (EXISTS "${CMAKE_BINARY_DIR}/conan_paths.cmake")
+    include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+endif()
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # OpenImageIO
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#

@@ -1,0 +1,9 @@
+[requires]
+
+openimageio/2.2.7.0
+fftw/3.3.8
+
+[generators]
+
+cmake_find_package
+cmake_paths
