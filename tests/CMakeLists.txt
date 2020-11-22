@@ -13,6 +13,7 @@
 set(target ${PROJECT_NAME}-test)
 message(STATUS "Configuring ${target}")
 
+include(FetchContent)
 
 # 
 # Sources

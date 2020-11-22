@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# TinyTeX
+wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+
 # install "simple" dependencies
 apt-get install openimageio
 
