@@ -22,8 +22,7 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/Halide/CMakeLists.txt")
                     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endif()
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/external/Halide")
-find_package(Halide REQUIRED)
+add_subdirectory(${EXTERNAL_DIR}/Halide Halide)
 
 #############################
 # Target setup
