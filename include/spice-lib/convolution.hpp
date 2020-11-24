@@ -166,9 +166,9 @@ image<T, Channels> separable(image<T, Channels> img,
         for (size_t k_y = 0; k_y < filter.height(); ++k_y) {
             filter_v(x, k_y, c) = filter(x, k_y, c);
         }
-
-        return separable(img, filter_h, filter_v);
     }
+
+    return separable(img, filter_h, filter_v);
 }
 
 /**
@@ -277,7 +277,6 @@ image<T, Channels> frequency_space(image<T, Channels> img,
         size_t offset_top = (filter.height() - 1) / 2;
         for (int y = 0; y < padded_h; ++y) {
             for (int x = 0; x < padded_w; ++x) {
-                // TODO: comparisons in clamp are slowing this down - avoid them
                 img_spatial[y * padded_w + x] =
                     img(spice::clamp<int>(x - offset_left, 0, img.width() - 1),
                         spice::clamp<int>(y - offset_top, 0, img.height() - 1),
