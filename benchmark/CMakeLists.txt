@@ -107,8 +107,8 @@ target_compile_options(${target}
     -Wextra
     -pedantic
     -g
-    -o3
-    # -o1
+    -O3
+    # -O1
     # -fno-omit-frame-pointer
     # -fsanitize=address
 )

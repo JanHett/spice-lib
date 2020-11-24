@@ -100,7 +100,7 @@ target_compile_options(${target}
     -Wextra
     -pedantic
     -g
-    -o1
+    -O1
     -fno-omit-frame-pointer
     -fsanitize=address
     # TODO: uncomment once Apple's clang starts supporting this flag

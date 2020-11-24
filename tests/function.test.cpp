@@ -58,7 +58,9 @@ TEST(function, gaussian_2d_symmetric) {
     EXPECT_EQ(gaussian_vals.size(), width * height);
 
     // sanity check: sum of all values should approach 1
-    auto gaussian_sum = std::reduce(gaussian_vals.begin(), gaussian_vals.end());
+    auto gaussian_sum = std::accumulate(
+        gaussian_vals.begin(), gaussian_vals.end(),
+        0.f);
     // std::cout << "gaussian sum: " << gaussian_sum << "\n";
     EXPECT_FLOAT_EQ(gaussian_sum, 1.f);
 }

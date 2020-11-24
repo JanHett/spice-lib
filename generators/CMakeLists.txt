@@ -22,6 +22,15 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/Halide/CMakeLists.txt")
                     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endif()
 
+if(LINUX)
+    # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
+    # the SHARED_LLVM
+    set(Halide_SHARED_LLVM ON)
+
+    set(TARGET_METAL OFF)
+    set(TARGET_D3D12COMPUTE OFF)
+endif()
+
 add_subdirectory(${EXTERNAL_DIR}/Halide Halide)
 
 #############################
@@ -93,6 +102,15 @@ target_link_libraries(spice_lib_generators PRIVATE Halide::Generator)
 # Custom generators
 #
 
+# GPU features available per platform
+set(GPU_FEATURES cuda opencl)
+
+if(APPLE)
+    list(PREPEND GPU_FEATURES metal)
+elseif(WIN32)
+    list(PREPEND GPU_FEATURES d3d12compute)
+endif()
+
 # Segmentation
 add_halide_library(adaptive_threshold_halide FROM spice_lib_generators)
 
@@ -121,7 +139,7 @@ add_halide_library(divide_buffer_scalar_halide FROM spice_lib_generators
 # add_halide_library(subtract_buffers_halide FROM spice_lib_generators
 #     USE_RUNTIME adaptive_threshold_halide.runtime)
 add_halide_library(multiply_complex_buffers_halide FROM spice_lib_generators
-    FEATURES metal opencl cuda # d3d12compute
+    FEATURES ${GPU_FEATURES}
     USE_RUNTIME adaptive_threshold_halide.runtime)
 # add_halide_library(divide_buffers_halide FROM spice_lib_generators
 #     USE_RUNTIME adaptive_threshold_halide.runtime)
