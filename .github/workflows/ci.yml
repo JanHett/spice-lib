@@ -1,0 +1,79 @@
+# Copyright 2008-present Contributors to the OpenImageIO project.
+# SPDX-License-Identifier: BSD-3-Clause
+# https://github.com/OpenImageIO/oiio/blob/master/LICENSE.md
+# THIS FILE WAS ADAPTED FROM THE OPENIMAGEIO CI CONFIG AND IS DISTRIBUTED UNDER
+# OPENIMAGEIO'S LICENSE (SEE ABOVE)
+
+name: CI
+
+on:
+  push:
+    # Skip jobs when only documentation files are changed
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+
+
+jobs:
+  vfxplatform-2021:
+    # Test what's anticipated to be VFX Platform 2021 -- mainly, that means
+    # gcc9 and C++17. This test currently uses the latest OpenEXR release
+    # available on conan, though eventually 2021 will feature OpenEXR 3.0
+    # when complete.
+    name: "Linux VFX Platform 2021: gcc9/C++17 py3.7 boost-1.70 exr-2.5"
+    runs-on: ubuntu-18.04
+    container:
+      image: aswf/ci-osl:2021
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            sh ./ci/github/install-linux.sh
+      - name: configure
+        env:
+          CXX: g++
+          CC: gcc
+        run: |
+            sh ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
+      - name: build-tests
+        run: |
+            sh ./ci/github/build-tests-linux.sh
+      - name: test
+        run: |
+            sh ./ci/github/test-linux.sh
+      # - uses: actions/upload-artifact@v2
+      #   if: failure()
+      #   with:
+      #     name: ${{ github.job }}
+      #     path: build/*/testsuite/*/*.*
+
+  linux-latest-releases:
+    # Test against latest supported releases of toolchain and dependencies.
+    name: "Linux latest releases: gcc10 C++17"
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            sh ./ci/github/install-linux.sh
+      - name: configure
+        env:
+          CXX: g++-10
+          CC: gcc-10
+        run: |
+            sh ./ci/github/configure-linux.sh
+      - name: build-tests
+        run: |
+            sh ./ci/github/build-tests-linux.sh
+      - name: test
+        run: |
+            sh ./ci/github/test-linux.sh
+      # - uses: actions/upload-artifact@v2
+      #   if: failure()
+      #   with:
+      #     name: ${{ github.job }}
+      #     path: build/*/testsuite/*/*.*
