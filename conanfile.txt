@@ -5,6 +5,7 @@ fftw/3.3.8
 [generators]
 cmake
 cmake_paths
+cmake_find_package
 
 [options]
 fftw:precision=single

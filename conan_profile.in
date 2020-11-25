@@ -1,14 +1,14 @@
 [settings]
 os=@CMAKE_SYSTEM_NAME@
 os_build=@CMAKE_SYSTEM_NAME@
-arch=x86_64       # TODO: make this configurable
-arch_build=x86_64 # TODO: make this configurable
+arch=x86_64
+arch_build=x86_64
 build_type=Release
 
 compiler=@SPICE_COMPILER_NAME@
-compiler.version=@CMAKE_CXX_COMPILER_VERSION@
+compiler.version=@SPICE_COMPILER_VERSION_MAJOR@
 compiler.libcxx=libstdc++11
 
 [env]
-CC=@CC@
-CXX=@CXX@
+CC=@CMAKE_C_COMPILER@
+CXX=@CMAKE_CXX_COMPILER@

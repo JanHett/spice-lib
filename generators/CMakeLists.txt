@@ -22,13 +22,18 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/Halide/CMakeLists.txt")
                     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endif()
 
-if(LINUX)
+if(UNIX AND NOT APPLE)
     # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
     # the SHARED_LLVM
     set(Halide_SHARED_LLVM ON)
 
+    set(TARGET_WEBASSEMBLY OFF)
     set(TARGET_METAL OFF)
     set(TARGET_D3D12COMPUTE OFF)
+endif()
+
+if(USE_CONAN)
+    include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 endif()
 
 add_subdirectory(${EXTERNAL_DIR}/Halide Halide)
