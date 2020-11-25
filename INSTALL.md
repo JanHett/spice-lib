@@ -30,6 +30,14 @@
 >
 > [4] These dependencies will be automatically pulled with CMake's `FetchContent` module during configuration.
 
+### Supported operating systmes and compilers
+
+| Operating system | Compiler | Versions |
+| --- | --- | --- |
+| macOS | Apple `clang` | 11 |
+| Linux (tested on CentOS and Ubuntu) | `clang` | 11 |
+| Linux (tested on CentOS and Ubuntu) | `gcc` | > 7 |
+
 ## Building spice as a CMake subdirectory
 
 The recommended way to install spice-lib is to include it as a subdirectory in your CMake build.
@@ -83,11 +91,14 @@ $ mkdir build
 $ cd build
 # configure
 $ cmake .. \
-    [-DUSE_CONAN=OFF|ON]
+    [-DUSE_CONAN=OFF|ON] \
+    # Conan will install the libraries with the corresponding compiler \
+    [-DCMAKE_C_COMPILER=clang|gcc[-<version>]] \
+    [-DCMAKE_CXX_COMPILER=clang++|g++[-<version>]] \
     -DCMAKE_INSTALL_PREFIX=<"where spice should be installed"> \
-    # tests and docs are enabled by default, use the options to override this
+    # tests and docs are enabled by default, use the options to override this \
     [-DENABLE_TESTS=OFF|ON] [-DENABLE_DOCS=OFF|ON] \
-    # some additional info for Halide
+    # some additional info for Halide \
     -DCMAKE_BUILD_TYPE=Debug|Release \
     -DLLVM_DIR=<"where your llvm installation's CMake info is">
 # build
