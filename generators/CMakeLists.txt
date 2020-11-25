@@ -25,11 +25,11 @@ endif()
 if(UNIX AND NOT APPLE)
     # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
     # the SHARED_LLVM
-    set(Halide_SHARED_LLVM ON)
+    set(Halide_SHARED_LLVM ON CACHE BOOL "always use the SHARED_LLVM")
 
-    set(TARGET_WEBASSEMBLY OFF)
-    set(TARGET_METAL OFF)
-    set(TARGET_D3D12COMPUTE OFF)
+    set(TARGET_WEBASSEMBLY OFF CACHE BOOL "disable building WEBASSEMBLY targets")
+    set(TARGET_METAL OFF CACHE BOOL "disable building METAL targets")
+    set(TARGET_D3D12COMPUTE OFF CACHE BOOL "disable building D3D12COMPUTE targets")
 endif()
 
 if(USE_CONAN)
