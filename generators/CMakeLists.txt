@@ -22,15 +22,24 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/Halide/CMakeLists.txt")
                     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endif()
 
+if (NOT APPLE)
+    set(TARGET_METAL OFF CACHE BOOL "disable building METAL targets")
+endif()
+
+if (NOT WIN32)
+    set(TARGET_D3D12COMPUTE OFF CACHE BOOL "disable building D3D12COMPUTE targets")
+endif()
+
 if(UNIX AND NOT APPLE)
     # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
     # the SHARED_LLVM
     set(Halide_SHARED_LLVM ON CACHE BOOL "always use the SHARED_LLVM")
-
-    set(TARGET_WEBASSEMBLY OFF CACHE BOOL "disable building WEBASSEMBLY targets")
-    set(TARGET_METAL OFF CACHE BOOL "disable building METAL targets")
-    set(TARGET_D3D12COMPUTE OFF CACHE BOOL "disable building D3D12COMPUTE targets")
 endif()
+
+set(TARGET_WEBASSEMBLY OFF CACHE BOOL "disable building WEBASSEMBLY targets")
+
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "build Halide as a static lib")
+set(WITH_TESTS OFF CACHE BOOL "don't build Halide tests")
 
 if(USE_CONAN)
     include(${CMAKE_BINARY_DIR}/conan_paths.cmake)

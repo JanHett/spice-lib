@@ -19,39 +19,37 @@ on:
 
 
 jobs:
-  # vfxplatform-2021:
-  #   # Test what's anticipated to be VFX Platform 2021 -- mainly, that means
-  #   # gcc9 and C++17. This test currently uses the latest OpenEXR release
-  #   # available on conan, though eventually 2021 will feature OpenEXR 3.0
-  #   # when complete.
-  #   name: "Linux VFX Platform 2021: CentOS, gcc9, C++17"
-  #   runs-on: ubuntu-18.04
-  #   container:
-  #     image: aswf/ci-osl:2021
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: install
-  #       run: |
-  #           sh ./ci/github/install-linux.sh
-  #           # make conan accessible
-  #           echo "/home/runner/.local/bin" >> $GITHUB_PATH
-  #     - name: configure
-  #       env:
-  #         CXX: g++
-  #         CC: gcc
-  #       run: |
-  #           sh ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
-  #     - name: build-tests
-  #       run: |
-  #           sh ./ci/github/build-tests-linux.sh
-  #     - name: test
-  #       run: |
-  #           sh ./ci/github/test-linux.sh
-  #     # - uses: actions/upload-artifact@v2
-  #     #   if: failure()
-  #     #   with:
-  #     #     name: ${{ github.job }}
-  #     #     path: build/*/testsuite/*/*.*
+  vfxplatform-2021:
+    # Test what's anticipated to be VFX Platform 2021 -- mainly, that means
+    # gcc9 and C++17. This test currently uses the latest OpenEXR release
+    # available on conan, though eventually 2021 will feature OpenEXR 3.0
+    # when complete.
+    name: "Linux VFX Platform 2021: CentOS, gcc9, C++17"
+    runs-on: ubuntu-18.04
+    container:
+      image: aswf/ci-osl:2021
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            ./ci/github/install-linux.sh
+      - name: configure
+        env:
+          CXX: g++
+          CC: gcc
+        run: |
+            ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-linux.sh
+      - name: test
+        run: |
+            ./ci/github/test-linux.sh
+      # - uses: actions/upload-artifact@v2
+      #   if: failure()
+      #   with:
+      #     name: ${{ github.job }}
+      #     path: build/*/testsuite/*/*.*
 
   # linux-gcc7:
   #   # Test against gcc7.
@@ -90,9 +88,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: install
         run: |
-            sh ./ci/github/install-linux.sh
+            ./ci/github/install-linux.sh
             # make conan accessible
-            echo "::add-path::~/.local/bin"
             # echo "~/.local/bin" >> $GITHUB_PATH
       - name: configure
         env:
@@ -100,13 +97,13 @@ jobs:
           CC: gcc-10
         run: |
             conan --version
-            sh ./ci/github/configure-linux.sh
+            ./ci/github/configure-linux.sh
       - name: build-tests
         run: |
-            sh ./ci/github/build-tests-linux.sh
+            ./ci/github/build-tests-linux.sh
       - name: test
         run: |
-            sh ./ci/github/test-linux.sh
+            ./ci/github/test-linux.sh
       # - uses: actions/upload-artifact@v2
       #   if: failure()
       #   with:
@@ -123,7 +120,7 @@ jobs:
   #     - uses: actions/checkout@v2
   #     - name: install
   #       run: |
-  #           sh ./ci/github/install-linux.sh
+  #           ./ci/github/install-linux.sh
   #           # make conan accessible
   #           echo "/home/runner/.local/bin" >> $GITHUB_PATH
   #     - name: configure
@@ -131,13 +128,13 @@ jobs:
   #         CXX: clang++
   #         CC: clang
   #       run: |
-  #           sh ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
+  #           ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
   #     - name: build-tests
   #       run: |
-  #           sh ./ci/github/build-tests-linux.sh
+  #           ./ci/github/build-tests-linux.sh
   #     - name: test
   #       run: |
-  #           sh ./ci/github/test-linux.sh
+  #           ./ci/github/test-linux.sh
   #     # - uses: actions/upload-artifact@v2
   #     #   if: failure()
   #     #   with:
@@ -151,19 +148,19 @@ jobs:
       - uses: actions/checkout@v2
       - name: install
         run: |
-            sh ./ci/github/install-macos.sh
+            ./ci/github/install-macos.sh
       - name: configure
         env:
           CXX: clang++
           CC: clang
         run: |
-            sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+            ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
       - name: build-tests
         run: |
-            sh ./ci/github/build-tests-macos.sh
+            ./ci/github/build-tests-macos.sh
       - name: test
         run: |
-            sh ./ci/github/test-macos.sh
+            ./ci/github/test-macos.sh
   #     - uses: actions/upload-artifact@v2
   #       if: failure()
   #       with:

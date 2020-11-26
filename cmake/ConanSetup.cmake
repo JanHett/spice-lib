@@ -10,18 +10,18 @@ function(conan_install)
     configure_file(${SPICE_CONAN_PROFILE_TEMPLATE} ${SPICE_CONAN_PROFILE}
         @ONLY)
 
-    set(CONAN_INSTALL_COMMAND "conan install ${PROJECT_SOURCE_DIR} --profile ${SPICE_CONAN_PROFILE} --build=missing")
+    if (NOT EXISTS ${SPICE_CONAN_PROFILE})
+        message(FATAL_ERROR "Conan profile was not configured. Aborting configuration.")
+    endif()
+
+    set(CONAN_INSTALL_COMMAND conan install ${PROJECT_SOURCE_DIR} --profile ${SPICE_CONAN_PROFILE} --build=missing)
     message(STATUS "Executing `${CONAN_INSTALL_COMMAND}`")
     execute_process(COMMAND ${CONAN_INSTALL_COMMAND}
                     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-                    OUTPUT_VARIABLE CONAN_OUT
-                    ERROR_VARIABLE CONAN_ERROR
                     RESULT_VARIABLE CONAN_RESULT
                     )
 
     message(NOTICE "conan install exited with result `${CONAN_RESULT}`")
-    message(NOTICE "conan install output: ${CONAN_OUT}")
-    message(NOTICE "conan install errors: ${CONAN_ERROR}")
 
     if (EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake" AND
         EXISTS "${CMAKE_BINARY_DIR}/conan_paths.cmake")
