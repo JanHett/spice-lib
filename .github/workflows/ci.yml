@@ -37,7 +37,17 @@ jobs:
         env:
           CXX: g++
           CC: gcc
+          # LLVM_CONFIG: $(pwd)/llvm-install/bin/llvm-config
         run: |
+            ls /usr/local/lib/cmake/llvm
+            # echo "llvm-config -prefix:"
+            # llvm-config -prefix all
+            # echo "llvm-config -bindir:"
+            # llvm-config -bindir all
+            # echo "llvm-config -includedir:"
+            # llvm-config -includedir all
+            # echo "llvm-config -libdir:"
+            # llvm-config -libdir all
             ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
       - name: build-tests
         run: |
@@ -89,15 +99,22 @@ jobs:
       - name: install
         run: |
             ./ci/github/install-linux.sh
-            # make conan accessible
-            # echo "~/.local/bin" >> $GITHUB_PATH
       - name: configure
         env:
           CXX: g++-10
           CC: gcc-10
         run: |
             conan --version
-            ./ci/github/configure-linux.sh
+            ls $(pwd)/local_llvm/lib/cmake/llvm
+            # echo "llvm-config -prefix:"
+            # llvm-config -prefix all
+            # echo "llvm-config -bindir:"
+            # llvm-config -bindir all
+            # echo "llvm-config -includedir:"
+            # llvm-config -includedir all
+            # echo "llvm-config -libdir:"
+            # llvm-config -libdir   all
+            ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
       - name: build-tests
         run: |
             ./ci/github/build-tests-linux.sh

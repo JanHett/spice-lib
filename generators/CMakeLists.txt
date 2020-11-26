@@ -30,11 +30,11 @@ if (NOT WIN32)
     set(TARGET_D3D12COMPUTE OFF CACHE BOOL "disable building D3D12COMPUTE targets")
 endif()
 
-if(UNIX AND NOT APPLE)
-    # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
-    # the SHARED_LLVM
-    set(Halide_SHARED_LLVM ON CACHE BOOL "always use the SHARED_LLVM")
-endif()
+# if(UNIX AND NOT APPLE)
+#     # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
+#     # the SHARED_LLVM
+#     set(Halide_SHARED_LLVM ON CACHE BOOL "always use the SHARED_LLVM")
+# endif()
 
 set(TARGET_WEBASSEMBLY OFF CACHE BOOL "disable building WEBASSEMBLY targets")
 
@@ -72,6 +72,11 @@ message(STATUS
 
 add_executable(spice_lib_generators ${custom_generator_sources})
 target_link_libraries(spice_lib_generators PRIVATE Halide::Generator)
+
+# TODO: fix CI and remove this/move it to a toolchain file/detect it automatically!
+if (UNIX AND NOT APPLE)
+  target_compile_options(spice_lib_generators PUBLIC -fno-rtti)
+endif()
 
 #
 # Halide apps

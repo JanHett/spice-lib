@@ -152,6 +152,11 @@ target_link_libraries(${PROJECT_NAME}
         # fft_2d_reverse_halide
         )
 
+# TODO: fix CI and remove this/move it to a toolchain file!
+if (UNIX AND NOT APPLE)
+  target_compile_options(${PROJECT_NAME} INTERFACE -fno-rtti)
+endif()
+
 #############################
 # Installation setup
 #############################
