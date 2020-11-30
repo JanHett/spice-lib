@@ -4,11 +4,13 @@
 
 [![Build Status](https://travis-ci.com/JanHett/spice-lib.svg?branch=master)](https://travis-ci.com/JanHett/spice-lib) [![Lines of Code](https://tokei.rs/b1/github/JanHett/spice-lib)](https://github.com/XAMPPRocky/tokei)
 
- ![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20macOS/badge.svg)
- 
- ![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20Linux/badge.svg)
+## Support and status
 
- ![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20VFX%20Reference%20Platform%202021/badge.svg)
+| Operating System | Compiler | Status |
+| --- | --- | --- |
+| macOS 10.15, macOS 11.0 | `clang`, `g++` | [![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20macOS/badge.svg)](https://github.com/JanHett/spice-lib/actions?query=workflow%3A%22CI%3A+macOS%22) |
+| Ubuntu 18.04, 20.04 | `clang`, `g++` | [![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20Linux/badge.svg)](https://github.com/JanHett/spice-lib/actions?query=workflow%3A%22CI%3A+Linux%22) |
+| VFX Reference Platform 2021 (CentOS) | `g++` | [![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20VFX%20Reference%20Platform%202021/badge.svg)](https://github.com/JanHett/spice-lib/actions?query=workflow%3A%22CI%3A+VFX+Reference+Platform+2021%22) |
 
 spice-lib, or spice for short, is a set of image processing tools built on top of custom data types.
 

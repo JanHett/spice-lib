@@ -79,6 +79,7 @@ jobs:
       - name: install
         run: |
             sh ./ci/github/install-macos.sh
+            echo "/home/runner/.local/bin" >> $GITHUB_PATH
       - name: configure
         env:
           CXX: clang++
