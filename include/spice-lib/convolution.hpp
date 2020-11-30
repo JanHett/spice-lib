@@ -323,6 +323,7 @@ image<T, Channels> frequency_space(image<T, Channels> img,
 
     // free all our plans and temp buffers
     fftwf_destroy_plan(p_img_fwd);
+    fftwf_destroy_plan(p_img_inv);
     fftwf_destroy_plan(p_filter_fwd);
     fftwf_free(img_spatial);
     fftwf_free(img_frequency);
