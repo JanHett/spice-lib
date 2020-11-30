@@ -71,29 +71,29 @@ jobs:
   #         name: ${{ github.job }}
   #         path: build/*/testsuite/*/*.*
 
-  macos-11-0-clang:
-    name: "macOS 11.0: clang"
-    runs-on: macOS-11.0
-    steps:
-      - uses: actions/checkout@v2
-      - name: install
-        run: |
-            sh ./ci/github/install-macos.sh
-            echo "/home/runner/.local/bin" >> $GITHUB_PATH
-      - name: configure
-        env:
-          CXX: clang++
-          CC: clang
-        run: |
-            sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
-      - name: build-tests
-        run: |
-            sh ./ci/github/build-tests-macos.sh
-      - name: test
-        run: |
-            sh ./ci/github/test-macos.sh
-  #     - uses: actions/upload-artifact@v2
-  #       if: failure()
-  #       with:
-  #         name: ${{ github.job }}
-  #         path: build/*/testsuite/*/*.*
+  # macos-11-0-clang:
+  #   name: "macOS 11.0: clang"
+  #   runs-on: macOS-11.0
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: install
+  #       run: |
+  #           sh ./ci/github/install-macos.sh
+  #           echo "/home/runner/.local/bin" >> $GITHUB_PATH
+  #     - name: configure
+  #       env:
+  #         CXX: clang++
+  #         CC: clang
+  #       run: |
+  #           sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+  #     - name: build-tests
+  #       run: |
+  #           sh ./ci/github/build-tests-macos.sh
+  #     - name: test
+  #       run: |
+  #           sh ./ci/github/test-macos.sh
+  # #     - uses: actions/upload-artifact@v2
+  # #       if: failure()
+  # #       with:
+  # #         name: ${{ github.job }}
+  # #         path: build/*/testsuite/*/*.*
