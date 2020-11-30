@@ -1,0 +1,75 @@
+# Copyright 2008-present Contributors to the OpenImageIO project.
+# SPDX-License-Identifier: BSD-3-Clause
+# https://github.com/OpenImageIO/oiio/blob/master/LICENSE.md
+# THIS FILE WAS ADAPTED FROM THE OPENIMAGEIO CI CONFIG AND IS DISTRIBUTED UNDER
+# OPENIMAGEIO'S LICENSE (SEE ABOVE)
+
+name: "CI: Linux"
+
+on:
+  push:
+    # Skip jobs when only documentation files are changed
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+
+
+jobs:
+  linux-gcc7:
+    # Test against gcc7.
+    name: "Linux: Ubuntu, gcc7, C++17"
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            sh ./ci/github/install-linux.sh
+      - name: configure
+        env:
+          CXX: g++-7
+          CC: gcc-7
+        run: |
+            ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
+      - name: build-tests
+        run: |
+            sh ./ci/github/build-tests-linux.sh
+      - name: test
+        run: |
+            sh ./ci/github/test-linux.sh
+      # - uses: actions/upload-artifact@v2
+      #   if: failure()
+      #   with:
+      #     name: ${{ github.job }}
+      #     path: build/*/testsuite/*/*.*
+
+  linux-latest-releases:
+    # Test against latest supported releases of toolchain and dependencies.
+    name: "Linux: Ubuntu, gcc10, C++17"
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            ./ci/github/install-linux.sh
+      - name: configure
+        env:
+          CXX: g++-10
+          CC: gcc-10
+        run: |
+            conan --version
+            ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-linux.sh
+      - name: test
+        run: |
+            ./ci/github/test-linux.sh
+      # - uses: actions/upload-artifact@v2
+      #   if: failure()
+      #   with:
+      #     name: ${{ github.job }}
+      #     path: build/*/testsuite/*/*.*

@@ -1,0 +1,98 @@
+# Copyright 2008-present Contributors to the OpenImageIO project.
+# SPDX-License-Identifier: BSD-3-Clause
+# https://github.com/OpenImageIO/oiio/blob/master/LICENSE.md
+# THIS FILE WAS ADAPTED FROM THE OPENIMAGEIO CI CONFIG AND IS DISTRIBUTED UNDER
+# OPENIMAGEIO'S LICENSE (SEE ABOVE)
+
+name: "CI: macOS"
+
+on:
+  push:
+    # Skip jobs when only documentation files are changed
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+
+
+jobs:
+  macos-10-15-clang:
+    name: "macOS 10.15: clang"
+    runs-on: macOS-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            ./ci/github/install-macos.sh
+      - name: configure
+        env:
+          CXX: clang++
+          CC: clang
+        run: |
+            ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-macos.sh
+      - name: test
+        run: |
+            ./ci/github/test-macos.sh
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: ${{ github.job }}
+  #         path: build/*/testsuite/*/*.*
+
+  macos-10-15-gcc10:
+    name: "macOS 10.15: gcc-10"
+    runs-on: macOS-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            INSTALL_GCC_VERSION=10 sh ./ci/github/install-macos.sh
+      - name: configure
+        env:
+          CXX: g++-10
+          CC: gcc-10
+        run: |
+            sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+      - name: build-tests
+        run: |
+            sh ./ci/github/build-tests-macos.sh
+      - name: test
+        run: |
+            sh ./ci/github/test-macos.sh
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: ${{ github.job }}
+  #         path: build/*/testsuite/*/*.*
+
+  macos-11-0-clang:
+    name: "macOS 11.0: clang"
+    runs-on: macOS-11.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            sh ./ci/github/install-macos.sh
+      - name: configure
+        env:
+          CXX: clang++
+          CC: clang
+        run: |
+            sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+      - name: build-tests
+        run: |
+            sh ./ci/github/build-tests-macos.sh
+      - name: test
+        run: |
+            sh ./ci/github/test-macos.sh
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: ${{ github.job }}
+  #         path: build/*/testsuite/*/*.*

@@ -2,7 +2,13 @@
 
 # spice-lib. An image processing library.
 
-[![Build Status](https://travis-ci.com/JanHett/spice-lib.svg?branch=master)](https://travis-ci.com/JanHett/spice-lib) ![Build status](https://github.com/JanHett/spice-lib/workflows/CI/badge.svg) [![Lines of Code](https://tokei.rs/b1/github/JanHett/spice-lib)](https://github.com/XAMPPRocky/tokei)
+[![Build Status](https://travis-ci.com/JanHett/spice-lib.svg?branch=master)](https://travis-ci.com/JanHett/spice-lib) [![Lines of Code](https://tokei.rs/b1/github/JanHett/spice-lib)](https://github.com/XAMPPRocky/tokei)
+
+ ![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20macOS/badge.svg)
+ 
+ ![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20Linux/badge.svg)
+
+ ![Build status](https://github.com/JanHett/spice-lib/workflows/CI:%20VFX%20Reference%20Platform%202021/badge.svg)
 
 spice-lib, or spice for short, is a set of image processing tools built on top of custom data types.
 
