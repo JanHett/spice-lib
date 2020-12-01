@@ -34,7 +34,8 @@ jobs:
         run: |
             ./ci/github/install-linux.sh
             # get patched verison of Halide
-            git clone -b dont-include-sources-for-disabled-targets https://github.com/JanHett/Halide.git external/Halide
+            git clone -b test-hobbled-llvm https://github.com/JanHett/Halide.git external/Halide
+            # git clone -b dont-include-sources-for-disabled-targets https://github.com/JanHett/Halide.git external/Halide
       - name: configure
         env:
           CXX: g++
