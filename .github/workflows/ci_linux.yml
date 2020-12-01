@@ -73,29 +73,29 @@ jobs:
       #     name: ${{ github.job }}
       #     path: build/*/testsuite/*/*.*
 
-  linux-latest-releases-clang:
-    name: "Linux: Ubuntu, clang, C++17"
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: install
-        run: |
-            ./ci/github/install-linux.sh
-      - name: configure
-        env:
-          CXX: clang++
-          CC: clang
-        run: |
-            conan --version
-            ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
-      - name: build-tests
-        run: |
-            ./ci/github/build-tests-linux.sh
-      - name: test
-        run: |
-            ./ci/github/test-linux.sh
-      # - uses: actions/upload-artifact@v2
-      #   if: failure()
-      #   with:
-      #     name: ${{ github.job }}
-      #     path: build/*/testsuite/*/*.*
+  # linux-latest-releases-clang:
+  #   name: "Linux: Ubuntu, clang, C++17"
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: install
+  #       run: |
+  #           ./ci/github/install-linux.sh
+  #     - name: configure
+  #       env:
+  #         CXX: clang++
+  #         CC: clang
+  #       run: |
+  #           conan --version
+  #           ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
+  #     - name: build-tests
+  #       run: |
+  #           ./ci/github/build-tests-linux.sh
+  #     - name: test
+  #       run: |
+  #           ./ci/github/test-linux.sh
+  #     # - uses: actions/upload-artifact@v2
+  #     #   if: failure()
+  #     #   with:
+  #     #     name: ${{ github.job }}
+  #     #     path: build/*/testsuite/*/*.*

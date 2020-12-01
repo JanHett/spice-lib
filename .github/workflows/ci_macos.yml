@@ -45,31 +45,31 @@ jobs:
   #         name: ${{ github.job }}
   #         path: build/*/testsuite/*/*.*
 
-  macos-10-15-gcc10:
-    name: "macOS 10.15: gcc-10"
-    runs-on: macOS-10.15
-    steps:
-      - uses: actions/checkout@v2
-      - name: install
-        run: |
-            INSTALL_GCC_VERSION=10 sh ./ci/github/install-macos.sh
-      - name: configure
-        env:
-          CXX: g++-10
-          CC: gcc-10
-        run: |
-            sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
-      - name: build-tests
-        run: |
-            sh ./ci/github/build-tests-macos.sh
-      - name: test
-        run: |
-            sh ./ci/github/test-macos.sh
-  #     - uses: actions/upload-artifact@v2
-  #       if: failure()
-  #       with:
-  #         name: ${{ github.job }}
-  #         path: build/*/testsuite/*/*.*
+  # macos-10-15-gcc10:
+  #   name: "macOS 10.15: gcc-10"
+  #   runs-on: macOS-10.15
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: install
+  #       run: |
+  #           INSTALL_GCC_VERSION=10 sh ./ci/github/install-macos.sh
+  #     - name: configure
+  #       env:
+  #         CXX: g++-10
+  #         CC: gcc-10
+  #       run: |
+  #           sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+  #     - name: build-tests
+  #       run: |
+  #           sh ./ci/github/build-tests-macos.sh
+  #     - name: test
+  #       run: |
+  #           sh ./ci/github/test-macos.sh
+  # #     - uses: actions/upload-artifact@v2
+  # #       if: failure()
+  # #       with:
+  # #         name: ${{ github.job }}
+  # #         path: build/*/testsuite/*/*.*
 
   # macos-11-0-clang:
   #   name: "macOS 11.0: clang"
