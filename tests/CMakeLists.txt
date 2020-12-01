@@ -94,6 +94,10 @@ target_link_libraries(${target}
 # Compile options
 # 
 
+include(CheckCXXCompilerFlag OPTIONAL)
+
+check_cxx_compiler_flag(-fsanitize=address ASAN_SUPPORTED)
+
 target_compile_options(${target}
     PRIVATE
     -Wall
@@ -102,17 +106,26 @@ target_compile_options(${target}
     -g
     -O1
     -fno-omit-frame-pointer
-    -fsanitize=address
+    # -fsanitize=address
     # TODO: uncomment once Apple's clang starts supporting this flag
     # -fsanitize=leak
 )
 
 target_link_options(${target}
     PRIVATE
-    -fsanitize=address
+    # -fsanitize=address
     # TODO: uncomment once Apple's clang starts supporting this flag
     # -fsanitize=leak
 )
+
+if (ASAN_SUPPORTED)
+    target_compile_options(${target}
+    -fsanitize=address
+    )
+    target_link_options(${target}
+    -fsanitize=address
+    )
+endif()
 
 
 # 
