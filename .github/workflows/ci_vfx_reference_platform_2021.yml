@@ -32,16 +32,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: install
         run: |
-            ./ci/github/install-linux.sh
+            ./ci/github/install-centos.sh
             # get patched verison of Halide
-            git clone -b test-hobbled-llvm https://github.com/JanHett/Halide.git external/Halide
-            # git clone -b dont-include-sources-for-disabled-targets https://github.com/JanHett/Halide.git external/Halide
+            # git clone -b test-hobbled-llvm https://github.com/JanHett/Halide.git external/Halide
+            git clone -b dont-include-sources-for-disabled-targets https://github.com/JanHett/Halide.git external/Halide
       - name: configure
         env:
           CXX: g++
           CC: gcc
+          OIIO_LOCATION: $(pwd)/__temp/oiio/dist/linux64
         run: |
-            ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
+            ./ci/github/configure-centos.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
       - name: build-tests
         run: |
             ./ci/github/build-tests-linux.sh

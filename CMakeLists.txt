@@ -61,6 +61,14 @@ if (NOT USE_CONAN)
 endif()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# FFTW
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+# if (NOT USE_CONAN)
+#   find_package(FFTW3 REQUIRED)
+# endif()
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # Guideline Support Library
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -111,7 +119,7 @@ else()
     INTERFACE
         OpenImageIO
         # fftw3_threads # TODO: make this work
-        fftw3f
+        FFTW3::fftw3f
         # Threads::Threads
   )
 endif()
