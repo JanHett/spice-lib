@@ -9,3 +9,4 @@ cmake-build*
 external/fftw
 __pycache__
 Brewfile.lock.json
+__temp

@@ -119,7 +119,7 @@ else()
     INTERFACE
         OpenImageIO
         # fftw3_threads # TODO: make this work
-        FFTW3::fftw3f
+        fftw3f
         # Threads::Threads
   )
 endif()
