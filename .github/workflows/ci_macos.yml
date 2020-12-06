@@ -32,13 +32,13 @@ jobs:
           CXX: clang++
           CC: clang
         run: |
-            ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+            ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
       - name: build-tests
         run: |
-            ./ci/github/build-tests-macos.sh
+            ./ci/github/build-tests-unix.sh
       - name: test
         run: |
-            ./ci/github/test-macos.sh
+            ./ci/github/test-unix.sh
   #     - uses: actions/upload-artifact@v2
   #       if: failure()
   #       with:
@@ -58,13 +58,13 @@ jobs:
   #         CXX: g++-10
   #         CC: gcc-10
   #       run: |
-  #           sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+  #           sh ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
   #     - name: build-tests
   #       run: |
-  #           sh ./ci/github/build-tests-macos.sh
+  #           sh ./ci/github/build-tests-unix.sh
   #     - name: test
   #       run: |
-  #           sh ./ci/github/test-macos.sh
+  #           sh ./ci/github/test-unix.sh
   # #     - uses: actions/upload-artifact@v2
   # #       if: failure()
   # #       with:
@@ -85,13 +85,13 @@ jobs:
   #         CXX: clang++
   #         CC: clang
   #       run: |
-  #           sh ./ci/github/configure-macos.sh -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+  #           sh ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
   #     - name: build-tests
   #       run: |
-  #           sh ./ci/github/build-tests-macos.sh
+  #           sh ./ci/github/build-tests-unix.sh
   #     - name: test
   #       run: |
-  #           sh ./ci/github/test-macos.sh
+  #           sh ./ci/github/test-unix.sh
   # #     - uses: actions/upload-artifact@v2
   # #       if: failure()
   # #       with:

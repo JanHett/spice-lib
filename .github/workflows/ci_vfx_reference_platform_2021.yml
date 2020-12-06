@@ -42,46 +42,48 @@ jobs:
           CC: gcc
           OIIO_LOCATION: $(pwd)/__temp/oiio/dist/linux64
         run: |
-            ./ci/github/configure-centos.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
+            ./ci/github/configure-unix.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
       - name: build-tests
         run: |
-            ./ci/github/build-tests-linux.sh
+            ./ci/github/build-tests-unix.sh
       - name: test
         run: |
-            ./ci/github/test-linux.sh
+            ./ci/github/test-unix.sh
       # - uses: actions/upload-artifact@v2
       #   if: failure()
       #   with:
       #     name: ${{ github.job }}
       #     path: build/*/testsuite/*/*.*
 
-  # linux-clang:
-  #   # Test compiling with clang on Linux.
-  #   name: "Linux: CentOS, clang10, C++17"
-  #   runs-on: ubuntu-18.04
-  #   container:
-  #     image: aswf/ci-osl:2021
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: install
-  #       run: |
-  #           ./ci/github/install-linux.sh
-  #           # make conan accessible
-  #           echo "/home/runner/.local/bin" >> $GITHUB_PATH
-  #     - name: configure
-  #       env:
-  #         CXX: clang++
-  #         CC: clang
-  #       run: |
-  #           ./ci/github/configure-linux.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm
-  #     - name: build-tests
-  #       run: |
-  #           ./ci/github/build-tests-linux.sh
-  #     - name: test
-  #       run: |
-  #           ./ci/github/test-linux.sh
-  #     # - uses: actions/upload-artifact@v2
-  #     #   if: failure()
-  #     #   with:
-  #     #     name: ${{ github.job }}
-  #     #     path: build/*/testsuite/*/*.*
+  vfxplatform-2021-clang:
+    # Test compiling with clang on Linux.
+    name: "Linux: CentOS, clang10, C++17"
+    runs-on: ubuntu-18.04
+    container:
+      image: aswf/ci-osl:2021
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        env:
+          CXX: clang++
+          CC: clang
+        run: |
+            ./ci/github/install-centos.sh
+      - name: configure
+        env:
+          CXX: clang++
+          CC: clang
+          OIIO_LOCATION: $(pwd)/__temp/oiio/dist/linux64
+        run: |
+            ./ci/github/configure-unix.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-unix.sh
+      - name: test
+        run: |
+            ./ci/github/test-unix.sh
+      # - uses: actions/upload-artifact@v2
+      #   if: failure()
+      #   with:
+      #     name: ${{ github.job }}
+      #     path: build/*/testsuite/*/*.*

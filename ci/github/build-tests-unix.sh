@@ -2,4 +2,4 @@
 
 cd build
 
-cmake --build . --config Release --target spice-lib-test -- -j 8
+cmake --build . --config Release --target spice-lib-test -- -j 2

@@ -33,13 +33,13 @@ jobs:
           CXX: g++-7
           CC: gcc-7
         run: |
-            ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
+            ./ci/github/configure-linux.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
       - name: build-tests
         run: |
-            sh ./ci/github/build-tests-linux.sh
+            sh ./ci/github/build-tests-unix.sh
       - name: test
         run: |
-            sh ./ci/github/test-linux.sh
+            sh ./ci/github/test-unix.sh
       # - uses: actions/upload-artifact@v2
       #   if: failure()
       #   with:
@@ -60,13 +60,13 @@ jobs:
           CC: gcc-10
         run: |
             conan --version
-            ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
+            ./ci/github/configure-linux.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
       - name: build-tests
         run: |
-            ./ci/github/build-tests-linux.sh
+            ./ci/github/build-tests-unix.sh
       - name: test
         run: |
-            ./ci/github/test-linux.sh
+            ./ci/github/test-unix.sh
       # - uses: actions/upload-artifact@v2
       #   if: failure()
       #   with:
@@ -87,13 +87,13 @@ jobs:
   #         CC: clang
   #       run: |
   #           conan --version
-  #           ./ci/github/configure-linux.sh -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
+  #           ./ci/github/configure-linux.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
   #     - name: build-tests
   #       run: |
-  #           ./ci/github/build-tests-linux.sh
+  #           ./ci/github/build-tests-unix.sh
   #     - name: test
   #       run: |
-  #           ./ci/github/test-linux.sh
+  #           ./ci/github/test-unix.sh
   #     # - uses: actions/upload-artifact@v2
   #     #   if: failure()
   #     #   with:
