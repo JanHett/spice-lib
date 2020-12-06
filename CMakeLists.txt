@@ -61,28 +61,6 @@ if (NOT USE_CONAN)
 endif()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# FFTW
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-# if (NOT USE_CONAN)
-#   find_package(FFTW3 REQUIRED)
-# endif()
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# Guideline Support Library
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/gsl/include/")
-    # we couldn't find the header files for GSL or they don't exist
-    message("Unable to find Guideline Support Library. Attempting to pull.")
-
-    # we have a submodule setup for gsl, so we clone it
-    execute_process(COMMAND git submodule update --init -- external/gsl
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-endif()
-add_subdirectory(external/gsl)
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # Custom Halide generators
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -127,8 +105,6 @@ endif()
 # all the other dependencies...
 target_link_libraries(${PROJECT_NAME}
     INTERFACE
-        GSL
-
         # Halide-generated code
         ## Custom Halide functions
         ### Thresholds

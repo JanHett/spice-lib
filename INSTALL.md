@@ -2,15 +2,17 @@
 
 ## Prerequisites
 
-### For the library
-
 - [C++17](https://en.cppreference.com/w/cpp/compiler_support)
 - [CMake 3.16](https://cmake.org/)
+
+## Dependencies
+
+### For the library
+
 - [OpenImageIO](https://github.com/OpenImageIO/oiio) [1][2]
 - [FFTW](http://fftw.org/) [1][2]
 - [Halide](https://halide-lang.org/) [3]
 - [LLVM](http://llvm.org/) - this is a dependency of Halide [1]
-- [Guideline Support Library](https://github.com/microsoft/GSL)
 
 ### For the tests
 
