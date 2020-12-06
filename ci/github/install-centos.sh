@@ -25,10 +25,3 @@ sh ./src/build-scripts/build_pybind11.bash
 
 # build OIIO
 make
-
-echo "ls"
-ls
-echo "ls dist"
-ls dist
-echo "ls dist/linux64"
-ls dist/linux64
