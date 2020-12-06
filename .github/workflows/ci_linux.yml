@@ -33,7 +33,7 @@ jobs:
           CXX: g++-7
           CC: gcc-7
         run: |
-            ./ci/github/configure-unix.sh -DUSE_CONAN=ON
+            ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
       - name: build-tests
         run: |
             sh ./ci/github/build-tests-unix.sh
@@ -60,13 +60,24 @@ jobs:
           CC: gcc-10
         run: |
             conan --version
-            ./ci/github/configure-unix.sh -DUSE_CONAN=ON
+            ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
       - name: build-tests
         run: |
             ./ci/github/build-tests-unix.sh
       - name: test
         run: |
             ./ci/github/test-unix.sh
+      - name: install dependencies of docs
+        run: |
+            sh ./ci/github/install-for-documentation-linux.sh
+      - name: build documentation
+        run: |
+            sh ./ci/github/build-documentation-unix.sh
+      - name: publish documentation
+        # only deploy on pushes to master
+        # if: steps.extract_branch.outputs.branch == 'master'
+        run: |
+            sh ./ci/github/publish-documentation-unix.sh
       # - uses: actions/upload-artifact@v2
       #   if: failure()
       #   with:
@@ -87,7 +98,7 @@ jobs:
   #         CC: clang
   #       run: |
   #           conan --version
-  #           ./ci/github/configure-unix.sh -DUSE_CONAN=ON
+  #           ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
   #     - name: build-tests
   #       run: |
   #           ./ci/github/build-tests-unix.sh

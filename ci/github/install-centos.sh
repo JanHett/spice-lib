@@ -24,7 +24,6 @@ echo "Running on $NAME v$VERSION_ID"
 
 PACKAGE_MANAGER="yum"
 
-sudo $PACKAGE_MANAGER install -y doxygen
 sudo $PACKAGE_MANAGER install -y fftw-devel
 
 # build OIIO from source

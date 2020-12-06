@@ -40,8 +40,6 @@ endif()
 # Dependency setup
 #############################
 
-set(EXTERNAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/")
-
 # Include cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
