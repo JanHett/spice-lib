@@ -39,6 +39,19 @@ jobs:
       - name: test
         run: |
             ./ci/github/test-unix.sh
+      - name: install dependencies of docs
+        run: |
+            sh ./ci/github/install-for-documentation-macos.sh
+      - name: build documentation
+        run: |
+            echo "Setting up latex paths..."
+            eval "$(/usr/libexec/path_helper)"
+            sh ./ci/github/build-documentation-unix.sh
+      - name: publish documentation
+        # only deploy on pushes to master
+        # if: steps.extract_branch.outputs.branch == 'master'
+        run: |
+            sh ./ci/github/publish-documentation-unix.sh
   #     - uses: actions/upload-artifact@v2
   #       if: failure()
   #       with:
