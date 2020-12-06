@@ -23,6 +23,6 @@ echo "/home/runner/.local/bin" >> $GITHUB_PATH
 sudo $PACKAGE_MANAGER install -y doxygen
 
 # install llvm
-bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
 # Conan-provided dependencies will be installed during configuration
