@@ -68,6 +68,7 @@ jobs:
           CXX: clang++
           CC: clang
         run: |
+            git clone -b test-hobbled-llvm https://github.com/JanHett/Halide.git external/Halide
             ./ci/github/install-centos.sh
       - name: configure
         env:
