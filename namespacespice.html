@@ -121,6 +121,19 @@
               <a href="classspice_1_1color.html" class="m-doc">color</a>&lt;T, Channels&gt; const&amp; pxl) -&gt; std::ostream&amp;</span>
             </dt>
             <dd></dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, size_t Channels&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c0d04a6e1ca7478cb00b403ad13f77f" class="m-doc">load_image</a>(</span><span class="m-doc-wrap">char const* filename,
+              const OIIO::ImageSpec* config = nullptr) -&gt; <a href="classspice_1_1image.html" class="m-doc">image</a>&lt;T, Channels&gt;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, size_t Channels&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4e68d15d63e3135be07d2c55af315d1b" class="m-doc">write_image</a>(</span><span class="m-doc-wrap">char const* filename,
+              <a href="classspice_1_1image.html" class="m-doc">image</a>&lt;T, Channels&gt; const&amp; data,
+              OIIO::TypeDesc const&amp; format = <a href="namespacespice_1_1helpers.html#acd1d17e34b67c4eb2b80233b1e018b05" class="m-doc">helpers::<wbr />type_to_typedesc</a>&lt;T&gt;()) -&gt; bool</span>
+            </dt>
+            <dd></dd>
           </dl>
         </section>
         <section>
@@ -249,6 +262,60 @@
             </h3>
 <p>Specialized formatter for <code><a href="classspice_1_1color.html" class="m-doc">spice::<wbr />color</a></code>.</p>
           </div></section>
+          <section class="m-doc-details" id="a6c0d04a6e1ca7478cb00b403ad13f77f"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1image.html" class="m-doc">image</a>&lt;T, Channels&gt; spice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c0d04a6e1ca7478cb00b403ad13f77f" class="m-doc-self">load_image</a>(</span><span class="m-doc-wrap">char const* filename,
+              const OIIO::ImageSpec* config = nullptr)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a transposed copy of the image</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Transposes the image pixel-wise</p>
+          </div></section>
+          <section class="m-doc-details" id="a4e68d15d63e3135be07d2c55af315d1b"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, size_t Channels&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool spice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4e68d15d63e3135be07d2c55af315d1b" class="m-doc-self">write_image</a>(</span><span class="m-doc-wrap">char const* filename,
+              <a href="classspice_1_1image.html" class="m-doc">image</a>&lt;T, Channels&gt; const&amp; data,
+              OIIO::TypeDesc const&amp; format = <a href="namespacespice_1_1helpers.html#acd1d17e34b67c4eb2b80233b1e018b05" class="m-doc">helpers::<wbr />type_to_typedesc</a>&lt;T&gt;())</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filename</td>
+                  <td>The path to write to relative to the current working directory</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>The image to save to disk</td>
+                </tr>
+                <tr>
+                  <td>format</td>
+                  <td>The data format the file should be written with</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><code>true</code> if the image was successfully written, <code>false</code> if an error occurred.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Writes an image to a file at the specified location.</p>
+          </div></section>
         </section>
       </div>
     </div>
@@ -294,7 +361,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.17 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.13 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
