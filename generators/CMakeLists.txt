@@ -22,7 +22,30 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/Halide/CMakeLists.txt")
                     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 endif()
 
-add_subdirectory(../external/Halide Halide)
+if (NOT APPLE)
+    set(TARGET_METAL OFF CACHE BOOL "disable building METAL targets")
+endif()
+
+if (NOT WIN32)
+    set(TARGET_D3D12COMPUTE OFF CACHE BOOL "disable building D3D12COMPUTE targets")
+endif()
+
+# if(UNIX AND NOT APPLE)
+#     # Linux build fails if we are linking aginst linuxbrew LLVM and don't use
+#     # the SHARED_LLVM
+#     set(Halide_SHARED_LLVM ON CACHE BOOL "always use the SHARED_LLVM")
+# endif()
+
+set(TARGET_WEBASSEMBLY OFF CACHE BOOL "disable building WEBASSEMBLY targets")
+
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "build Halide as a static lib")
+set(WITH_TESTS OFF CACHE BOOL "don't build Halide tests")
+
+if(USE_CONAN)
+    include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+endif()
+
+add_subdirectory(${EXTERNAL_DIR}/Halide Halide)
 
 #############################
 # Target setup
@@ -49,6 +72,11 @@ message(STATUS
 
 add_executable(spice_lib_generators ${custom_generator_sources})
 target_link_libraries(spice_lib_generators PRIVATE Halide::Generator)
+
+# TODO: fix CI and remove this/move it to a toolchain file/detect it automatically!
+if (UNIX AND NOT APPLE)
+  target_compile_options(spice_lib_generators PUBLIC -fno-rtti)
+endif()
 
 #
 # Halide apps
@@ -93,6 +121,15 @@ target_link_libraries(spice_lib_generators PRIVATE Halide::Generator)
 # Custom generators
 #
 
+# GPU features available per platform
+set(GPU_FEATURES cuda opencl)
+
+if(APPLE)
+    list(PREPEND GPU_FEATURES metal)
+elseif(WIN32)
+    list(PREPEND GPU_FEATURES d3d12compute)
+endif()
+
 # Segmentation
 add_halide_library(adaptive_threshold_halide FROM spice_lib_generators)
 
@@ -121,7 +158,7 @@ add_halide_library(divide_buffer_scalar_halide FROM spice_lib_generators
 # add_halide_library(subtract_buffers_halide FROM spice_lib_generators
 #     USE_RUNTIME adaptive_threshold_halide.runtime)
 add_halide_library(multiply_complex_buffers_halide FROM spice_lib_generators
-    FEATURES metal opencl cuda # d3d12compute
+    FEATURES ${GPU_FEATURES}
     USE_RUNTIME adaptive_threshold_halide.runtime)
 # add_halide_library(divide_buffers_halide FROM spice_lib_generators
 #     USE_RUNTIME adaptive_threshold_halide.runtime)

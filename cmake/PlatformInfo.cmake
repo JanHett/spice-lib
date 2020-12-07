@@ -1,0 +1,51 @@
+# Compiler info
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(SPICE_COMPILER_NAME clang)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+    set(SPICE_COMPILER_NAME apple-clang)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(SPICE_COMPILER_NAME gcc)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+    set(SPICE_COMPILER_NAME intel)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set(SPICE_COMPILER_NAME msvc)
+else()
+    message(NOTICE "Unidentified compiler: ${CMAKE_CXX_COMPILER_ID}")
+endif()
+
+string(REPLACE "." ";" SPICE_COMPILER_VERSION_LIST ${CMAKE_CXX_COMPILER_VERSION})
+list(GET SPICE_COMPILER_VERSION_LIST 0 SPICE_COMPILER_VERSION_MAJOR)
+list(GET SPICE_COMPILER_VERSION_LIST 1 SPICE_COMPILER_VERSION_MINOR)
+list(GET SPICE_COMPILER_VERSION_LIST 2 SPICE_COMPILER_VERSION_PATCH)
+
+if (SPICE_COMPILER_NAME STREQUAL "apple-clang")
+    set (SPICE_CONAN_COMPILER_VERSION
+        ${SPICE_COMPILER_VERSION_MAJOR}.${SPICE_COMPILER_VERSION_MINOR})
+else()
+    set (SPICE_CONAN_COMPILER_VERSION ${SPICE_COMPILER_VERSION_MAJOR})
+endif()
+
+# Std lib info
+
+if (APPLE)
+    if (SPICE_COMPILER_NAME STREQUAL "gcc")
+        set(SPICE_STDLIB libstdc++)
+    else()
+        set(SPICE_STDLIB libc++)
+    endif()
+else ()
+    if (SPICE_COMPILER_NAME STREQUAL "clang")
+        set(SPICE_STDLIB libc++)
+    else()
+        set(SPICE_STDLIB libstdc++11)
+    endif()
+endif()
+
+# OS info
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    set(SPICE_SYSTEM_NAME "Macos")
+else()
+    set(SPICE_SYSTEM_NAME ${CMAKE_SYSTEM_NAME})
+endif()

@@ -1,0 +1,80 @@
+# Copyright 2008-present Contributors to the OpenImageIO project.
+# SPDX-License-Identifier: BSD-3-Clause
+# https://github.com/OpenImageIO/oiio/blob/master/LICENSE.md
+# THIS FILE WAS ADAPTED FROM THE OPENIMAGEIO CI CONFIG AND IS DISTRIBUTED UNDER
+# OPENIMAGEIO'S LICENSE (SEE ABOVE)
+
+name: "CI: VFX Reference Platform 2021"
+
+on:
+  push:
+    # Skip jobs when only documentation files are changed
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+
+
+jobs:
+  vfxplatform-2021:
+    # Test what's anticipated to be VFX Platform 2021 -- mainly, that means
+    # gcc9 and C++17. This test currently uses the latest OpenEXR release
+    # available on conan, though eventually 2021 will feature OpenEXR 3.0
+    # when complete.
+    name: "Linux VFX Platform 2021: CentOS, gcc9, C++17"
+    runs-on: ubuntu-18.04
+    container:
+      image: aswf/ci-osl:2021
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            ./ci/github/install-centos.sh
+            # get patched verison of Halide
+            # git clone -b test-hobbled-llvm https://github.com/JanHett/Halide.git external/Halide
+            git clone -b dont-include-sources-for-disabled-targets https://github.com/JanHett/Halide.git external/Halide
+      - name: configure
+        env:
+          CXX: g++
+          CC: gcc
+          OIIO_LOCATION: $(pwd)/__temp/oiio/dist/linux64
+        run: |
+            ./ci/github/configure-unix.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-unix.sh
+      - name: test
+        run: |
+            ./ci/github/test-unix.sh
+
+  vfxplatform-2021-clang:
+    # Test compiling with clang on Linux.
+    name: "Linux: CentOS, clang10, C++17"
+    runs-on: ubuntu-18.04
+    container:
+      image: aswf/ci-osl:2021
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        env:
+          CXX: clang++
+          CC: clang
+        run: |
+            git clone -b test-hobbled-llvm https://github.com/JanHett/Halide.git external/Halide
+            ./ci/github/install-centos.sh
+      - name: configure
+        env:
+          CXX: clang++
+          CC: clang
+          OIIO_LOCATION: $(pwd)/__temp/oiio/dist/linux64
+        run: |
+            ./ci/github/configure-unix.sh -DLLVM_DIR=/usr/local/lib/cmake/llvm -DTARGET_HEXAGON=OFF
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-unix.sh
+      - name: test
+        run: |
+            ./ci/github/test-unix.sh

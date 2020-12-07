@@ -2,36 +2,43 @@
 
 ## Prerequisites
 
-### For the library
-
-#### Need to be manually installed
-
 - [C++17](https://en.cppreference.com/w/cpp/compiler_support)
 - [CMake 3.16](https://cmake.org/)
-- [OpenImageIO](https://github.com/OpenImageIO/oiio)*
-- [FFTW](http://fftw.org/)*
-- [LLVM](http://llvm.org/)* - this is a dependency of Halide
 
-> \* On macOS you can install these dependencies by running `brew bundle install`.
+## Dependencies
 
-#### Included as git submodules
+### For the library
 
-You do not need to install these by hand, they will be pulled by CMake during configuration.
-
-- [Halide](https://halide-lang.org/)
-- [Guideline Support Library](https://github.com/microsoft/GSL)
+- [OpenImageIO](https://github.com/OpenImageIO/oiio) [1][2]
+- [FFTW](http://fftw.org/) [1][2]
+- [Halide](https://halide-lang.org/) [3]
+- [LLVM](http://llvm.org/) - this is a dependency of Halide [1]
 
 ### For the tests
 
-- [Google Test](https://github.com/google/googletest) (will be automatically pulled during configuration)
-- [Google Benchmark](https://github.com/google/benchmark) (included as git submodule, will be pulled by CMake during configuration if building benchmarks is enabled)
+- [Google Test](https://github.com/google/googletest) [4]
+- [Google Benchmark](https://github.com/google/benchmark) [3]
 
 ### For the documentation
 
-- [Doxygen](http://www.doxygen.nl/)*
+- [Doxygen](http://www.doxygen.nl/) [1]
 - [m.css](https://github.com/mosra/m.css) (included as a git submodule, will be pulled by CMake during configuration if building documentation is enabled)
 
-> \* On macOS you can install these dependencies by running `brew bundle install`.
+> [1] On macOS you can install these dependencies by running `brew bundle install`. Linuxbrew _might_ work, too.
+>
+> [2] These can also be pulled in via `conan`. If you set `USE_CONAN=ON`, they will be automatically installed during configuration.
+>
+> [3] These dependencies are included as git submodules. They will be pulled by CMake during configuration if the relevant target is enabled.
+>
+> [4] These dependencies will be automatically pulled with CMake's `FetchContent` module during configuration.
+
+### Supported operating systems and compilers
+
+| Operating system | Compiler | Compiler versions |
+| --- | --- | --- |
+| macOS | Apple `clang` | >= 11 |
+| Linux (tested on CentOS and Ubuntu) | `gcc` | >= 7 |
+| Linux (tested on CentOS) | `clang` | 10 |
 
 ## Building spice as a CMake subdirectory
 
@@ -80,20 +87,22 @@ Depending on your system configuration you may or may not have to set the CMake 
 
 ## Building it in standalone mode (e.g. for tests or development)
 
-### Build It!
-
 ```bash
 $ cd <spice repo directory>
 $ mkdir build
 $ cd build
 # configure
 $ cmake .. \
+    [-DUSE_CONAN=OFF|ON] \
+    # Conan will install the libraries with the corresponding compiler \
+    [-DCMAKE_C_COMPILER=clang|gcc[-<version>]] \
+    [-DCMAKE_CXX_COMPILER=clang++|g++[-<version>]] \
     -DCMAKE_INSTALL_PREFIX=<"where spice should be installed"> \
-    # tests and docs are enabled by default, use the options to override this
+    # tests and docs are enabled by default, use the options to override this \
     [-DENABLE_TESTS=OFF|ON] [-DENABLE_DOCS=OFF|ON] \
-    # some additional info for Halide
+    # some additional info for Halide \
     -DCMAKE_BUILD_TYPE=Debug|Release \
-    -DLLVM_DIR=<"where your llvm installation's CMake info is"> \
+    -DLLVM_DIR=<"where your llvm installation's CMake info is">
 # build
 $ cmake --build . --config Debug|Release [--target <"target name">]
 # if you chose to build the tests, you can test if everything works

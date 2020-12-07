@@ -1,0 +1,41 @@
+# Copyright 2008-present Contributors to the OpenImageIO project.
+# SPDX-License-Identifier: BSD-3-Clause
+# https://github.com/OpenImageIO/oiio/blob/master/LICENSE.md
+# THIS FILE WAS ADAPTED FROM THE OPENIMAGEIO CI CONFIG AND IS DISTRIBUTED UNDER
+# OPENIMAGEIO'S LICENSE (SEE ABOVE)
+
+name: "CI: macOS"
+
+on:
+  push:
+    # Skip jobs when only documentation files are changed
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+
+
+jobs:
+  macos-10-15-clang:
+    name: "macOS 10.15: clang"
+    runs-on: macOS-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: install
+        run: |
+            ./ci/github/install-macos.sh
+      - name: configure
+        env:
+          CXX: clang++
+          CC: clang
+        run: |
+            ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/
+      - name: build-tests
+        run: |
+            ./ci/github/build-tests-unix.sh
+      - name: test
+        run: |
+            ./ci/github/test-unix.sh

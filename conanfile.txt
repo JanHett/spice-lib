@@ -1,0 +1,11 @@
+[requires]
+openimageio/2.2.7.0
+fftw/3.3.8
+
+[generators]
+cmake
+cmake_paths
+cmake_find_package
+
+[options]
+fftw:precision=single

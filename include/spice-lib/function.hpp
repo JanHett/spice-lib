@@ -46,7 +46,6 @@ const auto sqrt_2_pi = std::sqrt(2 * M_PI);
  * 
  * \param std_deviation 
  * \param x 
- * \param y defaults to 0, thus giving the result for a one-dimensional gaussian
  * \return float 
  */
 inline float gaussian(float std_deviation, float x) {
@@ -69,7 +68,7 @@ inline float gaussian(float std_deviation, float x) {
  * 
  * \param std_deviation 
  * \param x 
- * \param y defaults to 0, thus giving the result for a one-dimensional gaussian
+ * \param y 
  * \return float 
  */
 inline float gaussian(float std_deviation, float x, float y) {

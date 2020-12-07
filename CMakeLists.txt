@@ -2,17 +2,11 @@
 
 # remove file(GLOB)
 
-# set up target for lib: `add_library`
-
-# set up target for tests: `add_executable`
-
 # set version number
 
 # remove explicit compile flags, and required version...
 # set them on targets:
 # --> target_compile_features(<target> PUBLIC ... INTERFACE ... PRIVATE ...)
-
-# specify PUBLIC/INTERFACE/PRIVATE on target_link_libraries
 
 # remove -Wall etc from *requirements* - only use it for building tests
 
@@ -22,9 +16,7 @@
 
 # CTEST! ctest -S build.cmake <== this is where CI is run
 
-# remove -Werror
-
-# target properties for static analysis (especially CMAK_CXX_CLANG_TIDY)
+# target properties for static analysis (especially CMAKE_CXX_CLANG_TIDY)
 
 
 ################################################################################
@@ -39,7 +31,7 @@ set(PROJECT_VERSION 0.1.0)
 
 include(GNUInstallDirs)
 
-if(APPLE)
+if (APPLE)
     # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
     LINK_DIRECTORIES(/usr/local/lib)
 endif()
@@ -48,77 +40,23 @@ endif()
 # Dependency setup
 #############################
 
-set(EXTERNAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/")
-
 # Include cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+option(USE_CONAN "Use `conan` for dependency management" OFF)
+
+if (USE_CONAN)
+  include(ConanSetup)
+  conan_install()
+endif()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # OpenImageIO
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-find_package(OpenImageIO REQUIRED)
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# Google Test
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-# set(GTEST_ROOT "/usr/local/include/gtest" CACHE PATH "Path to googletest")
-# find_package(GTest REQUIRED)
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# Guideline Support Library
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/gsl/include/")
-    # we couldn't find the header files for GSL or they don't exist
-    message("Unable to find Guideline Support Library. Attempting to pull.")
-
-    # we have a submodule setup for gsl, so we clone it
-    execute_process(COMMAND git submodule update --init -- external/gsl
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+if (NOT USE_CONAN)
+  find_package(OpenImageIO REQUIRED)
 endif()
-add_subdirectory(external/gsl)
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# FFTW
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-# TODO: remove this if it turns out that FFTW can be nicely installed as an
-# external dependency
-
-# set(FFTW_ROOT_DIR "${EXTERNAL_DIR}fftw/")
-# # set(FFTW_DIR "${FFTW_ROOT_DIR}/lib/cmake/Halide/")
-
-# if(NOT EXISTS "${FFTW_ROOT_DIR}")
-#     # we couldn't find the directory for FFTW
-#     message("Unable to find FFTW. Attempting to pull pre-built binaries.")
-
-#     if(UNIX)
-#       # curl FFTW build
-#       set(FFTW_MACOS_BUILD_URL http://fftw.org/fftw-3.3.8.tar.gz)
-#       file(DOWNLOAD ${FFTW_MACOS_BUILD_URL} "${EXTERNAL_DIR}__fftw_temp.tar.gz"
-#            TIMEOUT 60)
-#       # Ensure the target directory exists
-#       execute_process(COMMAND mkdir -p ${FFTW_ROOT_DIR}
-#                       WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
-#       # Unpack the FFTW build
-#       execute_process(COMMAND tar -xzf __fftw_temp.tar.gz -C fftw --strip-components 1
-#                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
-#       # Remove the archive
-#       execute_process(COMMAND rm -f __fftw_temp.tar.gz
-#                       WORKING_DIRECTORY "${EXTERNAL_DIR}")
-#     else()
-#       message("No instructions to pull FFTW for the current OS")
-#     endif()
-
-#     # TODO: replicate this for other OSes (read: Windows)
-# endif()
-
-# add_subdirectory(${FFTW_ROOT_DIR})
-
-# find threads so we can link to them and enable fftw's parallel routines
-# find_package(Threads) # TODO: make this work
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # Custom Halide generators
@@ -140,16 +78,31 @@ target_include_directories(
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 
-target_include_directories(${PROJECT_NAME} INTERFACE ${OIIO_INCLUDE_DIRS})
+# if we don't use conan, we need to add the include dir for OIIO
+if (NOT USE_CONAN)
+  target_include_directories(${PROJECT_NAME} INTERFACE ${OIIO_INCLUDE_DIRS})
+endif()
 
-target_link_libraries(${PROJECT_NAME}
+# use conan-provided packages if we can, otherwise fall back to global installs
+if (USE_CONAN)
+  target_link_libraries(${PROJECT_NAME}
     INTERFACE
-        GSL
+        CONAN_PKG::openimageio
+        CONAN_PKG::fftw
+  )
+else()
+  target_link_libraries(${PROJECT_NAME}
+    INTERFACE
         OpenImageIO
         # fftw3_threads # TODO: make this work
         fftw3f
         # Threads::Threads
+  )
+endif()
 
+# all the other dependencies...
+target_link_libraries(${PROJECT_NAME}
+    INTERFACE
         # Halide-generated code
         ## Custom Halide functions
         ### Thresholds
@@ -180,6 +133,11 @@ target_link_libraries(${PROJECT_NAME}
         # fft_2d_forward_halide
         # fft_2d_reverse_halide
         )
+
+# TODO: fix CI and remove this/move it to a toolchain file!
+if (UNIX AND NOT APPLE)
+  target_compile_options(${PROJECT_NAME} INTERFACE -fno-rtti)
+endif()
 
 #############################
 # Installation setup

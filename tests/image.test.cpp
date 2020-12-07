@@ -6,8 +6,6 @@
 #include <cstdint>
 #include <fstream>
 
-#include <gsl/span>
-
 #include <spice-lib/image.hpp>
 #include <spice-lib/statistics.hpp>
 #include <spice-lib/print.hpp>
