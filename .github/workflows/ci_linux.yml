@@ -73,11 +73,18 @@ jobs:
       - name: build documentation
         run: |
             sh ./ci/github/build-documentation-unix.sh
-      - name: publish documentation
+      - name: deploy documentation
         # only deploy on pushes to master
         # if: steps.extract_branch.outputs.branch == 'master'
-        run: |
-            sh ./ci/github/publish-documentation-unix.sh
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/html
+      # - name: publish documentation
+      #   # only deploy on pushes to master
+      #   # if: steps.extract_branch.outputs.branch == 'master'
+      #   run: |
+      #       sh ./ci/github/publish-documentation-unix.sh
       # - uses: actions/upload-artifact@v2
       #   if: failure()
       #   with:
