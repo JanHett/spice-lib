@@ -49,11 +49,6 @@ jobs:
       - name: test
         run: |
             ./ci/github/test-unix.sh
-      # - uses: actions/upload-artifact@v2
-      #   if: failure()
-      #   with:
-      #     name: ${{ github.job }}
-      #     path: build/*/testsuite/*/*.*
 
   vfxplatform-2021-clang:
     # Test compiling with clang on Linux.
@@ -83,8 +78,3 @@ jobs:
       - name: test
         run: |
             ./ci/github/test-unix.sh
-      # - uses: actions/upload-artifact@v2
-      #   if: failure()
-      #   with:
-      #     name: ${{ github.job }}
-      #     path: build/*/testsuite/*/*.*

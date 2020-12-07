@@ -40,11 +40,19 @@ jobs:
       - name: test
         run: |
             sh ./ci/github/test-unix.sh
-      # - uses: actions/upload-artifact@v2
-      #   if: failure()
-      #   with:
-      #     name: ${{ github.job }}
-      #     path: build/*/testsuite/*/*.*
+      - name: install dependencies of docs
+        run: |
+            sh ./ci/github/install-for-documentation-linux.sh
+      - name: build documentation
+        run: |
+            sh ./ci/github/build-documentation-unix.sh
+      - name: deploy documentation
+        # only deploy on pushes to master
+        if: steps.extract_branch.outputs.branch == 'master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/html
 
   linux-latest-releases:
     name: "Linux: Ubuntu, gcc10, C++17"
@@ -67,53 +75,3 @@ jobs:
       - name: test
         run: |
             ./ci/github/test-unix.sh
-      - name: install dependencies of docs
-        run: |
-            sh ./ci/github/install-for-documentation-linux.sh
-      - name: build documentation
-        run: |
-            sh ./ci/github/build-documentation-unix.sh
-      - name: deploy documentation
-        # only deploy on pushes to master
-        # if: steps.extract_branch.outputs.branch == 'master'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./doc/html
-      # - name: publish documentation
-      #   # only deploy on pushes to master
-      #   # if: steps.extract_branch.outputs.branch == 'master'
-      #   run: |
-      #       sh ./ci/github/publish-documentation-unix.sh
-      # - uses: actions/upload-artifact@v2
-      #   if: failure()
-      #   with:
-      #     name: ${{ github.job }}
-      #     path: build/*/testsuite/*/*.*
-
-  # linux-latest-releases-clang:
-  #   name: "Linux: Ubuntu, clang, C++17"
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: install
-  #       run: |
-  #           ./ci/github/install-linux.sh
-  #     - name: configure
-  #       env:
-  #         CXX: clang++
-  #         CC: clang
-  #       run: |
-  #           conan --version
-  #           ./ci/github/configure-unix.sh -DUSE_CONAN=ON -DLLVM_DIR=$(pwd)/local_llvm/lib/cmake/llvm
-  #     - name: build-tests
-  #       run: |
-  #           ./ci/github/build-tests-unix.sh
-  #     - name: test
-  #       run: |
-  #           ./ci/github/test-unix.sh
-  #     # - uses: actions/upload-artifact@v2
-  #     #   if: failure()
-  #     #   with:
-  #     #     name: ${{ github.job }}
-  #     #     path: build/*/testsuite/*/*.*

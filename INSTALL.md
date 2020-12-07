@@ -32,13 +32,13 @@
 >
 > [4] These dependencies will be automatically pulled with CMake's `FetchContent` module during configuration.
 
-### Supported operating systmes and compilers
+### Supported operating systems and compilers
 
-| Operating system | Compiler | Versions |
+| Operating system | Compiler | Compiler versions |
 | --- | --- | --- |
-| macOS | Apple `clang` | 11 |
-| Linux (tested on CentOS and Ubuntu) | `clang` | 11 |
-| Linux (tested on CentOS and Ubuntu) | `gcc` | > 7 |
+| macOS | Apple `clang` | >= 11 |
+| Linux (tested on CentOS and Ubuntu) | `gcc` | >= 7 |
+| Linux (tested on CentOS) | `clang` | 10 |
 
 ## Building spice as a CMake subdirectory
 
