@@ -47,7 +47,7 @@
         <h1>
           Installing spice
         </h1>
-<h2>Prerequisites</h2><h3>For the library</h3><h4>Need to be manually installed</h4><ul><li><a href="https://en.cppreference.com/w/cpp/compiler_support">C++17</a></li><li><a href="https://cmake.org/">CMake 3.16</a></li><li><a href="https://github.com/OpenImageIO/oiio">OpenImageIO</a>*</li><li><a href="http://fftw.org/">FFTW</a>*</li><li><a href="http://llvm.org/">LLVM</a>* - this is a dependency of Halide</li></ul><blockquote><ul><li>On macOS you can install these dependencies by running <code>brew bundle install</code>.</li></ul></blockquote><h4>Included as git submodules</h4><p>You do not need to install these by hand, they will be pulled by CMake during configuration.</p><ul><li><a href="https://halide-lang.org/">Halide</a></li><li><a href="https://github.com/microsoft/GSL">Guideline Support Library</a></li></ul><h3>For the tests</h3><ul><li><a href="https://github.com/google/googletest">Google Test</a> (will be automatically pulled during configuration)</li><li><a href="https://github.com/google/benchmark">Google Benchmark</a> (included as git submodule, will be pulled by CMake during configuration if building benchmarks is enabled)</li></ul><h3>For the documentation</h3><ul><li><a href="http://www.doxygen.nl/">Doxygen</a>*</li><li><a href="https://github.com/mosra/m.css">m.css</a> (included as a git submodule, will be pulled by CMake during configuration if building documentation is enabled)</li></ul><blockquote><ul><li>On macOS you can install these dependencies by running <code>brew bundle install</code>.</li></ul></blockquote><h2>Building spice as a CMake subdirectory</h2><p>The recommended way to install spice-lib is to include it as a subdirectory in your CMake build.</p><pre class="m-code"># Set the minimum CMake version - spice-lib itself uses 3.16, so we&#39;ll follow
+<h2>Prerequisites</h2><ul><li><a href="https://en.cppreference.com/w/cpp/compiler_support">C++17</a></li><li><a href="https://cmake.org/">CMake 3.16</a></li></ul><h2>Dependencies</h2><h3>For the library</h3><ul><li><a href="https://github.com/OpenImageIO/oiio">OpenImageIO</a> [1][2]</li><li><a href="http://fftw.org/">FFTW</a> [1][2]</li><li><a href="https://halide-lang.org/">Halide</a> [3]</li><li><a href="http://llvm.org/">LLVM</a> - this is a dependency of Halide [1]</li></ul><h3>For the tests</h3><ul><li><a href="https://github.com/google/googletest">Google Test</a> [4]</li><li><a href="https://github.com/google/benchmark">Google Benchmark</a> [3]</li></ul><h3>For the documentation</h3><ul><li><a href="http://www.doxygen.nl/">Doxygen</a> [1]</li><li><a href="https://github.com/mosra/m.css">m.css</a> (included as a git submodule, will be pulled by CMake during configuration if building documentation is enabled)</li></ul><blockquote><p>[1] On macOS you can install these dependencies by running <code>brew bundle install</code>. Linuxbrew <em>might</em> work, too.</p><p>[2] These can also be pulled in via <code>conan</code>. If you set <code>USE_CONAN=ON</code>, they will be automatically installed during configuration.</p><p>[3] These dependencies are included as git submodules. They will be pulled by CMake during configuration if the relevant target is enabled.</p><p>[4] These dependencies will be automatically pulled with CMake&#x27;s <code>FetchContent</code> module during configuration.</p></blockquote><h3>Supported operating systmes and compilers</h3><table class="m-table"><thead><tr><th>Operating system</th><th>Compiler</th><th>Versions</th></tr></thead><tbody><tr><td>macOS</td><td>Apple <code>clang</code></td><td>11</td></tr><tr><td>Linux (tested on CentOS and Ubuntu)</td><td><code>clang</code></td><td>11</td></tr><tr><td>Linux (tested on CentOS and Ubuntu)</td><td><code>gcc</code></td><td>&gt; 7</td></tr></tbody></table><h2>Building spice as a CMake subdirectory</h2><p>The recommended way to install spice-lib is to include it as a subdirectory in your CMake build.</p><pre class="m-code"># Set the minimum CMake version - spice-lib itself uses 3.16, so we&#39;ll follow
 # this example
 cmake_minimum_required(VERSION 3.16)
 
@@ -82,17 +82,21 @@ add_executable(${PROJECT_NAME})
 
 # Link spice-lib to our application
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    spice-lib)</pre><p>Depending on your system configuration you may or may not have to set the CMake options for Halide during the configuration as shown below.</p><h2>Building it in standalone mode (e.g. for tests or development)</h2><h3>Build It!</h3><pre class="m-code">$ <span class="nb">cd</span> &lt;spice repo directory&gt;
+    spice-lib)</pre><p>Depending on your system configuration you may or may not have to set the CMake options for Halide during the configuration as shown below.</p><h2>Building it in standalone mode (e.g. for tests or development)</h2><pre class="m-code">$ <span class="nb">cd</span> &lt;spice repo directory&gt;
 $ mkdir build
 $ <span class="nb">cd</span> build
 <span class="c1"># configure</span>
 $ cmake .. <span class="se">\</span>
+    <span class="o">[</span>-DUSE_CONAN<span class="o">=</span>OFF<span class="p">|</span>ON<span class="o">]</span> <span class="se">\</span>
+    <span class="c1"># Conan will install the libraries with the corresponding compiler \</span>
+    <span class="o">[</span>-DCMAKE_C_COMPILER<span class="o">=</span>clang<span class="p">|</span>gcc<span class="o">[</span>-&lt;version&gt;<span class="o">]]</span> <span class="se">\</span>
+    <span class="o">[</span>-DCMAKE_CXX_COMPILER<span class="o">=</span>clang++<span class="p">|</span>g++<span class="o">[</span>-&lt;version&gt;<span class="o">]]</span> <span class="se">\</span>
     -DCMAKE_INSTALL_PREFIX<span class="o">=</span>&lt;<span class="s2">&quot;where spice should be installed&quot;</span>&gt; <span class="se">\</span>
-    <span class="c1"># tests and docs are enabled by default, use the options to override this</span>
+    <span class="c1"># tests and docs are enabled by default, use the options to override this \</span>
     <span class="o">[</span>-DENABLE_TESTS<span class="o">=</span>OFF<span class="p">|</span>ON<span class="o">]</span> <span class="o">[</span>-DENABLE_DOCS<span class="o">=</span>OFF<span class="p">|</span>ON<span class="o">]</span> <span class="se">\</span>
-    <span class="c1"># some additional info for Halide</span>
+    <span class="c1"># some additional info for Halide \</span>
     -DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="p">|</span>Release <span class="se">\</span>
-    -DLLVM_DIR<span class="o">=</span>&lt;<span class="s2">&quot;where your llvm installation&#39;s CMake info is&quot;</span>&gt; <span class="se">\</span>
+    -DLLVM_DIR<span class="o">=</span>&lt;<span class="s2">&quot;where your llvm installation&#39;s CMake info is&quot;</span>&gt;
 <span class="c1"># build</span>
 $ cmake --build . --config Debug<span class="p">|</span>Release <span class="o">[</span>--target &lt;<span class="s2">&quot;target name&quot;</span>&gt;<span class="o">]</span>
 <span class="c1"># if you chose to build the tests, you can test if everything works</span>
@@ -141,7 +145,7 @@ tests/spice-lib-test</pre><p>The following target names are supported:</p><table
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.20 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.17 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
