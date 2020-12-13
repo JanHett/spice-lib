@@ -46,6 +46,10 @@ jobs:
       - name: build documentation
         run: |
             sh ./ci/github/build-documentation-unix.sh
+      - uses: actions/upload-artifact@v2
+        with:
+          name: doc
+          path: doc/html/
       - name: deploy documentation
         # only deploy on pushes to master
         if: steps.extract_branch.outputs.branch == 'master'

@@ -1,8 +1,20 @@
+/**
+ * \file color_view.hpp
+ * \author Jan Hettenkofer (jan@hettenkofer.net)
+ * \brief Defines a non-owning view over data representing a color
+ * \version 0.1
+ * \date 2020-12-13
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #ifndef SPICE_COLOR_VIEW
 #define SPICE_COLOR_VIEW
 
 #include <type_traits>
 
+namespace spice {
 /**
  * \brief Wrapper around color data of arbitrary length with arbitrary stride
  * between channel samples
@@ -657,6 +669,8 @@ std::ostream& operator<<(std::ostream& os, color_view<T> const & pxl)
     os << pxl[pxl.size() - 1];
     os << ")";
     return os;
+}
+
 }
 
 #endif // SPICE_COLOR_VIEW

@@ -2,7 +2,7 @@
 
 # spice-lib. An image processing library.
 
-[![Build Status](https://travis-ci.com/JanHett/spice-lib.svg?branch=master)](https://travis-ci.com/JanHett/spice-lib) [![Lines of Code](https://tokei.rs/b1/github/JanHett/spice-lib)](https://github.com/XAMPPRocky/tokei)
+[![Lines of Code](https://tokei.rs/b1/github/JanHett/spice-lib)](https://github.com/XAMPPRocky/tokei)
 
 ## Support and status
 
