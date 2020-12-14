@@ -64,6 +64,7 @@
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
             <dt>
+              <div class="m-doc-template">template&lt;typename T_lhs, typename T_rhs, typename T_result&gt;</div>
               using <a href="#a424b8e9d2e35344146eb0bd24034e03a" class="m-doc">enable_if_same_t</a> = std::enable_if_t&lt;std::is_same&lt;T_lhs, T_rhs&gt;::value, T_result&gt;
             </dt>
             <dd></dd>
@@ -103,6 +104,9 @@
           <h2>Typedef documentation</h2>
           <section class="m-doc-details" id="a424b8e9d2e35344146eb0bd24034e03a"><div>
             <h3>
+              <div class="m-doc-template">
+                template&lt;typename T_lhs, typename T_rhs, typename T_result&gt;
+              </div>
               using spice::<wbr />helpers::<wbr /><a href="#a424b8e9d2e35344146eb0bd24034e03a" class="m-doc-self">enable_if_same_t</a> = std::enable_if_t&lt;std::is_same&lt;T_lhs, T_rhs&gt;::value, T_result&gt;
             </h3>
 <p>Wraps <code>std::enable_if_t</code> in such a way that the template is enabled when the first two template arguments are equal as determined by <code>std::is_same</code>. When enabled, this type becomes equivalent to the third argument <code>T_result</code>.</p>
@@ -200,7 +204,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.13 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.20 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

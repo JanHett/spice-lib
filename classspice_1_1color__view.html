@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>color_view class | spice-lib</title>
+  <title>spice::color_view class | spice-lib</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="spice_favicon.png" type="image/png" />
@@ -45,8 +45,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="color__view_8hpp.html">&lt;include/spice-lib/color_view.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
-          color_view <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacespice.html">spice</a>::<wbr/></span>color_view <span class="m-thin">class</span>
         </h1>
         <p>Wrapper around color data of arbitrary length with arbitrary stride between channel samples.</p>
         <table class="m-table m-fullwidth m-flat">
@@ -77,8 +78,8 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="ad06b702b0d637567a39e2a0a5ebe3c2a">
-              using <a href="#ad06b702b0d637567a39e2a0a5ebe3c2a" class="m-doc-self">value_type</a> = T
+            <dt id="a5d131efe478590f198d61934e07a57b7">
+              using <a href="#a5d131efe478590f198d61934e07a57b7" class="m-doc-self">value_type</a> = T
             </dt>
             <dd>Alias for the type used to represent individual pixel values.</dd>
           </dl>
@@ -87,114 +88,114 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a4cd2c55bfa9b8c6ec9405e1fcbc99e48" class="m-doc">color_view</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a7d9abbb7a9e3f6840225d2baa0ef7f18" class="m-doc">color_view</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd>Construct a new, empty <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
+            <dd>Construct a new, empty <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a4ba57ee5e071cdd6f93ec760629e8531" class="m-doc">color_view</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a3f486c85c592cbef080b09809a379084" class="m-doc">color_view</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd>Create a copy of the given <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
+            <dd>Create a copy of the given <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a23e1d7c2c071a0118b8435f619467fb5" class="m-doc">color_view</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#aec164d96220da6b15009775efa053d44" class="m-doc">color_view</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd>Move the the given <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
+            <dd>Move the the given <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#af0ca364f2ddfd8955fc0f7d09f84a71e" class="m-doc">color_view</a>(</span><span class="m-doc-wrap">T*const data,
+              <span class="m-doc-wrap-bumper"><a href="#ae2047a9eb556ad5fbe5177c0e795787e" class="m-doc">color_view</a>(</span><span class="m-doc-wrap">T*const data,
               size_t stride,
               size_t channels) <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd>Construct a new <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object referring to the given data.</dd>
+            <dd>Construct a new <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object referring to the given data.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7488cfb12a8581beb87b9128776b7645" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a38987427a2a57a22ad5f03ff29f26ece" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Copy-assigns another <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</dd>
+            <dd>Copy-assigns another <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a701c57aafcd1e84a0eb54c747ceff925" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac31be686becd2ace45f29a10a6087cc6" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Move-assigns another <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</dd>
+            <dd>Move-assigns another <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a28deb93fddc1acf45f4712d26bdc6bb4" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">T const&amp; value) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6b707dbfcdc2f4df8d293fcf1b9da34e" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">T const&amp; value) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Assign each channel the provided value.</dd>
-            <dt id="a575a583b45c8028c16553d7b9965eb36">
-              <span class="m-doc-wrap-bumper">void <a href="#a575a583b45c8028c16553d7b9965eb36" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a284b26cd55836390dd08e1ea105eacaf">
+              <span class="m-doc-wrap-bumper">void <a href="#a284b26cd55836390dd08e1ea105eacaf" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Replaces the reference with a nullptr reference and resets the stride and size to 0.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a593a0d11972eadb4c65225d00ff3e2ee" class="m-doc">reset</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; other)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a00ed95c8e80ed5bf63b1b588c1d2fcd5" class="m-doc">reset</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; other)</span>
             </dt>
             <dd>Replaces the reference with the reference held by <code>other</code> and adjusts the size accordingly.</dd>
-            <dt id="a9c94a0e2bb8569c369028cf6d3ce1e0c">
-              <span class="m-doc-wrap-bumper">void <a href="#a9c94a0e2bb8569c369028cf6d3ce1e0c" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">T*const data,
+            <dt id="a8c8538c85416c1beef0ca832a4f9b902">
+              <span class="m-doc-wrap-bumper">void <a href="#a8c8538c85416c1beef0ca832a4f9b902" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">T*const data,
               size_t stride,
               size_t channels)</span>
             </dt>
             <dd>Replaces the reference to refer to <code>data</code> and updates the stride and channel count.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae27cfa7268b5124be59cd452f9cf3b5e" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7f74040367d58a980e177680b5e68259" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Returns the channel count.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a12ef5915f02b05157c8be858bf31555b" class="m-doc">channels</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a29a5217b622ae3e7215999a47a9587b4" class="m-doc">channels</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Returns the channel count.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a73bf6a850d737da7afd56d8a76993c51" class="m-doc">stride</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6f177c35442bd557e67ba88aaeb3ab4f" class="m-doc">stride</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Returns the stride.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6202493214c097b313bd5f8fb7b8ad1f" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; T*const <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8c2446ac4972a63ac3e366c317e5515" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; T*const <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Returns the data pointer.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8de5cc7d4b5f0a6badf01f1e26a82875" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; T const *const <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5da35866131f8b812629b48b0ccbd32d" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; T const *const <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Returns the data pointer.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a594cd6e745d1743c6e4c6b98cfa099ed" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) -&gt; T&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9c1d127c94c4d6999695198b6faeccf8" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) -&gt; T&amp;</span>
             </dt>
-            <dd>Retrieve a reference to an element of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</dd>
+            <dd>Retrieve a reference to an element of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a093b01601676ad88445cc8fcbb50a7bc" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const -&gt; T const &amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0562157e8509fdb2e3b3b56d5731ba0f" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const -&gt; T const &amp;</span>
             </dt>
-            <dd>Retrieve a constant reference to an element of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</dd>
+            <dd>Retrieve a constant reference to an element of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a04b14a382f7a36ea3469250b10b670c6" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a77885f132e9c54ad1b9b5dae5692ea17" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Add <code>rhs</code> to this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
+            <dd>Add <code>rhs</code> to this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac90294ff8bd5b8569fac652b493df220" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a88d0c4174116b1a12bcea03b3bbb8f19" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Add <code>rhs</code> to this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
+            <dd>Add <code>rhs</code> to this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aaa7fdf81c62c74a81da666847ef57704" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad908de714159d78722e8c98caf55f91e" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Subtract <code>rhs</code> from this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
+            <dd>Subtract <code>rhs</code> from this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5deebeebc76c52cca0e2181f49ccb645" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a727e6541b1de241165c4845c0998c15d" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Subtract <code>rhs</code> from this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
+            <dd>Subtract <code>rhs</code> from this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a61fd6e24d86a03d9dbd78dfdde94f158" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa3bec2b1df7703618b2ab7e751a7380d" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Multiply this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</dd>
+            <dd>Multiply this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8ecb300821acd4cbc56927211db19865" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#acd1996788b4975dd66760c777b8be698" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Multiply this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</dd>
+            <dd>Multiply this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2983587b9d77b9d33dd891c0a0456161" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa0212ed3249914583131d926841053ce" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Divide this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</dd>
+            <dd>Divide this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5202db0f50d734b75ac0b48809aaba4c" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a19335e077cdcbc85c4cef5286618a308" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap">T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</span>
             </dt>
-            <dd>Divide this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</dd>
+            <dd>Divide this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</dd>
           </dl>
         </section>
         <section id="friends">
@@ -203,123 +204,123 @@
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a3023e5aeec5de4736943d7d8a07eadf4" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
-            <dd>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</dd>
+            <dd>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0b9e2d6a79cd585400100b94062a250b" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b9e2d6a79cd585400100b94062a250b" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
-            <dd>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</dd>
+            <dd>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#aff5168a759ddbe4a7cd399d1921c6f0c" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
-            <dd>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</dd>
+            <dd>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab82b0c2df43b7c1a454e765708d71b4a" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">auto <a href="#ab82b0c2df43b7c1a454e765708d71b4a" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
               T_other const&amp; rhs) -&gt; std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
-            <dd>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</dd>
+            <dd>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aae270191a4489ba6490418b0731e3856" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aae270191a4489ba6490418b0731e3856" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; bool</span>
             </dt>
             <dd>Compares two color_views for equality.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad179c8f32c1eedf6842f574de5bbfd60" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad179c8f32c1eedf6842f574de5bbfd60" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; bool</span>
             </dt>
             <dd>Compares two color_views for inequality.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#abd450118e5bf0970b3708599f24b3d38" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two color_views.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa05c9f126c5e3a18f1dfafb01e6a8ddd" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
-              T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa05c9f126c5e3a18f1dfafb01e6a8ddd" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two color_views for inequality.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7da296b621474bccda0bd33992a8a3fc" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
-              T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7da296b621474bccda0bd33992a8a3fc" class="m-doc">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              T_other const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two color_views.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T_other&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#acf15dfe52be48e5fc9d10670e3a8823c" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt;</span>
             </dt>
             <dd>Compares two color_views for inequality.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2f661daa8f35ffbe53efc3f215a52434" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2f661daa8f35ffbe53efc3f215a52434" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Add <code>rhs</code> to <code>lhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afebc0c80b8b23e0ee7fed1aa8911b0b8" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#afebc0c80b8b23e0ee7fed1aa8911b0b8" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Add <code>rhs</code> to <code>lhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a02f730d368026f17c98010162562ddae" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a02f730d368026f17c98010162562ddae" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Subtract <code>rhs</code> from <code>lhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a97ce9e33aa419c7044c676836b0dd2ac" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a97ce9e33aa419c7044c676836b0dd2ac" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Subtract <code>rhs</code> from <code>lhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae7fbbd0d7ea9044df3daa92f493fb7e9" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae7fbbd0d7ea9044df3daa92f493fb7e9" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Multiply <code>lhs</code> with <code>rhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a72bf3ef0d0040ec6a3cb9982c5a0ac69" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a72bf3ef0d0040ec6a3cb9982c5a0ac69" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Multiply <code>lhs</code> with <code>rhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abf8ca162186e8180645d9d16318507b5" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abf8ca162186e8180645d9d16318507b5" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Divide <code>lhs</code> by <code>rhs</code> channel-wise.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a85624b68e6477ead71f756a42f79a9a7" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              T const&amp; rhs) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a85624b68e6477ead71f756a42f79a9a7" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              T const&amp; rhs) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a></span>
             </dt>
             <dd>Divide <code>lhs</code> by <code>rhs</code> channel-wise.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a4cd2c55bfa9b8c6ec9405e1fcbc99e48"><div>
+          <section class="m-doc-details" id="a7d9abbb7a9e3f6840225d2baa0ef7f18"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cd2c55bfa9b8c6ec9405e1fcbc99e48" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"> spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d9abbb7a9e3f6840225d2baa0ef7f18" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
-            <p>Construct a new, empty <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</p>
-<p>Before the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> can be used, it has to be assigned a reference with <code><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;::reset</code>.</p>
+            <p>Construct a new, empty <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object.</p>
+<p>Before the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> can be used, it has to be assigned a reference with <code><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;::reset</code>.</p>
           </div></section>
-          <section class="m-doc-details" id="a4ba57ee5e071cdd6f93ec760629e8531"><div>
+          <section class="m-doc-details" id="a3f486c85c592cbef080b09809a379084"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ba57ee5e071cdd6f93ec760629e8531" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"> spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3f486c85c592cbef080b09809a379084" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
-            <p>Create a copy of the given <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</p>
+            <p>Create a copy of the given <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -327,19 +328,19 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> to copy</td>
+                  <td>The <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> to copy</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a23e1d7c2c071a0118b8435f619467fb5"><div>
+          <section class="m-doc-details" id="aec164d96220da6b15009775efa053d44"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23e1d7c2c071a0118b8435f619467fb5" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"> spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aec164d96220da6b15009775efa053d44" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
-            <p>Move the the given <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object.</p>
+            <p>Move the the given <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -347,21 +348,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> to copy</td>
+                  <td>The <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> to copy</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af0ca364f2ddfd8955fc0f7d09f84a71e"><div>
+          <section class="m-doc-details" id="ae2047a9eb556ad5fbe5177c0e795787e"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0ca364f2ddfd8955fc0f7d09f84a71e" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap">T*const data,
+              <span class="m-doc-wrap-bumper"> spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae2047a9eb556ad5fbe5177c0e795787e" class="m-doc-self">color_view</a>(</span><span class="m-doc-wrap">T*const data,
               size_t stride,
               size_t channels) <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
-            <p>Construct a new <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> object referring to the given data.</p>
+            <p>Construct a new <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> object referring to the given data.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -377,19 +378,19 @@
                 </tr>
                 <tr>
                   <td>channels</td>
-                  <td>The number of channels this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> refers to</td>
+                  <td>The number of channels this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> refers to</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7488cfb12a8581beb87b9128776b7645"><div>
+          <section class="m-doc-details" id="a38987427a2a57a22ad5f03ff29f26ece"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7488cfb12a8581beb87b9128776b7645" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38987427a2a57a22ad5f03ff29f26ece" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Copy-assigns another <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</p>
+            <p>Copy-assigns another <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -403,19 +404,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a701c57aafcd1e84a0eb54c747ceff925"><div>
+          <section class="m-doc-details" id="ac31be686becd2ace45f29a10a6087cc6"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a701c57aafcd1e84a0eb54c747ceff925" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac31be686becd2ace45f29a10a6087cc6" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Move-assigns another <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</p>
+            <p>Move-assigns another <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -429,17 +430,17 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a28deb93fddc1acf45f4712d26bdc6bb4"><div>
+          <section class="m-doc-details" id="a6b707dbfcdc2f4df8d293fcf1b9da34e"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28deb93fddc1acf45f4712d26bdc6bb4" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">T const&amp; value) <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b707dbfcdc2f4df8d293fcf1b9da34e" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">T const&amp; value) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Assign each channel the provided value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -455,17 +456,17 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a593a0d11972eadb4c65225d00ff3e2ee"><div>
+          <section class="m-doc-details" id="a00ed95c8e80ed5bf63b1b588c1d2fcd5"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a593a0d11972eadb4c65225d00ff3e2ee" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; other)</span></span>
+              <span class="m-doc-wrap-bumper">void spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a00ed95c8e80ed5bf63b1b588c1d2fcd5" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; other)</span></span>
             </h3>
             <p>Replaces the reference with the reference held by <code>other</code> and adjusts the size accordingly.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -480,12 +481,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae27cfa7268b5124be59cd452f9cf3b5e"><div>
+          <section class="m-doc-details" id="a7f74040367d58a980e177680b5e68259"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">size_t color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae27cfa7268b5124be59cd452f9cf3b5e" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">size_t spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f74040367d58a980e177680b5e68259" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Returns the channel count.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -497,12 +498,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a12ef5915f02b05157c8be858bf31555b"><div>
+          <section class="m-doc-details" id="a29a5217b622ae3e7215999a47a9587b4"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">size_t color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a12ef5915f02b05157c8be858bf31555b" class="m-doc-self">channels</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">size_t spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a29a5217b622ae3e7215999a47a9587b4" class="m-doc-self">channels</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Returns the channel count.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -514,12 +515,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a73bf6a850d737da7afd56d8a76993c51"><div>
+          <section class="m-doc-details" id="a6f177c35442bd557e67ba88aaeb3ab4f"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">size_t color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73bf6a850d737da7afd56d8a76993c51" class="m-doc-self">stride</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">size_t spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6f177c35442bd557e67ba88aaeb3ab4f" class="m-doc-self">stride</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Returns the stride.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -531,12 +532,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a6202493214c097b313bd5f8fb7b8ad1f"><div>
+          <section class="m-doc-details" id="af8c2446ac4972a63ac3e366c317e5515"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T*const color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6202493214c097b313bd5f8fb7b8ad1f" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">T*const spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8c2446ac4972a63ac3e366c317e5515" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Returns the data pointer.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -548,12 +549,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8de5cc7d4b5f0a6badf01f1e26a82875"><div>
+          <section class="m-doc-details" id="a5da35866131f8b812629b48b0ccbd32d"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T const *const color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8de5cc7d4b5f0a6badf01f1e26a82875" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">T const *const spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5da35866131f8b812629b48b0ccbd32d" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Returns the data pointer.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -565,14 +566,14 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a594cd6e745d1743c6e4c6b98cfa099ed"><div>
+          <section class="m-doc-details" id="a9c1d127c94c4d6999695198b6faeccf8"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a594cd6e745d1743c6e4c6b98cfa099ed" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index)</span></span>
+              <span class="m-doc-wrap-bumper">T&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9c1d127c94c4d6999695198b6faeccf8" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index)</span></span>
             </h3>
-            <p>Retrieve a reference to an element of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</p>
+            <p>Retrieve a reference to an element of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -591,14 +592,14 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a093b01601676ad88445cc8fcbb50a7bc"><div>
+          <section class="m-doc-details" id="a0562157e8509fdb2e3b3b56d5731ba0f"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T const &amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a093b01601676ad88445cc8fcbb50a7bc" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const</span></span>
+              <span class="m-doc-wrap-bumper">T const &amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0562157e8509fdb2e3b3b56d5731ba0f" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const</span></span>
             </h3>
-            <p>Retrieve a constant reference to an element of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>.</p>
+            <p>Retrieve a constant reference to an element of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -617,14 +618,14 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a04b14a382f7a36ea3469250b10b670c6"><div>
+          <section class="m-doc-details" id="a77885f132e9c54ad1b9b5dae5692ea17"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04b14a382f7a36ea3469250b10b670c6" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77885f132e9c54ad1b9b5dae5692ea17" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Add <code>rhs</code> to this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
+            <p>Add <code>rhs</code> to this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -638,19 +639,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac90294ff8bd5b8569fac652b493df220"><div>
+          <section class="m-doc-details" id="a88d0c4174116b1a12bcea03b3bbb8f19"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac90294ff8bd5b8569fac652b493df220" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88d0c4174116b1a12bcea03b3bbb8f19" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
             </h3>
-            <p>Add <code>rhs</code> to this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
+            <p>Add <code>rhs</code> to this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -664,19 +665,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aaa7fdf81c62c74a81da666847ef57704"><div>
+          <section class="m-doc-details" id="ad908de714159d78722e8c98caf55f91e"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa7fdf81c62c74a81da666847ef57704" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad908de714159d78722e8c98caf55f91e" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Subtract <code>rhs</code> from this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
+            <p>Subtract <code>rhs</code> from this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -690,19 +691,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5deebeebc76c52cca0e2181f49ccb645"><div>
+          <section class="m-doc-details" id="a727e6541b1de241165c4845c0998c15d"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5deebeebc76c52cca0e2181f49ccb645" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a727e6541b1de241165c4845c0998c15d" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
             </h3>
-            <p>Subtract <code>rhs</code> from this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
+            <p>Subtract <code>rhs</code> from this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -716,19 +717,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a61fd6e24d86a03d9dbd78dfdde94f158"><div>
+          <section class="m-doc-details" id="aa3bec2b1df7703618b2ab7e751a7380d"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61fd6e24d86a03d9dbd78dfdde94f158" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3bec2b1df7703618b2ab7e751a7380d" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Multiply this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</p>
+            <p>Multiply this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -742,19 +743,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8ecb300821acd4cbc56927211db19865"><div>
+          <section class="m-doc-details" id="acd1996788b4975dd66760c777b8be698"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ecb300821acd4cbc56927211db19865" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd1996788b4975dd66760c777b8be698" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
             </h3>
-            <p>Multiply this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</p>
+            <p>Multiply this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> with <code>rhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -768,19 +769,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a2983587b9d77b9d33dd891c0a0456161"><div>
+          <section class="m-doc-details" id="aa0212ed3249914583131d926841053ce"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2983587b9d77b9d33dd891c0a0456161" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0212ed3249914583131d926841053ce" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Divide this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</p>
+            <p>Divide this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -794,19 +795,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5202db0f50d734b75ac0b48809aaba4c"><div>
+          <section class="m-doc-details" id="a19335e077cdcbc85c4cef5286618a308"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp; color_<wbr />view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5202db0f50d734b75ac0b48809aaba4c" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp; spice::<wbr />color_view&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19335e077cdcbc85c4cef5286618a308" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap">T const&amp; rhs)</span></span>
             </h3>
-            <p>Divide this <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</p>
+            <p>Divide this <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> by <code>rhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -820,7 +821,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -832,9 +833,9 @@
                 template&lt;typename T_other&gt;
               </div>
               <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3023e5aeec5de4736943d7d8a07eadf4" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</p>
+            <p>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -842,7 +843,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T_other</td>
-                  <td>A scalar that is comparable to the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
+                  <td>A scalar that is comparable to the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
                 </tr>
               </tbody>
               <thead>
@@ -861,7 +862,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>true if all elements of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> correspond to the scalar value, false otherwise</td>
+                  <td>true if all elements of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> correspond to the scalar value, false otherwise</td>
                 </tr>
               </tfoot>
             </table>
@@ -873,10 +874,10 @@
                 template&lt;typename T&gt;
                 template&lt;typename T_other&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b9e2d6a79cd585400100b94062a250b" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b9e2d6a79cd585400100b94062a250b" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
-            <p>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</p>
+            <p>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -884,7 +885,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T_other</td>
-                  <td>A scalar that is comparable to the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
+                  <td>A scalar that is comparable to the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
                 </tr>
               </tbody>
               <thead>
@@ -903,7 +904,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>true if all elements of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> correspond to the scalar value, false otherwise</td>
+                  <td>true if all elements of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> correspond to the scalar value, false otherwise</td>
                 </tr>
               </tfoot>
             </table>
@@ -916,9 +917,9 @@
                 template&lt;typename T_other&gt;
               </div>
               <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff5168a759ddbe4a7cd399d1921c6f0c" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
-            <p>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</p>
+            <p>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -926,7 +927,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T_other</td>
-                  <td>A scalar that is comparable to the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
+                  <td>A scalar that is comparable to the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
                 </tr>
               </tbody>
               <thead>
@@ -945,7 +946,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>true if any of the elements of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> do not correspond to the scalar value, false otherwise</td>
+                  <td>true if any of the elements of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> do not correspond to the scalar value, false otherwise</td>
                 </tr>
               </tfoot>
             </table>
@@ -957,10 +958,10 @@
                 template&lt;typename T&gt;
                 template&lt;typename T_other&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab82b0c2df43b7c1a454e765708d71b4a" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab82b0c2df43b7c1a454e765708d71b4a" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
-            <p>Compares a <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</p>
+            <p>Compares a <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> component-wise with a scalar for inequality.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -968,7 +969,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T_other</td>
-                  <td>A scalar that is comparable to the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
+                  <td>A scalar that is comparable to the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&#x27;s data type <code>T</code></td>
                 </tr>
               </tbody>
               <thead>
@@ -987,7 +988,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>true if any of the elements of the <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> do not correspond to the scalar value, false otherwise</td>
+                  <td>true if any of the elements of the <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> do not correspond to the scalar value, false otherwise</td>
                 </tr>
               </tfoot>
             </table>
@@ -998,8 +999,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae270191a4489ba6490418b0731e3856" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae270191a4489ba6490418b0731e3856" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares two color_views for equality.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1029,8 +1030,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad179c8f32c1eedf6842f574de5bbfd60" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad179c8f32c1eedf6842f574de5bbfd60" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares two color_views for inequality.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1061,8 +1062,8 @@
                 template&lt;typename T&gt;
                 template&lt;typename T_other&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd450118e5bf0970b3708599f24b3d38" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd450118e5bf0970b3708599f24b3d38" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares two color_views.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1102,7 +1103,7 @@
                 template&lt;typename T&gt;
                 template&lt;typename T_other&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa05c9f126c5e3a18f1dfafb01e6a8ddd" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa05c9f126c5e3a18f1dfafb01e6a8ddd" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
             <p>Compares two color_views for inequality.</p>
@@ -1134,7 +1135,7 @@
                 template&lt;typename T&gt;
                 template&lt;typename T_other&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7da296b621474bccda0bd33992a8a3fc" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7da296b621474bccda0bd33992a8a3fc" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; lhs,
               T_other const&amp; rhs)</span></span>
             </h3>
             <p>Compares two color_views.</p>
@@ -1175,8 +1176,8 @@
                 template&lt;typename T&gt;
                 template&lt;typename T_other&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf15dfe52be48e5fc9d10670e3a8823c" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper">std::enable_if_t&lt;!std::is_same&lt;<a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>, T_other&gt;::value &amp;&amp; !std::is_scalar&lt;T_other&gt;::value, bool&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf15dfe52be48e5fc9d10670e3a8823c" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">T_other const&amp; lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Compares two color_views for inequality.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1206,8 +1207,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2f661daa8f35ffbe53efc3f215a52434" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2f661daa8f35ffbe53efc3f215a52434" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Add <code>rhs</code> to <code>lhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1227,7 +1228,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1237,7 +1238,7 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afebc0c80b8b23e0ee7fed1aa8911b0b8" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afebc0c80b8b23e0ee7fed1aa8911b0b8" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
               T const&amp; rhs)</span></span>
             </h3>
             <p>Add <code>rhs</code> to <code>lhs</code> channel-wise.</p>
@@ -1258,7 +1259,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1268,8 +1269,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a02f730d368026f17c98010162562ddae" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a02f730d368026f17c98010162562ddae" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Subtract <code>rhs</code> from <code>lhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1289,7 +1290,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1299,7 +1300,7 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97ce9e33aa419c7044c676836b0dd2ac" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97ce9e33aa419c7044c676836b0dd2ac" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
               T const&amp; rhs)</span></span>
             </h3>
             <p>Subtract <code>rhs</code> from <code>lhs</code> channel-wise.</p>
@@ -1320,7 +1321,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1330,8 +1331,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae7fbbd0d7ea9044df3daa92f493fb7e9" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae7fbbd0d7ea9044df3daa92f493fb7e9" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Multiply <code>lhs</code> with <code>rhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1351,7 +1352,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1361,7 +1362,7 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a72bf3ef0d0040ec6a3cb9982c5a0ac69" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a72bf3ef0d0040ec6a3cb9982c5a0ac69" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
               T const&amp; rhs)</span></span>
             </h3>
             <p>Multiply <code>lhs</code> with <code>rhs</code> channel-wise.</p>
@@ -1382,7 +1383,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1392,8 +1393,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf8ca162186e8180645d9d16318507b5" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
-              <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf8ca162186e8180645d9d16318507b5" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> const&amp; rhs)</span></span>
             </h3>
             <p>Divide <code>lhs</code> by <code>rhs</code> channel-wise.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1413,7 +1414,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1423,7 +1424,7 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85624b68e6477ead71f756a42f79a9a7" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a> lhs,
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85624b68e6477ead71f756a42f79a9a7" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a> lhs,
               T const&amp; rhs)</span></span>
             </h3>
             <p>Divide <code>lhs</code> by <code>rhs</code> channel-wise.</p>
@@ -1444,7 +1445,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
+                  <td><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&amp;</td>
                 </tr>
               </tfoot>
             </table>
@@ -1494,7 +1495,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.13 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.20 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

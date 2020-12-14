@@ -91,12 +91,12 @@
         <section id="pub-static-attribs">
           <h2><a href="#pub-static-attribs">Public static variables</a></h2>
           <dl class="m-doc">
-            <dt id="ac1462190fd4f41ca9ad7c0e679d4a969">
-              static const constexpr T <a href="#ac1462190fd4f41ca9ad7c0e679d4a969" class="m-doc-self">min</a>
+            <dt id="a960e48261e1b8fc3aed2e41b4c6c0dcf">
+              static const T <a href="#a960e48261e1b8fc3aed2e41b4c6c0dcf" class="m-doc-self">min</a> <span class="m-label m-flat m-primary">constexpr</span>
             </dt>
             <dd>The value representing no emission or occlusion for this image type (i.e. &quot;black&quot;)</dd>
-            <dt id="a8f6ac4ce9c36ef00227082c1a148b59b">
-              static const constexpr T <a href="#a8f6ac4ce9c36ef00227082c1a148b59b" class="m-doc-self">max</a>
+            <dt id="ade243e7aacb8ee59d72552bcc5ef01e4">
+              static const T <a href="#ade243e7aacb8ee59d72552bcc5ef01e4" class="m-doc-self">max</a> <span class="m-label m-flat m-primary">constexpr</span>
             </dt>
             <dd>The value representing the maximum renderable emission or occlusion for this image type (i.e. &quot;white&quot;)</dd>
           </dl>
@@ -166,12 +166,12 @@
             <dd>Get a constant reference to the sample at the specified offset.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6a3436402d745d23787a065c16ac3adb" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
-              int y) -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;</span>
+              int y) -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt;</span>
             </dt>
             <dd>Get pixel value at specified coordinates.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a57e4b06ec20e73328ec52ab82437607c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">int x,
-              int y) const -&gt; <a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const</span>
+              int y) const -&gt; <a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const</span>
             </dt>
             <dd>Get pixel value at specified coordinates.</dd>
             <dt>
@@ -566,7 +566,7 @@
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a3436402d745d23787a065c16ac3adb" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&lt;T&gt; spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a3436402d745d23787a065c16ac3adb" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
               int y)</span></span>
             </h3>
             <p>Get pixel value at specified coordinates.</p>
@@ -597,7 +597,7 @@
               <div class="m-doc-template">
                 template&lt;typename T, size_t Channels&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcolor__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57e4b06ec20e73328ec52ab82437607c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
+              <span class="m-doc-wrap-bumper"><a href="classspice_1_1color__view.html" class="m-doc">color_<wbr />view</a>&lt;T const &gt; const spice::<wbr />image&lt;T, Channels&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57e4b06ec20e73328ec52ab82437607c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">int x,
               int y) const</span></span>
             </h3>
             <p>Get pixel value at specified coordinates.</p>
@@ -820,10 +820,11 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>image&amp; Multiply this image element-wise with <code>rhs</code></td>
+                  <td>image&amp;</td>
                 </tr>
               </tfoot>
             </table>
+<p>Multiply this image element-wise with <code>rhs</code></p>
           </div></section>
           <section class="m-doc-details" id="aaac9bedd21d659cd8434ee74704b248a"><div>
             <h3>
@@ -1484,7 +1485,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.13 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>spice-lib. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.20 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
