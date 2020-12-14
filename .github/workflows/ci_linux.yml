@@ -52,7 +52,7 @@ jobs:
           path: doc/html/
       - name: deploy documentation
         # only deploy on pushes to master
-        if: steps.extract_branch.outputs.branch == 'master'
+        if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
