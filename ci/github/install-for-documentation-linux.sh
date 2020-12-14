@@ -28,4 +28,4 @@ sudo $HOME/bin/tlmgr install carlisle
 sudo $HOME/bin/tlmgr install collection-fontsrecommended
 # sudo $HOME/bin/tlmgr install collection-fontsextra # probably not needed
 
-sudo $PACKAGE_MANAGER install -y doxygen
+brew install doxygen
