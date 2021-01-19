@@ -18,10 +18,11 @@ pip3 install conan
 echo "/home/runner/.local/bin" >> $GITHUB_PATH
 
 # download llvm and install it
-LLVM_BINARIES_NAME="clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-16.04"
+# TODO: get this link in a more elegant way...
+LLVM_BINARIES_NAME="clang+llvm-11.0.1-x86_64-linux-gnu-ubuntu-16.04"
 wget -q -O \
     llvm-prebuilt.tar.xz \
-    https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/${LLVM_BINARIES_NAME}.tar.xz
+    https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.1/${LLVM_BINARIES_NAME}.tar.xz
 
 tar xf llvm-prebuilt.tar.xz
 
