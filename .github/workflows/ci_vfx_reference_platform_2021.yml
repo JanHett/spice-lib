@@ -33,8 +33,6 @@ jobs:
       - name: install
         run: |
             ./ci/github/install-centos.sh
-            # get patched verison of Halide
-            git clone -b dsharletg/hexagon-internal https://github.com/halide/Halide.git external/Halide
       - name: configure
         env:
           CXX: g++
