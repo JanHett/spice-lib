@@ -69,6 +69,19 @@ T clamp (T const & val, T const & lo, T const & hi) {
     return spice::max(spice::min(val, hi), lo);
 }
 
+/**
+ * \brief Return the absolute value, i.e. the value if it is positive or
+ * the additive inverse if it is negative
+ * 
+ * \tparam T 
+ * \param val 
+ * \return T 
+ */
+template<typename T, std::enable_if_t<std::is_signed_v<T>, int> = 0>
+T abs (T const & val) {
+    return spice::max(val, T{});
+}
+
 }
 
 #endif // SPICE_ALGORITHM

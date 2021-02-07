@@ -50,6 +50,23 @@ TEST(image, copy_constructor) {
     EXPECT_EQ(4, im2.channels());
 }
 
+TEST(image, copy_assignment) {
+    image<float> im1(2, 3);
+    image<float> im2;
+
+    EXPECT_FALSE(im1 == im2);
+    im2 = im1;
+    EXPECT_TRUE(im1 == im2);
+
+    EXPECT_EQ(24, im2.size());
+    for (size_t i = 0; i < im2.size(); ++i) {
+        EXPECT_EQ(0.f, im2.data()[i]);
+    }
+    EXPECT_EQ(2, im2.width());
+    EXPECT_EQ(3, im2.height());
+    EXPECT_EQ(4, im2.channels());
+}
+
 TEST(image, operator_equals) {
     image<float> im1(2, 3);
     image<float> im2(im1);

@@ -107,6 +107,26 @@ public:
      */
     using value_type = T;
 
+    ////////////////////////////////////////////////////////////////////////////
+    // STATIC VARIABLES
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * \brief The value representing no emission or occlusion for this image
+     * type (i.e. "black")
+     */
+    static const constexpr T min = color<T, Channels>::min;
+
+    /**
+     * \brief The value representing the maximum renderable emission or
+     * occlusion for this image type (i.e. "white")
+     */
+    static const constexpr T max = color<T, Channels>::max;
+
+    ////////////////////////////////////////////////////////////////////////////
+    // CONSTRUCTORS, DESTRUCTORS, CONVERSION OPERATORS
+    ////////////////////////////////////////////////////////////////////////////
+
     /**
      * \brief Default-construct a new image object
      * 
@@ -166,70 +186,24 @@ public:
     {}
 
     /**
-     * \brief Get direct access to the underlying data
+     * \brief Copy-assignment operator
      * 
-     * \return T * const
+     * \param other 
+     * \return image& 
      */
-    [[nodiscard]] T * const data() noexcept {
-        return m_data.data();
+    image& operator= (image other) {
+        std::swap(m_width, other.m_width);
+        std::swap(m_height, other.m_height);
+        std::swap(m_data, other.m_data);
+
+        return *this;
     }
 
-    /**
-     * \brief Get direct access to the underlying data
-     * 
-     * \return T * const& 
-     */
-    [[nodiscard]] T const * const data() const noexcept {
-        return m_data.data();
-    }
+    ////////////////////////////////////////////////////////////////////////////
+    // OPERATORS
+    ////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * \brief Get the width of the image
-     * 
-     * \return size_t 
-     */
-    [[nodiscard]] size_t width() const {
-        return m_width;
-    }
-
-    /**
-     * \brief Get the height of the image
-     * 
-     * \return size_t 
-     */
-    [[nodiscard]] size_t height() const {
-        return m_height;
-    }
-
-    /**
-     * \brief Get the number of channels in the image
-     * 
-     * \return constexpr size_t 
-     */
-    [[nodiscard]] constexpr size_t channels() const {
-        return Channels;
-    }
-
-    /**
-     * \brief Get the size of the data array containing the image
-     * 
-     * \return constexpr size_t 
-     */
-    [[nodiscard]] constexpr size_t size() const {
-        return m_data.size();
-    }
-
-    /**
-     * \brief The value representing no emission or occlusion for this image
-     * type (i.e. "black")
-     */
-    static const constexpr T min = color<T, Channels>::min;
-
-    /**
-     * \brief The value representing the maximum renderable emission or
-     * occlusion for this image type (i.e. "white")
-     */
-    static const constexpr T max = color<T, Channels>::max;
+    // ACCESS OPERATORS --------------------------------------------------------
 
     /**
      * \brief Get a reference to the sample at the specified offset
@@ -309,6 +283,8 @@ public:
             + y * m_width
             + x];
     }
+
+    // COMPARISON OPERATORS ----------------------------------------------------
 
     /**
      * \brief Compares two images
@@ -429,6 +405,8 @@ public:
         return !(rhs == lhs);
     }
 
+    // ARITHMETIC OPERATORS ----------------------------------------------------
+
     /**
      * \brief Add `rhs` element-wise to this image
      * 
@@ -465,7 +443,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator+(image lhs, image const & rhs) {
+    [[nodiscard]] friend image operator+(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -502,7 +480,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator+(image lhs, T const & rhs) {
+    [[nodiscard]] friend image operator+(image lhs, T const & rhs) {
         lhs += rhs;
 
         return lhs;
@@ -515,7 +493,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator+(T const & lhs, image rhs) {
+    [[nodiscard]] friend image operator+(T const & lhs, image rhs) {
         rhs += lhs;
 
         return rhs;
@@ -557,7 +535,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator-(image lhs, image const & rhs) {
+    [[nodiscard]] friend image operator-(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -594,7 +572,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator-(image lhs, T const & rhs) {
+    [[nodiscard]] friend image operator-(image lhs, T const & rhs) {
         lhs -= rhs;
 
         return lhs;
@@ -650,7 +628,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator*(image lhs, image const & rhs) {
+    [[nodiscard]] friend image operator*(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -687,7 +665,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator*(image lhs, T const & rhs) {
+    [[nodiscard]] friend image operator*(image lhs, T const & rhs) {
         lhs *= rhs;
 
         return lhs;
@@ -700,7 +678,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator*(T const & lhs, image rhs) {
+    [[nodiscard]] friend image operator*(T const & lhs, image rhs) {
         rhs *= lhs;
 
         return rhs;
@@ -742,7 +720,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator/(image lhs, image const & rhs) {
+    [[nodiscard]] friend image operator/(image lhs, image const & rhs) {
         if (lhs.width() != rhs.width() ||
             lhs.height() != rhs.height() ||
             lhs.channels() != rhs.channels())
@@ -779,7 +757,7 @@ public:
      * \param rhs 
      * \return image& 
      */
-    friend image operator/(image lhs, T const & rhs) {
+    [[nodiscard]] friend image operator/(image lhs, T const & rhs) {
         lhs /= rhs;
 
         return lhs;
@@ -798,25 +776,65 @@ public:
 
     //     return rhs;
     // }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // MEMBER FUNCTIONS
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * \brief Get direct access to the underlying data
+     * 
+     * \return T * const
+     */
+    [[nodiscard]] T * const data() noexcept {
+        return m_data.data();
+    }
+
+    /**
+     * \brief Get direct access to the underlying data
+     * 
+     * \return T * const& 
+     */
+    [[nodiscard]] T const * const data() const noexcept {
+        return m_data.data();
+    }
+
+    /**
+     * \brief Get the width of the image
+     * 
+     * \return size_t 
+     */
+    [[nodiscard]] size_t width() const {
+        return m_width;
+    }
+
+    /**
+     * \brief Get the height of the image
+     * 
+     * \return size_t 
+     */
+    [[nodiscard]] size_t height() const {
+        return m_height;
+    }
+
+    /**
+     * \brief Get the number of channels in the image
+     * 
+     * \return constexpr size_t 
+     */
+    [[nodiscard]] constexpr size_t channels() const {
+        return Channels;
+    }
+
+    /**
+     * \brief Get the size of the data array containing the image
+     * 
+     * \return constexpr size_t 
+     */
+    [[nodiscard]] constexpr size_t size() const {
+        return m_data.size();
+    }
 };
-
-// /**
-//  * Transposes the image pixel-wise
-//  *
-//  * \param img The image to be rotated
-//  * \returns a transposed copy of the image
-//  */
-// template<typename T>
-// [[nodiscard]] image<T> transpose (image<T> const & img)
-// {
-//     image<T> new_i(img.height(), img.width(), img.channel_semantics());
-
-//     for (size_t x = 0; x < img.width(); ++x)
-//         for (size_t y = 0; y < img.height(); ++y)
-//             new_i(y, x) = img(x, y);
-
-//     return new_i;
-// }
 
 template<typename T, size_t Channels>
 [[nodiscard]] image<T, Channels> load_image(char const * filename,
